@@ -1,6 +1,6 @@
 # Практика по OpenVINO
 
-# Часто возникацющие проблемы
+# Часто возникающие проблемы
 
 
 ## Проблема с импортом cv2
@@ -11,7 +11,7 @@ Traceback (most recent call last):
 ImportError: DLL load failed while importing cv2: Не найден указанный модуль.
 ```
 
-В программе импортируйте вручную пути к папкам с динамическими библиотеками 
+В запускаемом python файле импортируйте вручную пути к папкам с динамическими библиотеками 
 ```python
 import os
 os.add_dll_directory("C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\ngraph\\lib")
