@@ -33,9 +33,9 @@ def make_cat_passport_image(input_image_path, haar_model_path):
         cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 255), 2)
 
     # Display result image
-    #cv2.imshow("window_name", image)
-    #cv2.waitKey(0) 
-    #cv2.destroyAllWindows()
+    cv2.imshow("window_name", image)
+    cv2.waitKey(0) 
+    cv2.destroyAllWindows()
 
     # Crop image
     x, y, w, h = rects[0]
@@ -48,8 +48,9 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     cv2.imwrite('out.jpg', image)
     
     # Additional_task
+    
+    #Photo
     image2 = cv2.imread('pet_passport.png')
-    print(image.shape)
     image2[50:(50+140),50:(50+140)] = image
     
     #Name
@@ -70,10 +71,12 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     #Sex
     cv2.putText(image2, 'Female', (120, 260), cv2.FONT_HERSHEY_PLAIN,1,(255,0,0),1)
     
-    
     cv2.imshow("window_name", image2)
     cv2.waitKey(0)
-    #cv2.destroyAllWindows()
+    cv2.destroyAllWindows()
+    
+    # Save result image to file
+    cv2.imwrite('out2.jpg', image2)
 
     return
 
@@ -95,7 +98,6 @@ def main():
     
     args = build_argparser().parse_args()
     make_cat_passport_image(args.input, args.model)
-    image = cv2.imread('pet_passport.png')
 
     return 0
 
