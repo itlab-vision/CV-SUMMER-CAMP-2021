@@ -10,7 +10,7 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     # Convert image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # Normalize image intensity
-    #gray = cv2.normalize(gray)
+    gray = cv2.equalizeHist(gray)
     # Resize image
     resized = cv2.resize(gray, (640, 480), interpolation = cv2.INTER_AREA)
     # Detect cat faces using Haar Cascade
@@ -25,11 +25,10 @@ def make_cat_passport_image(input_image_path, haar_model_path):
         cv2.imshow("Output image #1", image)
     # Crop image
         image = image[y:y+h, x:x+w]
-    cv2.imshow("Output image #2", image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows
+        cv2.waitKey(0)
+        cv2.destroyAllWindows
     # Save result image to file
-    cv2.imwrite("out.jpg", image)
+        cv2.imwrite("out.jpg", image)
 
     return
 
