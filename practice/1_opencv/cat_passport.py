@@ -7,6 +7,7 @@ def make_cat_passport_image(input_image_path, haar_model_path):
 
     # Read image
     image = cv2.imread(input_image_path)
+    passport = cv2.imread("pet_passport.png")
 
     # Convert image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -36,8 +37,32 @@ def make_cat_passport_image(input_image_path, haar_model_path):
 
     # Save result image to file
     cv2.imwrite('out.jpg', image)
-
     cv2.imshow("Created image", image)
+
+    resized_face = cv2.resize(image, (170, 139), interpolation=cv2.INTER_AREA)
+    passport[47:47 + 139, 30:30 + 170] = resized_face
+    data = ['Moosya', 'Cat', '2', 'F', "12.11.2018", "White&black"]
+    for ind, i in enumerate(range(217, 288, 14)): #263
+        cv2.putText(passport, data[ind], (86 if ind != 4 else 106, i if ind != 5 else i-1), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 0), 1)
+    # cv2.putText(passport, "Moosya", (86, 217), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 0), 1)
+    # cv2.putText(passport, "Cat", (86, 232), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 0), 1)
+    # cv2.putText(passport, "2", (86, 247), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 0), 1)
+    # cv2.putText(passport, "F", (86, 262), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 0), 1)
+    #cv2.putText(passport, "12.11.2018", (106, 272), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 0), 1)
+    #cv2.putText(passport, "White&black", (86, 284), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 0), 1)
+
+    next_data = ["123FFC11", "25.07.2020", "Washington, USA", "7", "17.08.2020"]
+    for ind, i in enumerate(range(89, 250, 40)):
+        cv2.putText(passport, next_data[ind], (254, i), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 0), 1)
+    # cv2.putText(passport, "123FFC11", (254, 89), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 0), 1)
+    # cv2.putText(passport, "25.07.2020", (254, 129), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 0), 1)
+    # cv2.putText(passport, "Washington, USA", (254, 169), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 0), 1)
+    # cv2.putText(passport, "7", (254, 209), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 0), 1)
+    # cv2.putText(passport, "17.08.2020", (254, 249), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 0), 1)
+
+    cv2.imshow("passport", passport)
+    cv2.imwrite("filled_passport.jpg", passport)
+
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
