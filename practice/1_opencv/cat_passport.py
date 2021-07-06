@@ -14,7 +14,7 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     cv2.equalizeHist(gray)
 
     # Resize image
-    resized = cv2.resize(gray, (640,480), interpolation = cv2.INTER_AREA)
+    resized = cv2.resize(gray, (640, 480), interpolation = cv2.INTER_AREA)
 
     # Detect cat faces using Haar Cascade
     detector = cv2.CascadeClassifier(haar_model_path)
@@ -26,7 +26,7 @@ def make_cat_passport_image(input_image_path, haar_model_path):
         cv2.putText(image, "Cat #{}".format(i + 1), (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 255), 2)
     
     # Display result image
-    cv2.imshow("window_name", image)
+    cv2.imshow("cat picture", image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     
@@ -36,6 +36,36 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     
     # Save result image to file
     cv2.imwrite('out.jpg', image)
+
+    # Read image pet passport
+    image_passport = cv2.imread("pet_passport.png")
+
+    # Resize cat picture
+    resized = cv2.resize(image, (164, 130), interpolation = cv2.INTER_AREA)
+
+    # Insert cat picture
+    image_passport[52:182,34:198] = resized[0:130, 0:164]
+
+    # Insert text
+    cv2.putText(image_passport, "Barsik", (86,218), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    cv2.putText(image_passport, "cat", (86,231), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    cv2.putText(image_passport, "scottish fold", (86,245), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    cv2.putText(image_passport, "male", (86,259), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    cv2.putText(image_passport, "30.01.2020", (111,272), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    cv2.putText(image_passport, "tabby", (86,285), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    cv2.putText(image_passport, "0808", (272,89), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    cv2.putText(image_passport, "18.03.2021", (272,127), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    cv2.putText(image_passport, "left ear", (272,168), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    cv2.putText(image_passport, "-", (272,208), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    cv2.putText(image_passport, "-", (272,247), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+    
+    # Display result
+    cv2.imshow("passport", image_passport)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+    # Save result
+    cv2.imwrite('out_passport.jpg', image_passport)
     return
 
 
