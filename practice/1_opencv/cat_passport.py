@@ -23,7 +23,7 @@ def make_cat_passport_image(input_image_path, haar_model_path):
 
     # Draw bounding box
     for (i, (x, y, w, h)) in enumerate(rects):
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 200, 255), 2)
+        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 200, 0), 2)
         cv2.putText(image, "Cat #{}".format(i + 1), (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 255, 0), 2)
 
     # Display result image
@@ -37,6 +37,27 @@ def make_cat_passport_image(input_image_path, haar_model_path):
 
     # Save result image to file
     cv2.imwrite('out.jpg', image)
+
+    #----------------------------------Filling out the passport---------------------------------+
+    input_image_path = 'pet_passport.png'
+    passport = cv2.imread(input_image_path)
+
+    rows, cols, chanels = image.shape
+    image = cv2.addWeighted(passport[45:45+rows, 48:48+cols],0,image,0.7,0)
+    passport[45:45+rows,48:48+cols] = image
+
+    cv2.putText(passport, "Nika", (88,215), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0), 1)
+    cv2.putText(passport, "Cat", (88,230), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0), 1)
+    cv2.putText(passport, "Karat", (88,245), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0), 1)
+    cv2.putText(passport, "Male", (88,260), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0), 1)
+    cv2.putText(passport, "01.04.2019", (108,272), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0), 1)
+    cv2.putText(passport, "Short", (93,285), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0), 1)
+    cv2.imwrite('pet_passport_photo.jpg', passport)
+    
+    cv2.imshow("Passport", passport)
+    cv2.waitKey(0) 
+    cv2.destroyAllWindows()
+    #-------------------------------------------------------------------------------------------+
     print('"The program works correctly"')
     return
 
