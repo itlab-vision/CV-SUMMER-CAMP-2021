@@ -33,9 +33,9 @@ def make_cat_passport_image(input_image_path, haar_model_path):
         cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 255), 2)
 
     # Display result image
-    cv2.imshow("window_name", image)
-    cv2.waitKey(0) 
-    cv2.destroyAllWindows()
+    #cv2.imshow("window_name", image)
+    #cv2.waitKey(0) 
+    #cv2.destroyAllWindows()
 
     # Crop image
     x, y, w, h = rects[0]
@@ -48,7 +48,32 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     cv2.imwrite('out.jpg', image)
     
     # Additional_task
+    image2 = cv2.imread('pet_passport.png')
+    print(image.shape)
+    image2[50:(50+140),50:(50+140)] = image
     
+    #Name
+    cv2.putText(image2, 'Tom', (127, 213), cv2.FONT_HERSHEY_PLAIN,1,(255,0,0),1)
+
+    #Species
+    cv2.putText(image2, 'Siamese cat', (110, 247), cv2.FONT_HERSHEY_PLAIN,1,(255,0,0),1)
+    
+    #Date_of_Birthday
+    cv2.putText(image2, '22.02.2018', (116, 274), cv2.FONT_HERSHEY_PLAIN,1,(255,0,0),1)
+    
+    #Tattoo number
+    cv2.putText(image2, '1234567890', (277, 210), cv2.FONT_HERSHEY_PLAIN,1,(255,0,0),1)
+    
+    #Date of Microchipping
+    cv2.putText(image2, '21.02.2019', (280, 130), cv2.FONT_HERSHEY_PLAIN,1,(255,0,0),1)
+    
+    #Sex
+    cv2.putText(image2, 'Female', (120, 260), cv2.FONT_HERSHEY_PLAIN,1,(255,0,0),1)
+    
+    
+    cv2.imshow("window_name", image2)
+    cv2.waitKey(0)
+    #cv2.destroyAllWindows()
 
     return
 
