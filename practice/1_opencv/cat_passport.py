@@ -8,14 +8,14 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     # Read image
     image = cv2.imread(input_image_path)
 
+    # Resize image
+    image = cv2.resize(image, (640, 480), interpolation=cv2.INTER_AREA)
+
     # Convert image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # Normalize image intensity
     gray = cv2.equalizeHist(gray)
-
-    # Resize image
-    resized = cv2.resize(gray, (640, 480), interpolation=cv2.INTER_AREA)
 
     # Detect cat faces using Haar Cascade
     detector = cv2.CascadeClassifier(haar_model_path)
