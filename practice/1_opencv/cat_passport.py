@@ -30,8 +30,6 @@ def detect_cat_in_image(input_image_path, haar_model_path):
 
     # Display result image
     cv2.imshow("Cat Decetor", image)
-    cv2.waitKey()
-    cv2.destroyAllWindows()
 
     # Exit if nothing was detected
     if not rects.size:
@@ -39,7 +37,7 @@ def detect_cat_in_image(input_image_path, haar_model_path):
 
     # Crop image
     x, y, w, h = rects[0]
-    cat_image = image[y+1:y+h-1, x+1:x+w-1]
+    cat_image = image[y+2:y+h-1, x+2:x+w-1]
     return cat_image
 
     # Save result image to file
@@ -66,6 +64,8 @@ def main():
     if cat_image is None:
         print('No cat was detected in the image :(')
         return 0
+    cv2.waitKey()
+    cv2.destroyAllWindows()
 
     return 0
 
