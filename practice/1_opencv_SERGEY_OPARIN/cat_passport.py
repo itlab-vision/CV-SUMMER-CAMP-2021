@@ -10,7 +10,7 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     # Convert image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # Normalize image intensity
-    gray = cv2.equalizeHist(gray)
+    #gray = cv2.normalize(gray)
     # Resize image
     resized = cv2.resize(gray, (640, 480), interpolation = cv2.INTER_AREA)
     # Detect cat faces using Haar Cascade
@@ -24,11 +24,26 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     # Display result image
         cv2.imshow("Output image #1", image)
     # Crop image
-        image = image[y:y+h, x:x+w]
-        cv2.waitKey(0)
-        cv2.destroyAllWindows
+        cat = image[y:y+h, x:x+w]
+
     # Save result image to file
-        cv2.imwrite("out.jpg", image)
+    cv2.imwrite("out.jpg", cat)
+
+    # Putting cat face to the passport 
+    pas_form = cv2.imread("./pet_passport.png")
+    pas_form[52:185, 35:197] = cv2.resize(cat, (162, 133), interpolation = cv2.INTER_CUBIC)
+
+    # Putting text information
+    cv2.putText(pas_form, "John", (115, 215), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0,0,0), 1)
+    cv2.putText(pas_form, "Home", (115, 230), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0,0,0), 1)
+    cv2.putText(pas_form, "Siam", (115, 245), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0,0,0), 1)
+    cv2.putText(pas_form, "Male", (115, 260), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0,0,0), 1)
+    cv2.putText(pas_form, "07/26/2019", (115, 273), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0,0,0), 1)
+    cv2.putText(pas_form, "Ash blond", (115, 286), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0,0,0), 1)
+
+    cv2.imshow("passport", pas_form)
+    cv2.waitKey(0)
+    cv2.imwrite("Honorable Sir.jpg", pas_form)
 
     return
 
