@@ -1,0 +1,1159 @@
+<?xml version="1.0" ?>
+<mapping>
+	<map>
+		<framework name="resnet_model/conv2d_8/kernel" out_port_id="0"/>
+		<IR id="45" name="resnet_model/conv2d_8/Conv2D/Transpose6055_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_37/kernel" out_port_id="0"/>
+		<IR id="197" name="resnet_model/conv2d_37/Conv2D/Transpose6171_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_2/kernel" out_port_id="0"/>
+		<IR id="9" name="resnet_model/conv2d_2/Conv2D/Transpose6031_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_9/Conv2D" out_port_id="0"/>
+		<IR id="51" name="resnet_model/conv2d_9/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_52/kernel" out_port_id="0"/>
+		<IR id="275" name="resnet_model/conv2d_52/Conv2D/Transpose6231_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_28/FusedBatchNorm" out_port_id="0"/>
+		<IR id="152" name="resnet_model/batch_normalization_28/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_20" out_port_id="0"/>
+		<IR id="122" name="resnet_model/Relu_20" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_13/kernel" out_port_id="0"/>
+		<IR id="66" name="resnet_model/conv2d_13/Conv2D/Transpose6075_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_41/kernel" out_port_id="0"/>
+		<IR id="218" name="resnet_model/conv2d_41/Conv2D/Transpose6187_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_35/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="188" name="resnet_model/conv2d_35/Conv2D_bn_offset/EltwiseUnsqueeze4428_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_51/kernel" out_port_id="0"/>
+		<IR id="270" name="resnet_model/conv2d_51/Conv2D/Transpose6227_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_32/kernel" out_port_id="0"/>
+		<IR id="170" name="resnet_model/conv2d_32/Conv2D/Transpose6151_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_1/Conv2D" out_port_id="0"/>
+		<IR id="24" name="resnet_model/conv2d_1/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_8/Conv2D" out_port_id="0"/>
+		<IR id="46" name="resnet_model/conv2d_8/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_34" out_port_id="0"/>
+		<IR id="201" name="resnet_model/Relu_34" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_12" out_port_id="0"/>
+		<IR id="80" name="resnet_model/Relu_12" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/dense/MatMul" out_port_id="0"/>
+		<IR id="288" name="resnet_model/dense/MatMul" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_34/FusedBatchNorm" out_port_id="0"/>
+		<IR id="184" name="resnet_model/batch_normalization_34/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_15/Conv2D" out_port_id="0"/>
+		<IR id="82" name="resnet_model/conv2d_15/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_23/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="125" name="resnet_model/conv2d_23/Conv2D_bn_offset/EltwiseUnsqueeze4372_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_46/FusedBatchNorm" out_port_id="0"/>
+		<IR id="242" name="resnet_model/batch_normalization_46/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_22/Conv2D" out_port_id="0"/>
+		<IR id="119" name="resnet_model/conv2d_22/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_18/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="99" name="resnet_model/conv2d_18/Conv2D_bn_offset/EltwiseUnsqueeze4440_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_35/kernel" out_port_id="0"/>
+		<IR id="186" name="resnet_model/conv2d_35/Conv2D/Transpose6163_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_48/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="256" name="resnet_model/conv2d_48/Conv2D_bn_offset/EltwiseUnsqueeze4368_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_28/Conv2D" out_port_id="0"/>
+		<IR id="150" name="resnet_model/conv2d_28/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_29/FusedBatchNorm" out_port_id="0"/>
+		<IR id="157" name="resnet_model/batch_normalization_29/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_36/Conv2D" out_port_id="0"/>
+		<IR id="192" name="resnet_model/conv2d_36/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_52/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="277" name="resnet_model/conv2d_52/Conv2D_bn_offset/EltwiseUnsqueeze4396_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_6" out_port_id="0"/>
+		<IR id="127" name="resnet_model/add_6" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_24/Conv2D" out_port_id="0"/>
+		<IR id="144" name="resnet_model/conv2d_24/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_40/kernel" out_port_id="0"/>
+		<IR id="213" name="resnet_model/conv2d_40/Conv2D/Transpose6183_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_44/kernel" out_port_id="0"/>
+		<IR id="229" name="resnet_model/conv2d_44/Conv2D/Transpose6199_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_2/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="11" name="resnet_model/conv2d_2/Conv2D_bn_offset/EltwiseUnsqueeze4504_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_37/Conv2D" out_port_id="0"/>
+		<IR id="198" name="resnet_model/conv2d_37/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_46/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="241" name="resnet_model/conv2d_46/Conv2D_bn_offset/EltwiseUnsqueeze4412_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_12/FusedBatchNorm" out_port_id="0"/>
+		<IR id="64" name="resnet_model/batch_normalization_12/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_14/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="73" name="resnet_model/conv2d_14/Conv2D_bn_offset/EltwiseUnsqueeze4516_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Mean" out_port_id="0"/>
+		<IR id="284" name="resnet_model/Mean/Transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_31" out_port_id="0"/>
+		<IR id="185" name="resnet_model/Relu_31" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_11/Conv2D" out_port_id="0"/>
+		<IR id="76" name="resnet_model/conv2d_11/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_32/FusedBatchNorm" out_port_id="0"/>
+		<IR id="173" name="resnet_model/batch_normalization_32/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_28/kernel" out_port_id="0"/>
+		<IR id="149" name="resnet_model/conv2d_28/Conv2D/Transpose6135_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_4/FusedBatchNorm" out_port_id="0"/>
+		<IR id="22" name="resnet_model/batch_normalization_4/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_6/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="36" name="resnet_model/conv2d_6/Conv2D_bn_offset/EltwiseUnsqueeze4436_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_15/kernel" out_port_id="0"/>
+		<IR id="81" name="resnet_model/conv2d_15/Conv2D/Transpose6083_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_10" out_port_id="0"/>
+		<IR id="195" name="resnet_model/add_10" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_12/Conv2D" out_port_id="0"/>
+		<IR id="62" name="resnet_model/conv2d_12/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_23/Conv2D" out_port_id="0"/>
+		<IR id="124" name="resnet_model/conv2d_23/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_23/kernel" out_port_id="0"/>
+		<IR id="123" name="resnet_model/conv2d_23/Conv2D/Transpose6115_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_50/Conv2D" out_port_id="0"/>
+		<IR id="266" name="resnet_model/conv2d_50/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_6/FusedBatchNorm" out_port_id="0"/>
+		<IR id="37" name="resnet_model/batch_normalization_6/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_22/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="120" name="resnet_model/conv2d_22/Conv2D_bn_offset/EltwiseUnsqueeze4520_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_4" out_port_id="0"/>
+		<IR id="95" name="resnet_model/add_4" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_48/Conv2D" out_port_id="0"/>
+		<IR id="255" name="resnet_model/conv2d_48/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_12/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="63" name="resnet_model/conv2d_12/Conv2D_bn_offset/EltwiseUnsqueeze4548_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_20/kernel" out_port_id="0"/>
+		<IR id="107" name="resnet_model/conv2d_20/Conv2D/Transpose6103_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_29/Conv2D" out_port_id="0"/>
+		<IR id="155" name="resnet_model/conv2d_29/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_14/Conv2D" out_port_id="0"/>
+		<IR id="72" name="resnet_model/conv2d_14/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_39/FusedBatchNorm" out_port_id="0"/>
+		<IR id="210" name="resnet_model/batch_normalization_39/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_28" out_port_id="0"/>
+		<IR id="169" name="resnet_model/Relu_28" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_45/Conv2D" out_port_id="0"/>
+		<IR id="235" name="resnet_model/conv2d_45/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_38/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="204" name="resnet_model/conv2d_38/Conv2D_bn_offset/EltwiseUnsqueeze4364_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_1" out_port_id="0"/>
+		<IR id="43" name="resnet_model/add_1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_33/FusedBatchNorm" out_port_id="0"/>
+		<IR id="178" name="resnet_model/batch_normalization_33/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_46/kernel" out_port_id="0"/>
+		<IR id="239" name="resnet_model/conv2d_46/Conv2D/Transpose6207_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_48/kernel" out_port_id="0"/>
+		<IR id="254" name="resnet_model/conv2d_48/Conv2D/Transpose6215_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_20/FusedBatchNorm" out_port_id="0"/>
+		<IR id="110" name="resnet_model/batch_normalization_20/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_11/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="77" name="resnet_model/conv2d_11/Conv2D_bn_offset/EltwiseUnsqueeze4552_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_11/FusedBatchNorm" out_port_id="0"/>
+		<IR id="78" name="resnet_model/batch_normalization_11/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_33/Conv2D" out_port_id="0"/>
+		<IR id="176" name="resnet_model/conv2d_33/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_27/FusedBatchNorm" out_port_id="0"/>
+		<IR id="142" name="resnet_model/batch_normalization_27/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_2/Conv2D" out_port_id="0"/>
+		<IR id="10" name="resnet_model/conv2d_2/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_31/kernel" out_port_id="0"/>
+		<IR id="165" name="resnet_model/conv2d_31/Conv2D/Transpose6147_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_7/FusedBatchNorm" out_port_id="0"/>
+		<IR id="42" name="resnet_model/batch_normalization_7/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_7" out_port_id="0"/>
+		<IR id="49" name="resnet_model/Relu_7" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_14/FusedBatchNorm" out_port_id="0"/>
+		<IR id="74" name="resnet_model/batch_normalization_14/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_27/kernel" out_port_id="0"/>
+		<IR id="139" name="resnet_model/conv2d_27/Conv2D/Transpose6131_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_50/FusedBatchNorm" out_port_id="0"/>
+		<IR id="268" name="resnet_model/batch_normalization_50/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_5" out_port_id="0"/>
+		<IR id="38" name="resnet_model/Relu_5" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_23" out_port_id="0"/>
+		<IR id="138" name="resnet_model/Relu_23" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization/FusedBatchNorm" out_port_id="0"/>
+		<IR id="6" name="resnet_model/batch_normalization/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_26/kernel" out_port_id="0"/>
+		<IR id="134" name="resnet_model/conv2d_26/Conv2D/Transpose6127_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_17/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="93" name="resnet_model/conv2d_17/Conv2D_bn_offset/EltwiseUnsqueeze4560_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_19/kernel" out_port_id="0"/>
+		<IR id="102" name="resnet_model/conv2d_19/Conv2D/Transpose6099_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_12" out_port_id="0"/>
+		<IR id="227" name="resnet_model/add_12" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_33" out_port_id="0"/>
+		<IR id="196" name="resnet_model/Relu_33" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_43" out_port_id="0"/>
+		<IR id="253" name="resnet_model/Relu_43" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_6/Conv2D" out_port_id="0"/>
+		<IR id="35" name="resnet_model/conv2d_6/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_10/Conv2D" out_port_id="0"/>
+		<IR id="56" name="resnet_model/conv2d_10/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_14/kernel" out_port_id="0"/>
+		<IR id="71" name="resnet_model/conv2d_14/Conv2D/Transpose6079_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_14" out_port_id="0"/>
+		<IR id="263" name="resnet_model/add_14" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_21/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="115" name="resnet_model/conv2d_21/Conv2D_bn_offset/EltwiseUnsqueeze4496_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_17/Conv2D" out_port_id="0"/>
+		<IR id="92" name="resnet_model/conv2d_17/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_5/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="31" name="resnet_model/conv2d_5/Conv2D_bn_offset/EltwiseUnsqueeze4536_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_11" out_port_id="0"/>
+		<IR id="211" name="resnet_model/add_11" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_9/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="52" name="resnet_model/conv2d_9/Conv2D_bn_offset/EltwiseUnsqueeze4508_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_47/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="251" name="resnet_model/conv2d_47/Conv2D_bn_offset/EltwiseUnsqueeze4416_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_24/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="145" name="resnet_model/conv2d_24/Conv2D_bn_offset/EltwiseUnsqueeze4544_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_32" out_port_id="0"/>
+		<IR id="190" name="resnet_model/Relu_32" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_22/kernel" out_port_id="0"/>
+		<IR id="118" name="resnet_model/conv2d_22/Conv2D/Transpose6111_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_29/kernel" out_port_id="0"/>
+		<IR id="154" name="resnet_model/conv2d_29/Conv2D/Transpose6139_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_22/FusedBatchNorm" out_port_id="0"/>
+		<IR id="121" name="resnet_model/batch_normalization_22/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_2" out_port_id="0"/>
+		<IR id="18" name="resnet_model/Relu_2" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_48/FusedBatchNorm" out_port_id="0"/>
+		<IR id="257" name="resnet_model/batch_normalization_48/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_35/Conv2D" out_port_id="0"/>
+		<IR id="187" name="resnet_model/conv2d_35/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_30" out_port_id="0"/>
+		<IR id="180" name="resnet_model/Relu_30" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_9" out_port_id="0"/>
+		<IR id="179" name="resnet_model/add_9" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_15/FusedBatchNorm" out_port_id="0"/>
+		<IR id="84" name="resnet_model/batch_normalization_15/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_24" out_port_id="0"/>
+		<IR id="148" name="resnet_model/Relu_24" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_8" out_port_id="0"/>
+		<IR id="54" name="resnet_model/Relu_8" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_18/Conv2D" out_port_id="0"/>
+		<IR id="98" name="resnet_model/conv2d_18/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_27" out_port_id="0"/>
+		<IR id="164" name="resnet_model/Relu_27" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_21/kernel" out_port_id="0"/>
+		<IR id="113" name="resnet_model/conv2d_21/Conv2D/Transpose6107_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_37/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="199" name="resnet_model/conv2d_37/Conv2D_bn_offset/EltwiseUnsqueeze4476_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_2" out_port_id="0"/>
+		<IR id="59" name="resnet_model/add_2" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_42/Conv2D" out_port_id="0"/>
+		<IR id="224" name="resnet_model/conv2d_42/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_17" out_port_id="0"/>
+		<IR id="106" name="resnet_model/Relu_17" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="map/TensorArrayStack/TensorArrayGatherV3" out_port_id="0"/>
+		<IR id="0" name="map/TensorArrayStack/TensorArrayGatherV3" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_6" out_port_id="0"/>
+		<IR id="44" name="resnet_model/Relu_6" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_21/FusedBatchNorm" out_port_id="0"/>
+		<IR id="116" name="resnet_model/batch_normalization_21/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_26/Conv2D" out_port_id="0"/>
+		<IR id="135" name="resnet_model/conv2d_26/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_38/FusedBatchNorm" out_port_id="0"/>
+		<IR id="205" name="resnet_model/batch_normalization_38/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_21/Conv2D" out_port_id="0"/>
+		<IR id="114" name="resnet_model/conv2d_21/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_17/FusedBatchNorm" out_port_id="0"/>
+		<IR id="94" name="resnet_model/batch_normalization_17/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_7/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="41" name="resnet_model/conv2d_7/Conv2D_bn_offset/EltwiseUnsqueeze4400_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_7/Conv2D" out_port_id="0"/>
+		<IR id="40" name="resnet_model/conv2d_7/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_13" out_port_id="0"/>
+		<IR id="247" name="resnet_model/add_13" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="softmax_tensor" out_port_id="0"/>
+		<IR id="291" name="softmax_tensor" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_1/FusedBatchNorm" out_port_id="0"/>
+		<IR id="26" name="resnet_model/batch_normalization_1/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_38/kernel" out_port_id="0"/>
+		<IR id="202" name="resnet_model/conv2d_38/Conv2D/Transpose6175_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_1" out_port_id="0"/>
+		<IR id="13" name="resnet_model/Relu_1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_39/kernel" out_port_id="0"/>
+		<IR id="207" name="resnet_model/conv2d_39/Conv2D/Transpose6179_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_40/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="215" name="resnet_model/conv2d_40/Conv2D_bn_offset/EltwiseUnsqueeze4388_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_3/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="16" name="resnet_model/conv2d_3/Conv2D_bn_offset/EltwiseUnsqueeze4512_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add" out_port_id="0"/>
+		<IR id="27" name="resnet_model/add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_5/kernel" out_port_id="0"/>
+		<IR id="29" name="resnet_model/conv2d_5/Conv2D/Transpose6043_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_30/Conv2D" out_port_id="0"/>
+		<IR id="160" name="resnet_model/conv2d_30/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_10/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="57" name="resnet_model/conv2d_10/Conv2D_bn_offset/EltwiseUnsqueeze4528_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="5" name="resnet_model/conv2d/Conv2D_bn_offset/EltwiseUnsqueeze4556_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_22" out_port_id="0"/>
+		<IR id="133" name="resnet_model/Relu_22" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_33/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="177" name="resnet_model/conv2d_33/Conv2D_bn_offset/EltwiseUnsqueeze4376_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_3/Conv2D" out_port_id="0"/>
+		<IR id="15" name="resnet_model/conv2d_3/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_6/kernel" out_port_id="0"/>
+		<IR id="34" name="resnet_model/conv2d_6/Conv2D/Transpose6047_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_1/kernel" out_port_id="0"/>
+		<IR id="23" name="resnet_model/conv2d_1/Conv2D/Transpose6027_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_36/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="193" name="resnet_model/conv2d_36/Conv2D_bn_offset/EltwiseUnsqueeze4468_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_38" out_port_id="0"/>
+		<IR id="222" name="resnet_model/Relu_38" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_28/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="151" name="resnet_model/conv2d_28/Conv2D_bn_offset/EltwiseUnsqueeze4500_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_34/Conv2D" out_port_id="0"/>
+		<IR id="182" name="resnet_model/conv2d_34/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Pad_3" out_port_id="0"/>
+		<IR id="128" name="resnet_model/Relu_21" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_21" out_port_id="0"/>
+		<IR id="128" name="resnet_model/Relu_21" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_43/FusedBatchNorm" out_port_id="0"/>
+		<IR id="246" name="resnet_model/batch_normalization_43/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d/Conv2D" out_port_id="0"/>
+		<IR id="4" name="resnet_model/conv2d/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_18/FusedBatchNorm" out_port_id="0"/>
+		<IR id="100" name="resnet_model/batch_normalization_18/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_37" out_port_id="0"/>
+		<IR id="217" name="resnet_model/Relu_37" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_41" out_port_id="0"/>
+		<IR id="238" name="resnet_model/Relu_41" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_10/kernel" out_port_id="0"/>
+		<IR id="55" name="resnet_model/conv2d_10/Conv2D/Transpose6063_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d/kernel" out_port_id="0"/>
+		<IR id="3" name="map/TensorArrayStack/TensorArrayGatherV3/reverse_input_channels/Concat8823_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_19" out_port_id="0"/>
+		<IR id="117" name="resnet_model/Relu_19" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_35" out_port_id="0"/>
+		<IR id="206" name="resnet_model/Relu_35" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_31/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="167" name="resnet_model/conv2d_31/Conv2D_bn_offset/EltwiseUnsqueeze4564_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_7" out_port_id="0"/>
+		<IR id="147" name="resnet_model/add_7" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_49/FusedBatchNorm" out_port_id="0"/>
+		<IR id="262" name="resnet_model/batch_normalization_49/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Pad_1" out_port_id="0"/>
+		<IR id="60" name="resnet_model/Relu_9" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_9" out_port_id="0"/>
+		<IR id="60" name="resnet_model/Relu_9" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_13" out_port_id="0"/>
+		<IR id="85" name="resnet_model/Relu_13" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Squeeze" out_port_id="0"/>
+		<IR id="286" name="resnet_model/Squeeze" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_24/kernel" out_port_id="0"/>
+		<IR id="143" name="resnet_model/conv2d_24/Conv2D/Transpose6119_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_32/Conv2D" out_port_id="0"/>
+		<IR id="171" name="resnet_model/conv2d_32/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_31/FusedBatchNorm" out_port_id="0"/>
+		<IR id="168" name="resnet_model/batch_normalization_31/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_50/kernel" out_port_id="0"/>
+		<IR id="265" name="resnet_model/conv2d_50/Conv2D/Transpose6223_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_2/FusedBatchNorm" out_port_id="0"/>
+		<IR id="12" name="resnet_model/batch_normalization_2/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_52/Conv2D" out_port_id="0"/>
+		<IR id="276" name="resnet_model/conv2d_52/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_51/Conv2D" out_port_id="0"/>
+		<IR id="271" name="resnet_model/conv2d_51/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_25/Conv2D" out_port_id="0"/>
+		<IR id="130" name="resnet_model/conv2d_25/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_49/Conv2D" out_port_id="0"/>
+		<IR id="260" name="resnet_model/conv2d_49/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_5/FusedBatchNorm" out_port_id="0"/>
+		<IR id="32" name="resnet_model/batch_normalization_5/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_47/Conv2D" out_port_id="0"/>
+		<IR id="250" name="resnet_model/conv2d_47/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_14" out_port_id="0"/>
+		<IR id="90" name="resnet_model/Relu_14" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu" out_port_id="0"/>
+		<IR id="7" name="resnet_model/Relu" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_44" out_port_id="0"/>
+		<IR id="258" name="resnet_model/Relu_44" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_13/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="68" name="resnet_model/conv2d_13/Conv2D_bn_offset/EltwiseUnsqueeze4488_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_11/kernel" out_port_id="0"/>
+		<IR id="75" name="resnet_model/conv2d_11/Conv2D/Transpose6067_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/max_pooling2d/MaxPool" out_port_id="0"/>
+		<IR id="8" name="resnet_model/max_pooling2d/MaxPool" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_43/kernel" out_port_id="0"/>
+		<IR id="243" name="resnet_model/conv2d_43/Conv2D/Transpose6195_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_46" out_port_id="0"/>
+		<IR id="269" name="resnet_model/Relu_46" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_8/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="47" name="resnet_model/conv2d_8/Conv2D_bn_offset/EltwiseUnsqueeze4392_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/dense/kernel" out_port_id="0"/>
+		<IR id="287" name="resnet_model/dense/MatMul/1_port_transpose6795_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_30/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="161" name="resnet_model/conv2d_30/Conv2D_bn_offset/EltwiseUnsqueeze4360_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_34/kernel" out_port_id="0"/>
+		<IR id="181" name="resnet_model/conv2d_34/Conv2D/Transpose6159_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_9/kernel" out_port_id="0"/>
+		<IR id="50" name="resnet_model/conv2d_9/Conv2D/Transpose6059_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_40" out_port_id="0"/>
+		<IR id="233" name="resnet_model/Relu_40" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_40/FusedBatchNorm" out_port_id="0"/>
+		<IR id="216" name="resnet_model/batch_normalization_40/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_45" out_port_id="0"/>
+		<IR id="264" name="resnet_model/Relu_45" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_4/kernel" out_port_id="0"/>
+		<IR id="19" name="resnet_model/conv2d_4/Conv2D/Transpose6039_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_19/FusedBatchNorm" out_port_id="0"/>
+		<IR id="105" name="resnet_model/batch_normalization_19/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_39/Conv2D" out_port_id="0"/>
+		<IR id="208" name="resnet_model/conv2d_39/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_15/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="83" name="resnet_model/conv2d_15/Conv2D_bn_offset/EltwiseUnsqueeze4464_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_25/kernel" out_port_id="0"/>
+		<IR id="129" name="resnet_model/conv2d_25/Conv2D/Transpose6123_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_8" out_port_id="0"/>
+		<IR id="163" name="resnet_model/add_8" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_29" out_port_id="0"/>
+		<IR id="174" name="resnet_model/Relu_29" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_20/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="109" name="resnet_model/conv2d_20/Conv2D_bn_offset/EltwiseUnsqueeze4480_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_31/Conv2D" out_port_id="0"/>
+		<IR id="166" name="resnet_model/conv2d_31/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_10" out_port_id="0"/>
+		<IR id="65" name="resnet_model/Relu_10" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_19/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="104" name="resnet_model/conv2d_19/Conv2D_bn_offset/EltwiseUnsqueeze4472_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_15" out_port_id="0"/>
+		<IR id="96" name="resnet_model/Relu_15" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_5" out_port_id="0"/>
+		<IR id="111" name="resnet_model/add_5" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_27/Conv2D" out_port_id="0"/>
+		<IR id="140" name="resnet_model/conv2d_27/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_51/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="272" name="resnet_model/conv2d_51/Conv2D_bn_offset/EltwiseUnsqueeze4420_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_5/Conv2D" out_port_id="0"/>
+		<IR id="30" name="resnet_model/conv2d_5/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_3/FusedBatchNorm" out_port_id="0"/>
+		<IR id="17" name="resnet_model/batch_normalization_3/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_4" out_port_id="0"/>
+		<IR id="33" name="resnet_model/Relu_4" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_32/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="172" name="resnet_model/conv2d_32/Conv2D_bn_offset/EltwiseUnsqueeze4524_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_25/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="131" name="resnet_model/conv2d_25/Conv2D_bn_offset/EltwiseUnsqueeze4352_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_23/FusedBatchNorm" out_port_id="0"/>
+		<IR id="126" name="resnet_model/batch_normalization_23/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_33/kernel" out_port_id="0"/>
+		<IR id="175" name="resnet_model/conv2d_33/Conv2D/Transpose6155_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_49/kernel" out_port_id="0"/>
+		<IR id="259" name="resnet_model/conv2d_49/Conv2D/Transpose6219_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_41/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="220" name="resnet_model/conv2d_41/Conv2D_bn_offset/EltwiseUnsqueeze4460_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_9/FusedBatchNorm" out_port_id="0"/>
+		<IR id="53" name="resnet_model/batch_normalization_9/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_45/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="236" name="resnet_model/conv2d_45/Conv2D_bn_offset/EltwiseUnsqueeze4404_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_30/kernel" out_port_id="0"/>
+		<IR id="159" name="resnet_model/conv2d_30/Conv2D/Transpose6143_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_15" out_port_id="0"/>
+		<IR id="279" name="resnet_model/add_15" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_46/Conv2D" out_port_id="0"/>
+		<IR id="240" name="resnet_model/conv2d_46/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_3/kernel" out_port_id="0"/>
+		<IR id="14" name="resnet_model/conv2d_3/Conv2D/Transpose6035_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_16/Conv2D" out_port_id="0"/>
+		<IR id="87" name="resnet_model/conv2d_16/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_17/kernel" out_port_id="0"/>
+		<IR id="91" name="resnet_model/conv2d_17/Conv2D/Transpose6091_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_42/kernel" out_port_id="0"/>
+		<IR id="223" name="resnet_model/conv2d_42/Conv2D/Transpose6191_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_29/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="156" name="resnet_model/conv2d_29/Conv2D_bn_offset/EltwiseUnsqueeze4456_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_42/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="225" name="resnet_model/conv2d_42/Conv2D_bn_offset/EltwiseUnsqueeze4444_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_26/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="136" name="resnet_model/conv2d_26/Conv2D_bn_offset/EltwiseUnsqueeze4448_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_44/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="231" name="resnet_model/conv2d_44/Conv2D_bn_offset/EltwiseUnsqueeze4540_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_51/FusedBatchNorm" out_port_id="0"/>
+		<IR id="273" name="resnet_model/batch_normalization_51/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_25" out_port_id="0"/>
+		<IR id="153" name="resnet_model/Relu_25" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_36/FusedBatchNorm" out_port_id="0"/>
+		<IR id="194" name="resnet_model/batch_normalization_36/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_11" out_port_id="0"/>
+		<IR id="70" name="resnet_model/Relu_11" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_47/kernel" out_port_id="0"/>
+		<IR id="249" name="resnet_model/conv2d_47/Conv2D/Transpose6211_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_45/kernel" out_port_id="0"/>
+		<IR id="234" name="resnet_model/conv2d_45/Conv2D/Transpose6203_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Pad_5" out_port_id="0"/>
+		<IR id="228" name="resnet_model/Relu_39" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_39" out_port_id="0"/>
+		<IR id="228" name="resnet_model/Relu_39" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_16/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="88" name="resnet_model/conv2d_16/Conv2D_bn_offset/EltwiseUnsqueeze4384_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_42/FusedBatchNorm" out_port_id="0"/>
+		<IR id="226" name="resnet_model/batch_normalization_42/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_48" out_port_id="0"/>
+		<IR id="280" name="resnet_model/Relu_48" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_39/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="209" name="resnet_model/conv2d_39/Conv2D_bn_offset/EltwiseUnsqueeze4532_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_13/Conv2D" out_port_id="0"/>
+		<IR id="67" name="resnet_model/conv2d_13/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_37/FusedBatchNorm" out_port_id="0"/>
+		<IR id="200" name="resnet_model/batch_normalization_37/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_25/FusedBatchNorm" out_port_id="0"/>
+		<IR id="132" name="resnet_model/batch_normalization_25/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_35/FusedBatchNorm" out_port_id="0"/>
+		<IR id="189" name="resnet_model/batch_normalization_35/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/dense/BiasAdd" out_port_id="0"/>
+		<IR id="290" name="resnet_model/dense/BiasAdd/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_49/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="261" name="resnet_model/conv2d_49/Conv2D_bn_offset/EltwiseUnsqueeze4452_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_43/Conv2D" out_port_id="0"/>
+		<IR id="244" name="resnet_model/conv2d_43/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_36/kernel" out_port_id="0"/>
+		<IR id="191" name="resnet_model/conv2d_36/Conv2D/Transpose6167_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_44/FusedBatchNorm" out_port_id="0"/>
+		<IR id="232" name="resnet_model/batch_normalization_44/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_41/FusedBatchNorm" out_port_id="0"/>
+		<IR id="221" name="resnet_model/batch_normalization_41/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_16/kernel" out_port_id="0"/>
+		<IR id="86" name="resnet_model/conv2d_16/Conv2D/Transpose6087_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_27/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="141" name="resnet_model/conv2d_27/Conv2D_bn_offset/EltwiseUnsqueeze4356_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/dense/bias" out_port_id="0"/>
+		<IR id="289" name="resnet_model/dense/bias/EltwiseUnsqueeze4424_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_47" out_port_id="0"/>
+		<IR id="274" name="resnet_model/Relu_47" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_36" out_port_id="0"/>
+		<IR id="212" name="resnet_model/Relu_36" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_38/Conv2D" out_port_id="0"/>
+		<IR id="203" name="resnet_model/conv2d_38/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_47/FusedBatchNorm" out_port_id="0"/>
+		<IR id="252" name="resnet_model/batch_normalization_47/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_7/kernel" out_port_id="0"/>
+		<IR id="39" name="resnet_model/conv2d_7/Conv2D/Transpose6051_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_41/Conv2D" out_port_id="0"/>
+		<IR id="219" name="resnet_model/conv2d_41/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_1/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="25" name="resnet_model/conv2d_1/Conv2D_bn_offset/EltwiseUnsqueeze4408_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_50/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="267" name="resnet_model/conv2d_50/Conv2D_bn_offset/EltwiseUnsqueeze4492_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_16" out_port_id="0"/>
+		<IR id="101" name="resnet_model/Relu_16" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_52/FusedBatchNorm" out_port_id="0"/>
+		<IR id="278" name="resnet_model/batch_normalization_52/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_43/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="245" name="resnet_model/conv2d_43/Conv2D_bn_offset/EltwiseUnsqueeze4484_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_42" out_port_id="0"/>
+		<IR id="248" name="resnet_model/Relu_42" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/add_3" out_port_id="0"/>
+		<IR id="79" name="resnet_model/add_3" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_10/FusedBatchNorm" out_port_id="0"/>
+		<IR id="58" name="resnet_model/batch_normalization_10/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_18" out_port_id="0"/>
+		<IR id="112" name="resnet_model/Relu_18" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_3" out_port_id="0"/>
+		<IR id="28" name="resnet_model/Relu_3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_19/Conv2D" out_port_id="0"/>
+		<IR id="103" name="resnet_model/conv2d_19/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_4/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="21" name="resnet_model/conv2d_4/Conv2D_bn_offset/EltwiseUnsqueeze4432_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_4/Conv2D" out_port_id="0"/>
+		<IR id="20" name="resnet_model/conv2d_4/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_20/Conv2D" out_port_id="0"/>
+		<IR id="108" name="resnet_model/conv2d_20/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_45/FusedBatchNorm" out_port_id="0"/>
+		<IR id="237" name="resnet_model/batch_normalization_45/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_12/kernel" out_port_id="0"/>
+		<IR id="61" name="resnet_model/conv2d_12/Conv2D/Transpose6071_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_13/FusedBatchNorm" out_port_id="0"/>
+		<IR id="69" name="resnet_model/batch_normalization_13/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_16/FusedBatchNorm" out_port_id="0"/>
+		<IR id="89" name="resnet_model/batch_normalization_16/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_24/FusedBatchNorm" out_port_id="0"/>
+		<IR id="146" name="resnet_model/batch_normalization_24/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_30/FusedBatchNorm" out_port_id="0"/>
+		<IR id="162" name="resnet_model/batch_normalization_30/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_44/Conv2D" out_port_id="0"/>
+		<IR id="230" name="resnet_model/conv2d_44/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_40/Conv2D" out_port_id="0"/>
+		<IR id="214" name="resnet_model/conv2d_40/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_18/kernel" out_port_id="0"/>
+		<IR id="97" name="resnet_model/conv2d_18/Conv2D/Transpose6095_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_8/FusedBatchNorm" out_port_id="0"/>
+		<IR id="48" name="resnet_model/batch_normalization_8/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/conv2d_34/Conv2D_bn_offset" out_port_id="0"/>
+		<IR id="183" name="resnet_model/conv2d_34/Conv2D_bn_offset/EltwiseUnsqueeze4380_const" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="resnet_model/batch_normalization_26/FusedBatchNorm" out_port_id="0"/>
+		<IR id="137" name="resnet_model/batch_normalization_26/FusedBatchNorm/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="resnet_model/Relu_26" out_port_id="0"/>
+		<IR id="158" name="resnet_model/Relu_26" out_port_id="1"/>
+	</map>
+</mapping>

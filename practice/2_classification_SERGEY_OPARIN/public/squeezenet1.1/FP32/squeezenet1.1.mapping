@@ -1,0 +1,267 @@
+<?xml version="1.0" ?>
+<mapping>
+	<map>
+		<framework name="fire6/squeeze1x1" out_port_id="0"/>
+		<IR id="78" name="fire6/squeeze1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire2/squeeze1x1" out_port_id="0"/>
+		<IR id="12" name="fire2/squeeze1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire7/expand1x1" out_port_id="0"/>
+		<IR id="99" name="fire7/expand1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire7/relu_squeeze1x1" out_port_id="0"/>
+		<IR id="95" name="fire7/relu_squeeze1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire3/relu_expand1x1" out_port_id="0"/>
+		<IR id="34" name="fire3/relu_expand1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire4/expand1x1" out_port_id="0"/>
+		<IR id="50" name="fire4/expand1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire2/expand3x3" out_port_id="0"/>
+		<IR id="22" name="fire2/expand3x3" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire7/relu_expand1x1" out_port_id="0"/>
+		<IR id="100" name="fire7/relu_expand1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire2/concat" out_port_id="0"/>
+		<IR id="24" name="fire2/concat" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire7/concat" out_port_id="0"/>
+		<IR id="106" name="fire7/concat" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire4/relu_expand1x1" out_port_id="0"/>
+		<IR id="51" name="fire4/relu_expand1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire6/expand1x1" out_port_id="0"/>
+		<IR id="83" name="fire6/expand1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire9/expand1x1" out_port_id="0"/>
+		<IR id="131" name="fire9/expand1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="prob" out_port_id="0"/>
+		<IR id="152" name="prob" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire3/squeeze1x1" out_port_id="0"/>
+		<IR id="28" name="fire3/squeeze1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire5/squeeze1x1" out_port_id="0"/>
+		<IR id="61" name="fire5/squeeze1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire9/squeeze1x1" out_port_id="0"/>
+		<IR id="126" name="fire9/squeeze1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire6/relu_expand3x3" out_port_id="0"/>
+		<IR id="89" name="fire6/relu_expand3x3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire7/expand3x3" out_port_id="0"/>
+		<IR id="104" name="fire7/expand3x3" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire4/relu_expand3x3" out_port_id="0"/>
+		<IR id="56" name="fire4/relu_expand3x3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire8/relu_expand3x3" out_port_id="0"/>
+		<IR id="121" name="fire8/relu_expand3x3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire2/relu_expand3x3" out_port_id="0"/>
+		<IR id="23" name="fire2/relu_expand3x3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire6/relu_squeeze1x1" out_port_id="0"/>
+		<IR id="79" name="fire6/relu_squeeze1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="pool10" out_port_id="0"/>
+		<IR id="151" name="pool10/reduce" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="pool3" out_port_id="0"/>
+		<IR id="41" name="pool3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire3/relu_squeeze1x1" out_port_id="0"/>
+		<IR id="29" name="fire3/relu_squeeze1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire5/relu_squeeze1x1" out_port_id="0"/>
+		<IR id="62" name="fire5/relu_squeeze1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire6/relu_expand1x1" out_port_id="0"/>
+		<IR id="84" name="fire6/relu_expand1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire5/relu_expand3x3" out_port_id="0"/>
+		<IR id="72" name="fire5/relu_expand3x3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire8/expand3x3" out_port_id="0"/>
+		<IR id="120" name="fire8/expand3x3" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire8/expand1x1" out_port_id="0"/>
+		<IR id="115" name="fire8/expand1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire7/relu_expand3x3" out_port_id="0"/>
+		<IR id="105" name="fire7/relu_expand3x3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="drop9" out_port_id="0"/>
+		<IR id="138" name="fire9/concat" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire9/concat" out_port_id="0"/>
+		<IR id="138" name="fire9/concat" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire6/concat" out_port_id="0"/>
+		<IR id="90" name="fire6/concat" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="relu_conv1" out_port_id="0"/>
+		<IR id="7" name="relu_conv1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire8/relu_squeeze1x1" out_port_id="0"/>
+		<IR id="111" name="fire8/relu_squeeze1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire2/expand1x1" out_port_id="0"/>
+		<IR id="17" name="fire2/expand1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire3/expand1x1" out_port_id="0"/>
+		<IR id="33" name="fire3/expand1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire8/relu_expand1x1" out_port_id="0"/>
+		<IR id="116" name="fire8/relu_expand1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire9/expand3x3" out_port_id="0"/>
+		<IR id="136" name="fire9/expand3x3" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire2/relu_squeeze1x1" out_port_id="0"/>
+		<IR id="13" name="fire2/relu_squeeze1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire2/relu_expand1x1" out_port_id="0"/>
+		<IR id="18" name="fire2/relu_expand1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="pool1" out_port_id="0"/>
+		<IR id="8" name="pool1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire7/squeeze1x1" out_port_id="0"/>
+		<IR id="94" name="fire7/squeeze1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire3/concat" out_port_id="0"/>
+		<IR id="40" name="fire3/concat" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire4/concat" out_port_id="0"/>
+		<IR id="57" name="fire4/concat" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="conv10" out_port_id="0"/>
+		<IR id="142" name="conv10" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire4/squeeze1x1" out_port_id="0"/>
+		<IR id="45" name="fire4/squeeze1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire9/relu_expand1x1" out_port_id="0"/>
+		<IR id="132" name="fire9/relu_expand1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="conv1" out_port_id="0"/>
+		<IR id="6" name="conv1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="data" out_port_id="0"/>
+		<IR id="0" name="data" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="fire3/expand3x3" out_port_id="0"/>
+		<IR id="38" name="fire3/expand3x3" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire4/expand3x3" out_port_id="0"/>
+		<IR id="55" name="fire4/expand3x3" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire3/relu_expand3x3" out_port_id="0"/>
+		<IR id="39" name="fire3/relu_expand3x3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire8/concat" out_port_id="0"/>
+		<IR id="122" name="fire8/concat" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire5/concat" out_port_id="0"/>
+		<IR id="73" name="fire5/concat" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire9/relu_expand3x3" out_port_id="0"/>
+		<IR id="137" name="fire9/relu_expand3x3" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire5/expand1x1" out_port_id="0"/>
+		<IR id="66" name="fire5/expand1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="pool5" out_port_id="0"/>
+		<IR id="74" name="pool5" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire8/squeeze1x1" out_port_id="0"/>
+		<IR id="110" name="fire8/squeeze1x1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire9/relu_squeeze1x1" out_port_id="0"/>
+		<IR id="127" name="fire9/relu_squeeze1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire5/expand3x3" out_port_id="0"/>
+		<IR id="71" name="fire5/expand3x3" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire4/relu_squeeze1x1" out_port_id="0"/>
+		<IR id="46" name="fire4/relu_squeeze1x1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="fire6/expand3x3" out_port_id="0"/>
+		<IR id="88" name="fire6/expand3x3" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="fire5/relu_expand1x1" out_port_id="0"/>
+		<IR id="67" name="fire5/relu_expand1x1" out_port_id="1"/>
+	</map>
+</mapping>
