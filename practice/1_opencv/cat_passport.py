@@ -3,7 +3,7 @@ import cv2
 import sys
 
 
-def make_cat_passport_image(input_image_path, haar_model_path):
+def detect_cat_in_image(input_image_path, haar_model_path):
 
     # Read image
     image = cv2.imread(input_image_path)
@@ -35,17 +35,15 @@ def make_cat_passport_image(input_image_path, haar_model_path):
 
     # Exit if nothing was detected
     if not rects.size:
-        print('No cat was detected in the image :(')
-        return
+        return None
 
     # Crop image
     x, y, w, h = rects[0]
-    image = image[y:y+h, x:x+w]
+    cat_image = image[y+1:y+h-1, x+1:x+w-1]
+    return cat_image
 
     # Save result image to file
-    output_file_path = 'out.jpg'
-    cv2.imwrite(output_file_path, image)
-    print(f'Image saved to {output_file_path}')
+    # cv2.imwrite('out.jpg', image)
 
 
 def build_argparser():
@@ -64,7 +62,10 @@ def build_argparser():
 def main():
     
     args = build_argparser().parse_args()
-    make_cat_passport_image(args.input, args.model)
+    cat_image = detect_cat_in_image(args.input, args.model)
+    if cat_image is None:
+        print('No cat was detected in the image :(')
+        return 0
 
     return 0
 
