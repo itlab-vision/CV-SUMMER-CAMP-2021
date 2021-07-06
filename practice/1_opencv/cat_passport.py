@@ -3,7 +3,7 @@ import argparse
 import cv2
 
 
-def make_cat_passport_image(input_image_path, haar_model_path):
+def make_cat_passport_image(input_image_path, haar_model_path, passport_path):
 
     # Read image
     image = cv2.imread(input_image_path)
@@ -23,7 +23,7 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     # Detect cat faces using Haar Cascade
     detector = cv2.CascadeClassifier(haar_model_path)
     rects = detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(75, 75))
-    print(rects)
+    # print(rects)
 
     # Draw bounding box
     for (i, (x, y, w, h)) in enumerate(rects):
@@ -33,9 +33,9 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     # image[0:300:2,::2] = (0, 0, 255)
 
     # Display result image
-    cv2.imshow("window_name", image)
-    cv2.waitKey(0) 
-    cv2.destroyAllWindows()
+    # cv2.imshow("window_name", image)
+    # cv2.waitKey(0) 
+    # cv2.destroyAllWindows()
 
     # Crop image
     x, y, w, h = rects[0]
@@ -44,6 +44,25 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     # Save result image to file
     cv2.imwrite('out.jpg', image)
 
+
+
+
+    # show passport with cat
+    passport = cv2.imread(passport_path)
+    w,h = 170,139
+    image = cv2.resize(image,(w,h), interpolation = cv2.INTER_AREA)
+    for x in range(h):
+        for y in range(w):
+            passport[x+48,y+31] = image[x,y]
+
+    cv2.putText(passport, 'OpenCV', (86,217), cv2.FONT_HERSHEY_SIMPLEX, 
+                    0.3, (0,0,0), 0, cv2.LINE_AA)
+
+    cv2.putText(passport, '19.01.2038', (110,272), cv2.FONT_HERSHEY_SIMPLEX, 
+                    0.3, (0,0,0), 0, cv2.LINE_AA)
+    cv2.imshow("window_name", passport)
+    cv2.waitKey(0) 
+    cv2.destroyAllWindows()
 
     print('"Finished"!!!')
     return
@@ -57,6 +76,8 @@ def build_argparser():
                       help='Show this help message and exit.')
     args.add_argument('-m', '--model', type=str, required=True,
                       help='Required. Path to .XML file with pre-trained model.')
+    args.add_argument('-p', '--passport', type=str, required=True,
+                      help='Required. Path to passport image.')
     args.add_argument('-i', '--input', type=str, required=True,
                       help='Required. Path to input image')
     return parser
@@ -65,7 +86,7 @@ def build_argparser():
 def main():
     
     args = build_argparser().parse_args()
-    make_cat_passport_image(args.input, args.model)
+    make_cat_passport_image(args.input, args.model, args.passport)
 
     return 0
 
