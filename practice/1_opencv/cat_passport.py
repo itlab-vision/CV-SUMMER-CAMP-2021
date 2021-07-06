@@ -22,14 +22,14 @@ def make_cat_passport_image(input_image_path, haar_model_path):
     rects = detector.detectMultiScale(image, scaleFactor=1.1, minNeighbors=5, minSize=(75, 75))
 
     # Draw bounding box
-    cv2.imshow("Result", image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-    # Display result image
     for (i, (x, y, w, h)) in enumerate(rects):
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
         cv2.putText(image, "Cat #{}".format(i + 1), (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 255), 2)
+
+    # Display result image
+    cv2.imshow("Result", image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     # Crop image
     x, y, w, h = rects[0]
