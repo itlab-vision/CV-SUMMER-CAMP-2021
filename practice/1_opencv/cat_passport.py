@@ -26,7 +26,7 @@ def create_passport(passport, photo, cat_index):
     cv2.putText(filled_passport, "Cat #{}".format(cat_index + 1), (89, 218), cv2.FONT_ITALIC, 0.55, (0, 0, 0), 1)
     cv2.putText(filled_passport, breeds[randint(0, 3)], (89, 247), cv2.FONT_ITALIC, 0.55, (0, 0, 0), 1)
     cv2.putText(filled_passport, gender[randint(0, 1)], (89, 260), cv2.FONT_ITALIC, 0.55, (0, 0, 0), 1)
-    cv2.putText(filled_passport, f"{randint(0, 30)}.{randint(0, 12)}.20{randint(10, 20)}", (105, 273), cv2.FONT_ITALIC, 0.55, (0, 0, 0), 1)
+    cv2.putText(filled_passport, f"{randint(1, 30)}.{randint(1, 12)}.20{randint(10, 20)}", (105, 273), cv2.FONT_ITALIC, 0.55, (0, 0, 0), 1)
     cv2.putText(filled_passport, "1337", (256, 93), cv2.FONT_ITALIC, 0.55, (0, 0, 0), 1)
 
     cv2.imshow("passport", filled_passport)
