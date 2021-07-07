@@ -1,6 +1,8 @@
+# python cat_passport.py -m haarcascade_frontalcatface.xml -i cat.jpg
+
 import argparse
 import sys
-import cv2#python cat_passport.py –m “haarcascade_frontalcatface.xml” –i “cat.jpg”
+import cv2
 
 
 def make_cat_passport_image(input_image_path, haar_model_path):
