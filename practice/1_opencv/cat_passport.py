@@ -1,26 +1,56 @@
 import argparse
 import cv2
-
+import sys
 
 def make_cat_passport_image(input_image_path, haar_model_path):
 
     # Read image
+    image = cv2.imread(input_image_path)
+    #print(image.shape)
 
     # Convert image to grayscale
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    #print(gray.shape, gray.dtype)
+    #cv2.imshow('test1', gray)
 
     # Normalize image intensity
+    gray = cv2.equalizeHist(gray)
+    #cv2.imshow('test2', gray)
 
     # Resize image
 
     # Detect cat faces using Haar Cascade
+    detector = cv2.CascadeClassifier(haar_model_path)
+    rects = detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(75, 75))
+    print(rects)
 
     # Draw bounding box
+    for (i, (x, y, w, h)) in enumerate(rects):
+        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        cv2.putText(image, "Cat #{}".format(i + 1), (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 255), 2)
 
     # Display result image
+    cv2.imshow("test3", image)
 
     # Crop image
-
+    x, y, w, h = rects[0]
+    image2 = image[y:y+h, x:x+w]
+    
     # Save result image to file
+
+    #!!!Проверить!!!Почему image3 влияет на image2? 
+
+    #image3 = image[0 : 300 : 2, : :2]
+    #cv2.imshow("test5", image3)
+    #image3[0 : 300 : 2, : :2] = (0,0,255)
+    #cv2.imshow("test6", image3)
+
+
+    cv2.imshow("test4", image2)
+    cv2.imwrite('out.jpg', image2)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     return
 
