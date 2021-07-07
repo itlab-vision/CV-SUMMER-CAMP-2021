@@ -3,6 +3,7 @@
 import argparse
 import sys
 import cv2
+from random import randrange
 
 
 def make_cat_passport_image(input_image_path, haar_model_path):
@@ -52,6 +53,77 @@ def make_cat_passport_image(input_image_path, haar_model_path):
 
     # Save result image to file
     cv2.imwrite('out.jpg', image)
+
+    # Additional task
+    image_final = cv2.imread('pet_passport.png')
+    image_final[49:(49+138), 49:(49+138)] = image
+
+    # Name
+    cv2.putText(image_final,
+                'Murka',
+                (91, 219),
+                cv2.FONT_HERSHEY_PLAIN,
+                1,
+                (255,0,0),
+                1)
+
+    # Species
+    cv2.putText(image_final,
+                'Cat',
+                (91, 232),
+                cv2.FONT_HERSHEY_PLAIN,
+                1,
+                (255, 0, 0),
+                1)
+
+    # Breed
+    cv2.putText(image_final,
+                'Siamese Cat',
+                (91, 246),
+                cv2.FONT_HERSHEY_PLAIN,
+                1,
+                (255, 0, 0),
+                1)
+
+    # Sex
+    cv2.putText(image_final,
+                'Female',
+                (91, 260),
+                cv2.FONT_HERSHEY_PLAIN,
+                1,
+                (255, 0, 0),
+                1)
+
+    # Date of Birth
+    cv2.putText(image_final,
+                '01.01.2020',
+                (116, 273),
+                cv2.FONT_HERSHEY_PLAIN,
+                1,
+                (255, 0, 0),
+                1)
+
+    # Tattoo number
+    tattoo_number = randrange(100000, 999999)
+    cv2.putText(image_final,
+                str(tattoo_number),
+                (274, 212),
+                cv2.FONT_HERSHEY_PLAIN,
+                1,
+                (255, 0, 0),
+                1)
+
+    # Date of Tattoing
+    cv2.putText(image_final,
+                '11.01.2020',
+                (274, 253),
+                cv2.FONT_HERSHEY_PLAIN,
+                1,
+                (255, 0, 0),
+                1)
+
+    cv2.imwrite('out_final.jpg', image_final)
+
     return
 
 
