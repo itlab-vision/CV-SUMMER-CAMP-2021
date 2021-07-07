@@ -2,7 +2,7 @@ import argparse
 import cv2
 import sys
 
-def make_cat_passport_image(input_image_path, haar_model_path):
+def make_cat_passport_image(input_image_path, input_image2_path, haar_model_path):
 
     # Read image
     image = cv2.imread(input_image_path)
@@ -30,25 +30,55 @@ def make_cat_passport_image(input_image_path, haar_model_path):
         cv2.putText(image, "Cat #{}".format(i + 1), (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 255), 2)
 
     # Display result image
-    cv2.imshow("test3", image)
+    cv2.imshow("result_frame", image)
 
     # Crop image
     x, y, w, h = rects[0]
-    image2 = image[y:y+h, x:x+w]
+    ROIimage = image[y:y+h, x:x+w]
     
     # Save result image to file
-
-    #!!!Проверить!!!Почему image3 влияет на image2? 
 
     #image3 = image[0 : 300 : 2, : :2]
     #cv2.imshow("test5", image3)
     #image3[0 : 300 : 2, : :2] = (0,0,255)
     #cv2.imshow("test6", image3)
 
+    cv2.imshow("ROIimage", ROIimage)
+    cv2.imwrite('out.jpg', ROIimage)
 
-    cv2.imshow("test4", image2)
-    cv2.imwrite('out.jpg', image2)
+    # Cat passport
+    passport = cv2.imread(input_image2_path)
 
+    #Text-on-Passport
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    cv2.putText(passport,'TestCat',(90,218), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+    cv2.putText(passport,'Cat',(90,231), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+    cv2.putText(passport,'Unknown',(90,245), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+    cv2.putText(passport,'Male',(90,260), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+    cv2.putText(passport,'02/01/2019',(110,272), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+    cv2.putText(passport,'White+Black',(90,285), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+
+    cv2.putText(passport,'EA010231',(300,91), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+    cv2.putText(passport,'05/03/2019',(300,130), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+    cv2.putText(passport,'Unknown',(300,170), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+    cv2.putText(passport,'001232',(300,212), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+    cv2.putText(passport,'13/03/2019',(300,251), font, 0.4,(0,255,0),1,cv2.LINE_AA)
+
+    # Cat-to-Passport
+    height,width,depth = ROIimage.shape
+    CorCoeff = 47
+
+    for h1 in range(height):
+        for w1 in range(width):
+            for c1 in range(depth):
+                passport[h1 + CorCoeff ,w1 + CorCoeff ,c1] = ROIimage[h1,w1,c1]    
+
+    # Save result image to file
+    cv2.imshow("Passport_out", passport) 
+    cv2.imwrite('passport_out.jpg', passport)
+ 
+
+    # WaitKey
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -65,13 +95,15 @@ def build_argparser():
                       help='Required. Path to .XML file with pre-trained model.')
     args.add_argument('-i', '--input', type=str, required=True,
                       help='Required. Path to input image')
+    args.add_argument('-i2', '--input2', type=str, required=True,
+                      help='Required. Path to input image2')
     return parser
 
 
 def main():
     
     args = build_argparser().parse_args()
-    make_cat_passport_image(args.input, args.model)
+    make_cat_passport_image(args.input, args.input2, args.model)
 
     return 0
 
