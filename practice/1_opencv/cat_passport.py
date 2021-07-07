@@ -60,6 +60,7 @@ def create_cat_passport(crop_image):
         cv2.putText(passport, el, (x, y + dy * i), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 0))
 
     show("passport", passport)
+    cv2.imwrite("cat_passport.jpg", crop_image)
     return
 
 def build_argparser():
