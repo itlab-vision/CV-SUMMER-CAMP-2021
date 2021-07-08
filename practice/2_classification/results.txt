@@ -1,0 +1,8 @@
+2_classification\doge.jpg: [260 263 259 258 273]
+2_classification\goose.jpg: [ 99  97 146  83  98]
+2_classification\bison.jpg: [347 345 348 350 341]
+
+2_classification\doge.jpg: [260 263 259 258 273]
+2_classification\goose.jpg: [ 99  97 146  83  98]
+2_classification\bison.jpg: [347 345 348 350 341]
+
