@@ -86,14 +86,24 @@ def main():
     log.info("Start IE classification sample")
 
     # Create InferenceEngineClassifier object
+    ie_classifier = InferenceEngineClassifier(
+        configPath=args.model,
+        weightsPath=args.weights,
+        device=args.device,
+        extension=args.cpu_extension,
+        classesPath=args.classes,
+    )
 
     # Read image
+    image = cv2.imread(args.input)
 
     # Classify image
+    probs = ie_classifier.classify(image)
+    log.info(f'{probs = }')
 
     # Get top 5 predictions
-
-    # print result
+    preds = ie_classifier.get_top(probs, 5)
+    log.info(f'{preds = }')
 
 
 if __name__ == '__main__':
