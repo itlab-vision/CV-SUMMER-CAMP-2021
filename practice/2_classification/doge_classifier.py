@@ -89,15 +89,6 @@ def main():
 
     log.info("Start IE classification sample")
 
-    # Create InferenceEngineClassifier object
-    
-    # Read image
-        
-    # Classify image
-    
-    # Get top 5 predictions
-    
-    # print result
 
     log.basicConfig(format="[ %(levelname)s ] %(message)s",
                     level=log.INFO, stream=sys.stdout)
