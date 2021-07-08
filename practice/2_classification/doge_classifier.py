@@ -26,10 +26,8 @@ class InferenceEngineClassifier:
         self.exec_net = self.ie.load_network(network=self.net, device_name=device)
         # Add code for classes names loading
         if classesPath is None:
-            # Generate numbered class names
             self.classes = [(i, '') for i in range(1000)]
         else:
-            # Load class names from file
             with open(classesPath, 'r') as fp:
                 self.classes = [tuple(line.rstrip().split(maxsplit=1)) for line in fp]
 
@@ -109,7 +107,7 @@ def main():
                                               extension=args.cpu_extension, classesPath=args.classes)
     image_names = get_images(args.input)
     # Read images
-    images = [cv2.imread(os.path.join(args.input, image_name)) for image_name in image_names]
+    images = [cv2.imread(os.path.join(*args.input.split("/"), image_name)) for image_name in image_names]
     # Classify images
     probs = ie_classifier.classify(images)
     # Get top 5 predictions for each
