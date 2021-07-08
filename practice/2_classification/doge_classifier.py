@@ -1,10 +1,10 @@
 import os
-import cv2
 import sys
 import argparse
 import numpy as np
 import logging as log
-from openvino.inference_engine import IENetwork, IECore
+import cv2
+from openvino.inference_engine import  IECore
 
 
 class InferenceEngineClassifier:
@@ -42,7 +42,7 @@ class InferenceEngineClassifier:
         old_size = image.shape[:2][::-1]
         new_size = (w, h)
         image = cv2.resize(image, new_size, interpolation=cv2.INTER_AREA)
-        log.warning(f'Image was resized from {old_size} to {new_size}')
+        log.info(f'Image was resized from {old_size} to {new_size}')
 
         # Convert from RGBRGBRGB to RRRGGGBBB
         image = image.transpose((2, 0, 1))
@@ -50,19 +50,20 @@ class InferenceEngineClassifier:
         return image
 
     def classify(self, image):
-        # Get data about input and output from neural network
+        # Get data about input and output of neural network
         input_blob = next(iter(self.network.input_info))
         output_blob = next(iter(self.network.outputs))
 
-        # Get required input shape for input
+        # Get required input shape
         n, c, h, w = self.network.input_info[input_blob].input_data.shape
 
         # Construct array of prepared input images
         images = np.ndarray(shape=(n, c, h, w))
+        # ??? Only one image per infer is supported by squeezenet model
         images[0] = self._prepare_image(image, h, w)
 
         # Classify the image and get result tensor
-        output = self.exec_net.infer(inputs = {input_blob: images})
+        output = self.exec_net.infer(inputs={input_blob: images})
         probabilities = output[output_blob][0]
 
         return probabilities
@@ -127,14 +128,15 @@ def main():
         raise FileNotFoundError(f'No images found in folder "{args.input}"')
     log.info(f'Found {len(images)} images in {args.input}')
 
+    # Classify images
     for i, (filename, image) in enumerate(images.items()):
         log.info('')
         log.info(f'[{i+1}] Classifying "{filename}"')
 
-        # Classify image
+        #Classify current image
         probabilities = ie_classifier.classify(image)
 
-        # Get top 5 predictions
+        # Get top 3 predictions
         top_predicts = ie_classifier.get_top(probabilities, 3)
         for classname, probability in top_predicts:
             log.info(f'Predicted ({probability*100:0>5.2f}%) {classname}')
