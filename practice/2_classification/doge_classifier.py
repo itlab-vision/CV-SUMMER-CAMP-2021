@@ -16,22 +16,24 @@ from openvino.inference_engine import IENetwork, IECore
 
 
 class InferenceEngineClassifier:
-    def __init__(self, configPath=None, weightsPath=None,
-            device='CPU', extension=None, classesPath=None):
-        
+    def __init__(
+        self, configPath=None, weightsPath=None,
+        device='CPU', extension=None, classesPath=None
+    ):
+
         # Add code for Inference Engine initialization
-        
+
         # Add code for model loading
 
         # Add code for classes names loading
-        
+
         return
 
     def get_top(self, prob, topN=1):
         result = []
-        
+
         # Add code for getting top predictions
-        
+
         return result
 
     def _prepare_image(self, image, h, w):
@@ -48,9 +50,9 @@ class InferenceEngineClassifier:
 
     def classify(self, image):
         probabilities = None
-        
+
         # Add code for image classification using Inference Engine
-        
+
         return probabilities
 
 
@@ -75,23 +77,23 @@ def build_argparser():
 
 
 def main():
-    log.basicConfig(format="[ %(levelname)s ] %(message)s",
-        level=log.INFO, stream=sys.stdout)
+    log.basicConfig(
+        format="[ %(levelname)s ] %(message)s",
+        level=log.INFO, stream=sys.stdout
+    )
     args = build_argparser().parse_args()
 
     log.info("Start IE classification sample")
 
     # Create InferenceEngineClassifier object
-    
-    # Read image
-        
-    # Classify image
-    
-    # Get top 5 predictions
-    
-    # print result
 
-    return
+    # Read image
+
+    # Classify image
+
+    # Get top 5 predictions
+
+    # print result
 
 
 if __name__ == '__main__':
