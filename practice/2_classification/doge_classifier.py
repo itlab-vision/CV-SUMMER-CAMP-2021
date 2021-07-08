@@ -1,3 +1,4 @@
+import os
 import cv2
 import sys
 import argparse
@@ -116,8 +117,16 @@ def main():
         classesPath=args.classes,
     )
 
-    # Read image
-    image = cv2.imread(args.input)
+    # Read images from folfder
+    images = []
+    for filename in os.listdir(args.input):
+        image = cv2.imread(os.path.join(args.input, filename))
+        if image is not None:
+            images.append(image)
+    if not images:
+        raise FileNotFoundError(f'No images found in folder "{args.input}"')
+
+    image = images[0]
 
     # Classify image
     probabilities = ie_classifier.classify(image)
