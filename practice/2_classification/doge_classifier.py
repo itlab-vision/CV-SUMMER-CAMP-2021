@@ -57,7 +57,19 @@ class InferenceEngineClassifier:
     def classify(self, image):
         probabilities = None
 
-        # Add code for image classification using Inference Engine
+        # Get data about input and output from neural network
+        input_blob = next(iter(self.network.input_info))
+        output_blob = next(iter(self.network.outputs))
+
+        # Get required input shape for input
+        n, c, h, w = self.network.inputs[input_blob].shape
+
+        images = np.ndarray(shape=(n, c, h, w))
+        images[0] = self._prepare_image(image, h, w)
+
+        # Classify the image and get result tensor
+        output = self.exec_net.infer(inputs = {input_blob: images})
+        probabilities = output[output_blob][0]
 
         return probabilities
 
