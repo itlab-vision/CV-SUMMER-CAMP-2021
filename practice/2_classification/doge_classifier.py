@@ -72,7 +72,7 @@ def build_argparser():
     parser.add_argument('-w', '--weights', help='Path to an .bin file \
         with a trained weights.', required=True, type=str)
     parser.add_argument('-i', '--input', help='Path to \
-        image file', required=True, type=str)
+        image file(s)', required=True, type=str, nargs='+')
     parser.add_argument('-l', '--cpu_extension', help='MKLDNN \
         (CPU)-targeted custom layers.Absolute path to a shared library \
         with the kernels implementation', type=str, default=None)
@@ -95,17 +95,19 @@ def main():
     # Create InferenceEngineClassifier object
     ie_classifer = InferenceEngineClassifier(configPath=args.model, weightsPath=args.weights, device=args.device, extension=args.cpu_extension, classesPath=args.classes)
     
-    # Read image
-    img = cv2.imread(args.input)
+    num_of_input = len(args.input)
+    for i in range(num_of_input):
+        # Read image
+        img = cv2.imread(args.input[i])
 
-    # Classify image
-    prob = ie_classifer.classify(img)
+        # Classify image
+        prob = ie_classifer.classify(img)
 
-    # Get top 5 predictions
-    predictions = ie_classifer.get_top(prob, 5)
+        # Get top 5 predictions
+        predictions = ie_classifer.get_top(prob, 5)
 
-    # print result
-    log.info("Predictions: " + str(predictions))
+        # print result
+        log.info("Predictions #{}:".format(i + 1) + str(predictions))
 
     return
 
