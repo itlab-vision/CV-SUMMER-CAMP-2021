@@ -1,12 +1,3 @@
-"""
-Classification sample
-
-Command line to run:
-python ie_classification_sample.py -i image.jpg \
-    -m resnet-50.xml -w resnet-50.bin -c imagenet_synset_words.txt
-"""
-
-import os
 import cv2
 import sys
 import argparse
@@ -23,33 +14,31 @@ class InferenceEngineClassifier:
         # Inference Engine initialization
         ie = IECore()
 
-        # Model loading
+        # Load network with model
         self.network = ie.read_network(configPath, weightsPath)
         self.exec_net = ie.load_network(self.network, device)
 
-        if classesPath is None:
-            # Generate numbered class names
-            self.classes = [(i, '') for i in range(1000)]
-        else:
+        self.classnames = {}
+        if classesPath is not None:
             # Load class names from file
             with open(classesPath, 'r') as fp:
-                self.classes = [tuple(line.rstrip().split(maxsplit=1)) for line in fp]
+                for i, line in enumerate(fp):
+                    self.classnames[i] = line.rstrip().partition(' ')[2]
 
         return
 
-    def get_top(self, probs, topN=1):
+    def get_top(self, probabilities, topN=1):
         # Assoisiate probabilities with class names
-        result = {}
-        for i, prob in enumerate(probs):
-            result[self.classes[i]] = prob[0][0]
+        associations = {}
+        for i, probability in enumerate(probabilities):
+            associations[self.classnames.get(i, i)] = probability[0][0]
 
         # Return top entries based on highest probabilities
-        return sorted(result.items(), key=lambda i: i[1], reverse=True)[:topN]
+        return sorted(associations.items(), key=lambda i: i[1], reverse=True)[:topN]
 
     def _prepare_image(self, image, h, w):
-
         # Resize image
-        old_size = image.shape[::-1][:2]
+        old_size = image.shape[:2][::-1]
         new_size = (w, h)
         image = cv2.resize(image, new_size, interpolation=cv2.INTER_AREA)
         log.warning(f'Image was resized from {old_size} to {new_size}')
@@ -60,15 +49,14 @@ class InferenceEngineClassifier:
         return image
 
     def classify(self, image):
-        probabilities = None
-
         # Get data about input and output from neural network
         input_blob = next(iter(self.network.input_info))
         output_blob = next(iter(self.network.outputs))
 
         # Get required input shape for input
-        n, c, h, w = self.network.inputs[input_blob].shape
+        n, c, h, w = self.network.input_info[input_blob].input_data.shape
 
+        # Construct array of prepared input images
         images = np.ndarray(shape=(n, c, h, w))
         images[0] = self._prepare_image(image, h, w)
 
@@ -121,12 +109,14 @@ def main():
     image = cv2.imread(args.input)
 
     # Classify image
-    probs = ie_classifier.classify(image)
+    probabilities = ie_classifier.classify(image)
 
     # Get top 5 predictions
-    preds = ie_classifier.get_top(probs, 5)
-    for pred in preds:
-        log.info(f'Predicted ({pred[1]*100:0>5.2f}%) [{pred[0][0]}] {pred[0][1]}')
+    top_predicts = ie_classifier.get_top(probabilities, 4)
+    for classname, probability in top_predicts:
+        log.info(f'Predicted ({probability*100:0>5.2f}%) {classname}')
+
+    return
 
 
 if __name__ == '__main__':
