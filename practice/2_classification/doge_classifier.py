@@ -35,9 +35,15 @@ class InferenceEngineClassifier:
         return result
 
     def _prepare_image(self, image, h, w):
-    
-        # Add code for image preprocessing
-        
+        # Convert from RGBRGBRGB to RRRGGGBBB
+        image = image.transpose((2, 0, 1))
+
+        # Resize image
+        old_size = image.shape[::-1][:2]
+        new_size = (w, h)
+        image = cv2.resize(image, new_size)
+        log.warn(f'Image was resized from {old_size} to {new_size}')
+
         return image
 
     def classify(self, image):
