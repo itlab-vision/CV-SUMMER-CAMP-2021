@@ -1,0 +1,1 @@
+python doge_classifier.py -m models\squeezenet1.1.xml -w models\squeezenet1.1.bin -c imagenet_synset_words.txt
