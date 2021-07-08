@@ -27,9 +27,13 @@ class InferenceEngineClassifier:
         self.network = ie.read_network(configPath, weightsPath)
         self.exec_net = ie.load_network(self.network, device)
 
-        # Load class names from file
-        with open(classesPath, 'r') as fp:
-            self.classes = [tuple(line.rstrip().split(maxsplit=1)) for line in fp]
+        if classesPath is None:
+            # Generate numbered class names
+            self.classes = [(i, '') for i in range(1000)]
+        else:
+            # Load class names from file
+            with open(classesPath, 'r') as fp:
+                self.classes = [tuple(line.rstrip().split(maxsplit=1)) for line in fp]
 
         return
 
