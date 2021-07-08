@@ -42,14 +42,14 @@ class InferenceEngineClassifier:
         old_size = image.shape[:2][::-1]
         new_size = (w, h)
         image = cv2.resize(image, new_size, interpolation=cv2.INTER_AREA)
-        log.info(f'Image was resized from {old_size} to {new_size}')
+        # log.info(f'Image was resized from {old_size} to {new_size}')
 
         # Convert from RGBRGBRGB to RRRGGGBBB
         image = image.transpose((2, 0, 1))
 
         return image
 
-    def classify(self, image):
+    def classify_images(self, images):
         # Get data about input and output of neural network
         input_blob = next(iter(self.network.input_info))
         output_blob = next(iter(self.network.outputs))
@@ -58,13 +58,16 @@ class InferenceEngineClassifier:
         n, c, h, w = self.network.input_info[input_blob].input_data.shape
 
         # Construct array of prepared input images
-        images = np.ndarray(shape=(n, c, h, w))
-        # ??? Only one image per infer is supported by squeezenet model
-        images[0] = self._prepare_image(image, h, w)
+        inputs = np.ndarray(shape=(n, c, h, w))
 
-        # Classify the image and get result tensor
-        output = self.exec_net.infer(inputs={input_blob: images})
-        probabilities = output[output_blob][0]
+        probabilities = []
+        for image in images:
+            # ??? Only one image per infer is supported by squeezenet model
+            inputs[0] = self._prepare_image(image, h, w)
+
+            # Classify the image and get result tensor
+            output = self.exec_net.infer({input_blob: inputs})
+            probabilities.append(output[output_blob][0])
 
         return probabilities
 
@@ -118,26 +121,29 @@ def main():
         classesPath=args.classes,
     )
 
-    # Read images from folfder
-    images = {}
-    for filename in os.listdir(args.input):
-        image = cv2.imread(os.path.join(args.input, filename))
+    # Read images from folder
+    filenames = []
+    images = []
+    directory = args.input
+    for filename in os.listdir(directory):
+        image = cv2.imread(os.path.join(directory, filename))
         if image is not None:
-            images[filename] = image
+            filenames.append(filename)
+            images.append(image)
     if not images:
-        raise FileNotFoundError(f'No images found in folder "{args.input}"')
-    log.info(f'Found {len(images)} images in {args.input}')
+        raise FileNotFoundError(f'No images found in folder "{directory}"')
+    log.info(f'Found {len(images)} images in {directory}')
 
     # Classify images
-    for i, (filename, image) in enumerate(images.items()):
-        log.info('')
-        log.info(f'[{i+1}] Classifying "{filename}"')
+    probabilities = ie_classifier.classify_images(images)
 
-        #Classify current image
-        probabilities = ie_classifier.classify(image)
+    # Associate predictions with names and print
+    for i in range(len(images)):
+        log.info('')
+        log.info(f'[{i+1}] "{filenames[i]}"')
 
         # Get top 3 predictions
-        top_predicts = ie_classifier.get_top(probabilities, 3)
+        top_predicts = ie_classifier.get_top(probabilities[i], 3)
         for classname, probability in top_predicts:
             log.info(f'Predicted ({probability*100:0>5.2f}%) {classname}')
 
