@@ -25,21 +25,22 @@ class InferenceEngineClassifier:
 
         # Model loading
         self.network = ie.read_network(configPath, weightsPath)
-
         self.exec_net = ie.load_network(self.network, device)
 
-        # TODO Add code for classes names loading
+        # Load class names from file
+        with open(classesPath, 'r') as fp:
+            self.classes = [tuple(line.rstrip().split(maxsplit=1)) for line in fp]
 
         return
 
-    def get_top(self, prob, topN=1):
-        result = []
+    def get_top(self, probs, topN=1):
+        # Assoisiate probabilities with class names
+        result = {}
+        for i, prob in enumerate(probs):
+            result[self.classes[i]] = prob[0][0]
 
-        # Get top predictions
-        # TODO Get actual class names
-        result.extend(prob[:topN])
-
-        return result
+        # Return top entries based on highest probabilities
+        return sorted(result.items(), key=lambda i: i[1], reverse=True)[:topN]
 
     def _prepare_image(self, image, h, w):
 
@@ -117,11 +118,11 @@ def main():
 
     # Classify image
     probs = ie_classifier.classify(image)
-    log.info(f'{probs = }')
 
     # Get top 5 predictions
     preds = ie_classifier.get_top(probs, 5)
-    log.info(f'{preds = }')
+    for pred in preds:
+        log.info(f'Predicted ({pred[1]*100:0>5.2f}%) [{pred[0][0]}] {pred[0][1]}')
 
 
 if __name__ == '__main__':
