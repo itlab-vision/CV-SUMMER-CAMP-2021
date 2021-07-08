@@ -20,19 +20,24 @@ class InferenceEngineClassifier:
         self, configPath=None, weightsPath=None,
         device='CPU', extension=None, classesPath=None
     ):
+        # Inference Engine initialization
+        ie = IECore()
 
-        # Add code for Inference Engine initialization
+        # Model loading
+        self.network = ie.read_network(configPath, weightsPath)
 
-        # Add code for model loading
+        self.exec_net = ie.load_network(self.network, device)
 
-        # Add code for classes names loading
+        # TODO Add code for classes names loading
 
         return
 
     def get_top(self, prob, topN=1):
         result = []
 
-        # Add code for getting top predictions
+        # Get top predictions
+        # TODO Get actual class names
+        result.extend(prob[:topN])
 
         return result
 
