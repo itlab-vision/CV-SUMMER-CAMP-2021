@@ -20,9 +20,10 @@ class InferenceEngineClassifier:
             device='CPU', extension=None, classesPath=None):
         
         # Add code for Inference Engine initialization
-        
+        self.ie = IECore()
         # Add code for model loading
-
+        self.net = self.ie.read_network(model=configPath)
+        self.exec_net = self.ie.load_network(network=self.net, device_name=device)
         # Add code for classes names loading
         
         return
@@ -31,21 +32,33 @@ class InferenceEngineClassifier:
         result = []
         
         # Add code for getting top predictions
+        result = np.squeeze(prob)
+        top_classes = np.argsort(result)[-topN :][::-1]
+        top_probs = [result[x] for x in top_classes]
         
-        return result
+        return top_classes, top_probs
 
     def _prepare_image(self, image, h, w):
     
         # Add code for image preprocessing
-        
+        image = cv2.resize(image, (w, h))
+        image = image.transpose((2, 0, 1))
         return image
 
     def classify(self, image):
-        probabilities = None
         
         # Add code for image classification using Inference Engine
-        
-        return probabilities
+        input_blob = next(iter(self.net.inputs))
+        out_blob = next(iter(self.net.outputs))
+
+        n, c, h, w = self.net.inputs[input_blob].shape
+
+        image = self._prepare_image(image, h, w)
+
+        output = self.exec_net.infer(inputs = {input_blob: image})
+
+        output = output[out_blob]
+        return output
 
 
 def build_argparser():
@@ -76,15 +89,27 @@ def main():
     log.info("Start IE classification sample")
 
     # Create InferenceEngineClassifier object
-    
+    ie_classifier = InferenceEngineClassifier(configPath=args.model, 
+        weightsPath=args.weights, device=args.device, 
+        extension=args.cpu_extension, classesPath=args.classes)
+
     # Read image
-        
+    img = cv2.imread(args.input)
+
     # Classify image
+    prob = ie_classifier.classify(img)
     
     # Get top 5 predictions
+    top_classes, top_probs = ie_classifier.get_top(prob, 5)
     
     # print result
-
+    with open(args.classes, 'r') as f:
+        classes = [line.strip('\n') for line in f]
+        log.info("Predictions:\n" + 
+            '\n'.join([classes[idx][10 :] + ' ' + str(top_probs[i]) for i, idx in enumerate(top_classes)]))
+    
+    
+    
     return
 
 
