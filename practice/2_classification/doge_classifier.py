@@ -118,23 +118,26 @@ def main():
     )
 
     # Read images from folfder
-    images = []
+    images = {}
     for filename in os.listdir(args.input):
         image = cv2.imread(os.path.join(args.input, filename))
         if image is not None:
-            images.append(image)
+            images[filename] = image
     if not images:
         raise FileNotFoundError(f'No images found in folder "{args.input}"')
+    log.info(f'Found {len(images)} images in {args.input}')
 
-    image = images[0]
+    for i, (filename, image) in enumerate(images.items()):
+        log.info('')
+        log.info(f'[{i+1}] Classifying "{filename}"')
 
-    # Classify image
-    probabilities = ie_classifier.classify(image)
+        # Classify image
+        probabilities = ie_classifier.classify(image)
 
-    # Get top 5 predictions
-    top_predicts = ie_classifier.get_top(probabilities, 4)
-    for classname, probability in top_predicts:
-        log.info(f'Predicted ({probability*100:0>5.2f}%) {classname}')
+        # Get top 5 predictions
+        top_predicts = ie_classifier.get_top(probabilities, 3)
+        for classname, probability in top_predicts:
+            log.info(f'Predicted ({probability*100:0>5.2f}%) {classname}')
 
     return
 
