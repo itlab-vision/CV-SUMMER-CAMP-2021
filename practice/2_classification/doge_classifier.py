@@ -78,14 +78,9 @@ class InferenceEngineClassifier:
         out_blob = next(iter(self.net.outputs))
         input_blob = next(iter(self.net.inputs))
 
-        new_shapes = {}
-        for layer in self.net.inputs:
-            shape = self.net.inputs[layer].shape
-            shape[0] = len(images)
-            new_shapes.update({layer: shape})
-        self.net.reshape(new_shapes)
-
-        self.exec_net = self.ie.load_network(network=self.net, device_name=self._device)
+        self.net.batch_size = len(images)
+        self.exec_net = self.ie.load_network(network=self.net, device_name=self._device,
+            config={"DYN_BATCH_ENABLED": "YES"})
 
         output = self.exec_net.infer(inputs = {input_blob: images})
 
