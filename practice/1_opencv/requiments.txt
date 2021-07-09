@@ -1,0 +1,9 @@
+tensorflow
+mxnet
+networkx
+numpy
+protobuf
+onnx
+defusedxml
+urllib3
+requests

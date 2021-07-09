@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e75517-4526-4963-bfe1-604f639ac7fd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/cat_passport.py" beforeDir="false" afterPath="$PROJECT_DIR$/cat_passport.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requiments" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,5 +79,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
