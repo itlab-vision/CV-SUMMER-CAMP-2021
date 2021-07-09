@@ -18,7 +18,7 @@ from openvino.inference_engine import IENetwork, IECore
 
 class InferenceEngineClassifier:
     def __init__(self, configPath=None, weightsPath=None,
-            device='CPU', extension=None, classesPath=None):
+            device=None, extension=None, classesPath=None):
         
         # Add code for Inference Engine initialization
         self.ie = IECore()
