@@ -29,9 +29,8 @@ class InferenceEngineClassifier:
         self.ie = IECore()
 
         # Add code for model loading
-        self.net = self.ie.read_network(model=configPath)
+        self.net = self.ie.read_network(configPath, weightsPath)
         self.exec_net = self.ie.load_network(network=self.net, device_name=device)
-
 
         # Add code for classes names loading
         with open(classesPath, 'r') as f:
@@ -43,21 +42,28 @@ class InferenceEngineClassifier:
         result = []
 
         # Add code for getting top predictions
-        result = np.squueeze(prob)
-        result = np.argsotr(result)[-topN:][::-1]
+        arr = np.array([])
+        prob = prob[0]
+        for x in prob:
+            tmp = max(x)[0]
+            arr = np.append(arr, tmp)
+        arr = np.argsort(arr)
+        arr = arr[-topN:]
+        for i in range(topN):
+            result.append(str(float('{:.2f}'.format(prob[arr[i]][0][0]*100))) + '% ' +
+                          str(self.labels_map[arr[i]]))
 
-        return result
+        return list(reversed(result))
 
     def _prepare_image(self, image, h, w):
     
         # Add code for image preprocessing
         image = cv2.resize(image, (w, h))
         image = image.transpose((2, 0, 1))
-
+        
         return image
 
     def classify(self, image):
-        probabilities = None
         
         # Add code for image classification using Inference Engine
         input_blob = next(iter(self.net.inputs))
@@ -100,23 +106,26 @@ def main():
     log.info("Start IE classification sample")
 
     # Create InferenceEngineClassifier object
-    ie_classifer = InferenceEngineClassifier(configPath=args.model, weightsPath=args.weights,
-     device=args.device, extension=args.cpu_extension, classesPath=args.classes)
-    
-    num_of_input = len(args.input)
-    for i in range(num_of_input):
-        # Read image
-        img = cv2.imread(args.input[i])
+    ie_classifier = InferenceEngineClassifier(configPath=args.model,
+        weightsPath=args.weights,
+        device=args.device,
+        extension="CPU",
+        classesPath=args.classes)
 
-        # Classify image
-        prob = ie_classifer.classify(img)
+    # Read image
+    img = cv2.imread(args.input)   
+     
+    # Classify image
+    prob = ie_classifier.classify(img)
 
-        # Get top 5 predictions
-        predictions = ie_classifer.get_top(prob, 5)
+    # Get top 5 predictions
+    predictions = ie_classifier.get_top(prob, 5)
 
-        # print result
-        log.info("Predictions #{}:".format(i + 1) + str(predictions))
-
+    # print result
+    log.info("Predictions: " + str(predictions))
+    log.info("Predictions: ")
+    for i in range(5):
+        print(str(predictions[i]))
     return
 
 if __name__ == '__main__':
