@@ -73,8 +73,8 @@ def build_argparser():
         file with a trained model.', required=True, type=str)
     parser.add_argument('-w', '--weights', help='Path to an .bin file \
         with a trained weights.', required=True, type=str)
-    parser.add_argument('-i', '--input', help='Path to \
-        image file', required=True, type=str)
+    parser.add_argument('-id', '--input_dir', help='Path to \
+        images directory', required=True, type=str)
     parser.add_argument('-l', '--cpu_extension', help='MKLDNN \
         (CPU)-targeted custom layers.Absolute path to a shared library \
         with the kernels implementation', type=str, default=None)
@@ -84,6 +84,8 @@ def build_argparser():
         (CPU by default)', default='CPU', type=str)
     parser.add_argument('-c', '--classes', help='File containing classes \
         names', type=str, default=None)
+    parser.add_argument('-t', '--top', help='Count of printing predictions',\
+        type=int, default=3)
     return parser
 
 
@@ -100,17 +102,23 @@ def main():
                                             device=args.device, 
         extension="CPU", 
         classesPath=args.classes)
-    # Read image
-    img = cv2.imread(args.input)
+    # Read images
+    for image in os.listdir(path=args.input_dir):
+        try:
+            img = cv2.imread(args.input_dir +'\\'+ image)
+        except Exception as ex:
+            print(args.input_dir +'\\'+ image, " can not be open")
+            continue
     # Classify image
-    prob = ie_classifier.classify(img)
+        prob = ie_classifier.classify(img)
     # Get top 5 predictions
-    predictions = ie_classifier.get_top(prob, 5)
+        predictions = ie_classifier.get_top(prob, args.top)
     # print result
-    #log.info("Predictions: " + str(predictions))
-    log.info("Predictions: ")
-    for i in range(predictions.shape[0]):
-        log.info(ie_classifier.class_names[predictions[i-1]-1])
+        print(args.input_dir +'\\'+ image)
+        #log.info("Predictions: " + str(predictions))
+        log.info("Predictions: ")
+        for i in range(predictions.shape[0]):
+            log.info(ie_classifier.class_names[predictions[i-1]-1])
 
     return
 
