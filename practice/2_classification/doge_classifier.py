@@ -75,15 +75,6 @@ def main():
 
     log.info("Start IE classification sample")
 
-    # Create InferenceEngineClassifier object
-    
-    # Read image
-        
-    # Classify image
-    
-    # Get top 5 predictions
-    
-    # print result
 
     return
 
