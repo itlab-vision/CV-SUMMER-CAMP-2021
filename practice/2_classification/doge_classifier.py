@@ -19,19 +19,29 @@ import sys
 import argparse
 import numpy as np
 import logging as log
+from numpy.core.fromnumeric import shape
 from openvino.inference_engine import IENetwork, IECore
 
 
 class InferenceEngineClassifier:
     def __init__(
-        self, configPath=None, weightsPath=None, device="CPU", extension=None, classesPath=None
+        self,
+        configPath=None,
+        weightsPath=None,
+        device="CPU",
+        extension=None,
+        classesPath=None,
+        batch_size=1,
     ):
 
         # Add code for Inference Engine initialization
         self.ie = IECore()
+        self.ie.set_config(config={"DYN_BATCH_ENABLED": "YES"}, device_name=device)
 
         # Add code for model loading
         self.net = self.ie.read_network(model=configPath)
+        self.net.batch_size = batch_size
+
         self.exec_net = self.ie.load_network(network=self.net, device_name=device)
 
         # Add code for classes names loading
@@ -62,7 +72,7 @@ class InferenceEngineClassifier:
 
         return image
 
-    def classify(self, image):
+    def classify(self, input):
         probabilities = None
 
         # Add code for image classification using Inference Engine
@@ -70,9 +80,15 @@ class InferenceEngineClassifier:
         out_blob = next(iter(self.net.outputs))
 
         n, c, h, w = self.net.inputs[input_blob].shape
-        image = self._prepare_image(image, h, w)
 
-        output = self.exec_net.infer(inputs={input_blob: image})
+        images = np.zeros(shape=(len(input), c, h, w))
+
+        for i, path in enumerate(input):
+            image = cv2.imread(path)
+            image = self._prepare_image(image, h, w)
+            images[i] = image
+
+        output = self.exec_net.infer(inputs={input_blob: images})
         probabilities = output[out_blob]
 
         return probabilities
@@ -103,6 +119,7 @@ def build_argparser():
         image file",
         required=True,
         type=str,
+        nargs="+",
     )
     parser.add_argument(
         "-l",
@@ -147,18 +164,25 @@ def main():
         device=args.device,
         extension=args.cpu_extension,
         classesPath=args.classes,
+        batch_size=len(args.input),
     )
     # Read image
-    image = cv2.imread(args.input)
+
     # Classify image
-    prob = ie_classifier.classify(image)
+    prob = ie_classifier.classify(args.input)
 
+    log.info(prob.shape)
     # Get top 5 predictions
-    pred, labels = ie_classifier.get_top(prob, topN=5)
+    topN = 5
+    
+    for i, path in enumerate(args.input):
+        log.warning(f"Image path: {path}")
+        log.info(f"Top {topN}:")
 
-    # print result
-    for index, label in zip(pred, labels):
-        log.info("{}{}".format(index, label))
+        pred, labels = ie_classifier.get_top(prob[i], topN=topN)
+
+        for index, label in zip(pred, labels):
+            log.info("{}{}".format(index, label))
 
     return
 
