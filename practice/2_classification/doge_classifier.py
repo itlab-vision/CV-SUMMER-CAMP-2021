@@ -6,7 +6,7 @@ python ie_classification_sample.py -i image.jpg \
     -m resnet-50.xml -w resnet-50.bin -c imagenet_synset_words.txt
 """
 
-import os
+import os 
 import cv2
 import sys
 import argparse
@@ -20,23 +20,31 @@ class InferenceEngineClassifier:
             device='CPU', extension=None, classesPath=None):
         
         # Add code for Inference Engine initialization
+        self.ie = IECore()
         
         # Add code for model loading
+        self.net = self.ie.read_network(model=configPath)
+        self.exec_net = self.ie.load_network(network=self.net, device_name=device)
 
         # Add code for classes names loading
+        with open(classesPath, 'r') as f:
+             self.classes = [x.split(sep=' ', maxsplit=1)[-1].strip() for x in f] #strip() - устранение пробельных символов
         
         return
 
     def get_top(self, prob, topN=1):
-        result = []
-        
+            
         # Add code for getting top predictions
+        result = np.squeeze(prob)
+        result = np.argsort(result)[-topN:][::-1]
         
         return result
 
     def _prepare_image(self, image, h, w):
     
         # Add code for image preprocessing
+        image = cv2.resize(image, (w, h))
+        image = image.transpose((2, 0, 1))
         
         return image
 
@@ -44,8 +52,16 @@ class InferenceEngineClassifier:
         probabilities = None
         
         # Add code for image classification using Inference Engine
+        input_blob = next(iter(self.net.inputs)) #получение указателя на вход
+        out_blob = next(iter(self.net.outputs))  #получение указателя на выход
         
-        return probabilities
+        n, c, h, w = self.net.inputs[input_blob].shape
+        image = self._prepare_image(image, h, w)
+        
+        output = self.exec_net.infer(inputs = {input_blob: image})
+        output = output[out_blob]
+        
+        return output
 
 
 def build_argparser():
@@ -76,17 +92,25 @@ def main():
     log.info("Start IE classification sample")
 
     # Create InferenceEngineClassifier object
-    
+    ie_classifier = InferenceEngineClassifier(configPath=args.model,
+                                              weightsPath=args.weights,
+                                              device=args.device,
+                                              extension=args.cpu_extension,
+                                              classesPath=args.classes)
     # Read image
+    img = cv2.imread(args.input)
         
     # Classify image
+    prob = ie_classifier.classify(img)
     
     # Get top 5 predictions
+    predictions = ie_classifier.get_top(prob, 5)
+    out  = [ [ie_classifier.classes[x], np.squeeze(prob)[x]] for x in predictions]
     
     # print result
+    log.info("Predictions: " + str(out))
 
     return
-
 
 if __name__ == '__main__':
     sys.exit(main())
