@@ -17,13 +17,17 @@ from openvino.inference_engine import IENetwork, IECore
 
 class InferenceEngineClassifier:
     def __init__(self, configPath=None, weightsPath=None,
-            device='CPU', extension=None, classesPath=None):
+            device='CPU', extension=None, classesPath=None, n_inargs=1):
         
         # Add code for Inference Engine initialization
         self.ie = IECore()
         
         # Add code for model loading
         self.net = self.ie.read_network(model=configPath)
+        
+        n, c, h, w = self.net.inputs[next(iter(self.net.inputs))].shape
+        self.net.reshape({next(iter(self.net.input_info)): (n_inargs, c, h, w)})
+        
         self.exec_net = self.ie.load_network(network=self.net, device_name=device)
 
         # Add code for classes names loading
@@ -32,11 +36,16 @@ class InferenceEngineClassifier:
         
         return
 
-    def get_top(self, prob, topN=1):
+    def get_top(self, prob, topN=1, n_inargs=1):
             
         # Add code for getting top predictions
-        result = np.squeeze(prob)
-        result = np.argsort(result)[-topN:][::-1]
+        new_prob = np.squeeze(prob)
+
+        result = []
+        if n_inargs == 1:
+            result = np.argsort(new_prob)[-topN:][::-1]
+        else:    
+            result = [np.argsort(x)[-topN:][::-1] for x in new_prob]
         
         return result
 
@@ -48,7 +57,7 @@ class InferenceEngineClassifier:
         
         return image
 
-    def classify(self, image):
+    def classify(self, images, device):
         probabilities = None
         
         # Add code for image classification using Inference Engine
@@ -56,9 +65,9 @@ class InferenceEngineClassifier:
         out_blob = next(iter(self.net.outputs))  #получение указателя на выход
         
         n, c, h, w = self.net.inputs[input_blob].shape
-        image = self._prepare_image(image, h, w)
+        images = [self._prepare_image(img, h, w) for img in images]
         
-        output = self.exec_net.infer(inputs = {input_blob: image})
+        output = self.exec_net.infer(inputs = {input_blob: images})
         output = output[out_blob]
         
         return output
@@ -71,7 +80,7 @@ def build_argparser():
     parser.add_argument('-w', '--weights', help='Path to an .bin file \
         with a trained weights.', required=True, type=str)
     parser.add_argument('-i', '--input', help='Path to \
-        image file', required=True, type=str)
+        image file', required=True, type=str, nargs='+')
     parser.add_argument('-l', '--cpu_extension', help='MKLDNN \
         (CPU)-targeted custom layers.Absolute path to a shared library \
         with the kernels implementation', type=str, default=None)
@@ -90,27 +99,38 @@ def main():
     args = build_argparser().parse_args()
 
     log.info("Start IE classification sample")
+    in_len=len(args.input)
 
     # Create InferenceEngineClassifier object
     ie_classifier = InferenceEngineClassifier(configPath=args.model,
                                               weightsPath=args.weights,
                                               device=args.device,
                                               extension=args.cpu_extension,
-                                              classesPath=args.classes)
+                                              classesPath=args.classes,
+                                              n_inargs=in_len)
     # Read image
-    img = cv2.imread(args.input)
+    imgs = [cv2.imread(img) for img in args.input]
         
     # Classify image
-    prob = ie_classifier.classify(img)
+    prob = ie_classifier.classify(imgs,args.device)
     
     # Get top 5 predictions
-    predictions = ie_classifier.get_top(prob, 5)
-    out  = [ [ie_classifier.classes[x], np.squeeze(prob)[x]] for x in predictions]
+    predictions = ie_classifier.get_top(prob, 5, in_len)
+    
+    if in_len == 1:
+        out  = [ [ie_classifier.classes[x], np.squeeze(prob)[x]] for x in predictions]
+    else:
+        out=[]
+        for i, x in enumerate(predictions):
+            temp =[]
+            for y in x:
+                temp.append([ie_classifier.classes[y], np.squeeze(prob[i])[y]])
+            out.append(temp)
     
     # print result
     log.info("Predictions: " + str(out))
 
-    return
+    return 0
 
 if __name__ == '__main__':
     sys.exit(main())
