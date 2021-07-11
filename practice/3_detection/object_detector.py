@@ -97,13 +97,20 @@ def main():
     detector_pipeline = AsyncPipeline(ie, detector, plugin_configs,
         device='CPU', max_num_requests=1)
 
+    # Initialize class for saving as video
+    img = cap.read()
+    fourcc = cv2.VideoWriter_fourcc(*"H264")
+    h, w = img.shape[0:2]
+    writer = cv2.VideoWriter("camera_detection.mp4", fourcc, 30, (w, h))
+
     while True:
 
         # Get one image 
-        img = cap.read()
+        
 
         # Start processing frame asynchronously
         frame_id = 0
+        start_time = perf_counter()
         detector_pipeline.submit_data(img,frame_id,{'frame':img,'start_time':0})
         
         # Wait for processing finished
@@ -111,12 +118,19 @@ def main():
         
         # Get detection result
         results, meta = detector_pipeline.get_result(frame_id)
+
+        end_time = perf_counter()
     
         # Draw detections in the image
         with open(args.classes, 'r') as f:
             classes = ast.literal_eval("".join([line for line in f]))
             draw_detections(img, results, classes, args.prob_threshold)
-    
+
+        print(end_time - start_time)
+
+        # Save images to video file in mp4 format
+        writer.write(img)
+
         # Show image and wait for key press
         cv2.imshow('Image with detections', img)
         
@@ -124,9 +138,10 @@ def main():
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-            
-        pass
-        
+        img = cap.read()
+
+    writer.release()
+
     # Destroy all windows
     cv2.destroyAllWindows()
     return
