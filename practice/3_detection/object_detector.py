@@ -103,7 +103,10 @@ def main():
     detector_pipeline = AsyncPipeline(ie, detector, plugin_configs,
                                       device='CPU', max_num_requests=1)
 
+    output = cv2.VideoWriter('output_camera.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 20, (1280, 720))
+
     while True:
+        start = perf_counter()
 
         # Get one image 
         img = cap.read()
@@ -117,15 +120,21 @@ def main():
 
         # Start processing frame asynchronously
         results, meta = detector_pipeline.get_result(frame_id)
+
         # Draw detections in the image
         draw_detections(img, results, args.classes, args.prob_threshold)
 
         # Show image and wait for key press
         cv2.imshow('Image with detections', img)
+
+        output.write(img)
+
         # Wait 1 ms and check pressed button to break the loop
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
+        end = perf_counter()
+        log.info(f"Frame processing performance {end-start}")
     # Destroy all windows
     cv2.destroyAllWindows()
     return
