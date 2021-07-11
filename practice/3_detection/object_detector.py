@@ -63,12 +63,19 @@ def build_argparser():
 
 def draw_detections(frame, detections, labels, threshold):
     size = frame.shape[:2]
+
+    with open(labels, 'r') as f:
+        classes_list = f.read().split('\n')
+    label_map = dict(enumerate(classes_list))
+
     for detection in detections:
         # If score more than threshold, draw rectangle on the frame
         score = detection.score
         if score > threshold:
-            cv2.rectangle(frame, (int(detection.xmin), int(detection.ymin)), (int(detection.xmax), int(detection.ymax)), (0, 255, 0), 1)
-            cv2.putText(frame, "{:.4f}".format(score), (int(detection.xmin), int(detection.ymin)), cv2.FONT_HERSHEY_COMPLEX, 0.6, (0, 0, 255), 1)
+            cv2.rectangle(frame, (int(detection.xmin), int(detection.ymin)), (int(detection.xmax), int(detection.ymax)),
+                          (0, 255, 0), 1)
+            cv2.putText(frame, label_map[detection.id] + " " + "{:.4f}".format(score),
+                        (int(detection.xmin), int(detection.ymin)), cv2.FONT_HERSHEY_COMPLEX, 0.6, (0, 0, 255), 1)
 
     return frame
 
@@ -111,7 +118,7 @@ def main():
         # Start processing frame asynchronously
         results, meta = detector_pipeline.get_result(frame_id)
         # Draw detections in the image
-        draw_detections(img, results, None, args.prob_threshold)
+        draw_detections(img, results, args.classes, args.prob_threshold)
 
         # Show image and wait for key press
         cv2.imshow('Image with detections', img)
