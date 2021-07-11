@@ -11,7 +11,7 @@ import argparse
 import pathlib
 from time import perf_counter
 
-sys.path.append('C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\open_model_zoo\\demos\\common\\python')
+sys.path.append('C:\\Program Files (x86)\\Intel\\openvino_2021.4.582\\deployment_tools\\open_model_zoo\\demos\\common\\python')
 import models
 from pipelines import AsyncPipeline
 from images_capture import open_images_capture
@@ -61,13 +61,18 @@ def build_argparser():
   
   
 def draw_detections(frame, detections, labels, threshold):
+    with open(labels, 'r') as f:
+        classes_list = f.read().split('\n')
+    label_map = dict(enumerate(classes_list))
     size = frame.shape[:2]
     for detection in detections:
-    
+        score = detection.score
+
         # If score more than threshold, draw rectangle on the frame
-        
-        
-        pass
+        if score > threshold:
+            cv2.rectangle(frame, (int(detection.xmin), int(detection.ymin)), (int(detection.xmax), int(detection.ymax)), (0, 255, 0), 1)
+            cv2.putText(frame, f"Object {label_map[detection.id]} with {detection.score:.2f}", (int(detection.xmin), int(detection.ymin - 10)), cv2.FONT_HERSHEY_COMPLEX, 0.45, (0, 0, 255), 1)
+
     return frame
 
 
@@ -78,34 +83,58 @@ def main():
     log.info("Start OpenVINO object detection")
 
     # Initialize data input
-    
-    # Initialize OpenVINO
-    
-    # Initialize Plugin configs
-    
-    # Load YOLOv3 model
-    
-    # Initialize async pipeline
+    cap = open_images_capture(args.input, True)
 
+    # Initialize OpenVINO
+    ie = IECore()
+
+    # Initialize Plugin configs
+    plugin_configs = get_plugin_configs('CPU', 0, 0)
+
+    # Load YOLOv3 model
+    detector = models.YOLO(ie, pathlib.Path(args.model), labels=args.classes, threshold=args.prob_threshold,
+                           keep_aspect_ratio=True)
+
+    # Initialize async pipeline
+    detector_pipeline = AsyncPipeline(ie, detector, plugin_configs, device='CPU', max_num_requests=1)
+
+    # Инициализировать объект записи видео
+    output = cv2.VideoWriter('output_camera.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10,
+                             (1280, 720))
+
+    counter = 1
     while True:
 
-        # Get one image 
-        
+        # Get one image
+        img = cap.read()
+
+        start_time = perf_counter()
 
         # Start processing frame asynchronously
-        
+        frame_id = 0
+        detector_pipeline.submit_data(img, frame_id, {'frame': img, 'start_time': 0})
+
         # Wait for processing finished
+        detector_pipeline.await_any()
         
         # Get detection result
+        results, meta = detector_pipeline.get_result(frame_id)
     
         # Draw detections in the image
-    
-        # Show image and wait for key press
-        
-        # Wait 1 ms and check pressed button to break the loop
+        draw_detections(img, results, args.classes, args.prob_threshold)
 
-            
-        pass
+        # Show image
+        cv2.imshow('Image with detections', img)
+        output.write(img)
+
+        end_time = perf_counter()
+
+        log.info(f" frame {counter} was processed with {end_time - start_time} seconds")
+        counter += 1
+
+        # Wait 1 ms and check pressed button to break the loop
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
         
     # Destroy all windows
     cv2.destroyAllWindows()
