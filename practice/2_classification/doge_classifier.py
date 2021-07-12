@@ -20,22 +20,30 @@ class InferenceEngineClassifier:
             device='CPU', extension=None, classesPath=None):
         
         # Add code for Inference Engine initialization
-        
+        self.ie = IECore()
+
         # Add code for model loading
+        self.net = self.ie.read_network(model = configPath)
+        self.exec_net = self.ie.load_network(network = self.net, device_name = device)
 
         # Add code for classes names loading
-        
+        # with open(classesPath, 'r') as f:
+        #     labels = []
         return
 
     def get_top(self, prob, topN=1):
         result = []
         
+        result = np.squeeze(prob)
+        result = np.argsort(result)[-topN:][::-1]
         # Add code for getting top predictions
         
         return result
 
     def _prepare_image(self, image, h, w):
-    
+        
+        image = cv2.resize(image, (w, h))
+        image = image.transpose((2, 0, 1))
         # Add code for image preprocessing
         
         return image
@@ -43,9 +51,16 @@ class InferenceEngineClassifier:
     def classify(self, image):
         probabilities = None
         
+        input_blob = next(iter(self.net.input_info))
+        out_blob = next(iter(self.net.outputs))
+        n, c, h, w = self.net.inputs[input_blob].shape
+        image = self._prepare_image(image, h, w)
+
         # Add code for image classification using Inference Engine
-        
-        return probabilities
+        output = self.exec_net.infer(inputs = {input_blob: image})
+        output = output[out_blob]
+
+        return output
 
 
 def build_argparser():
@@ -76,15 +91,26 @@ def main():
     log.info("Start IE classification sample")
 
     # Create InferenceEngineClassifier object
-    
-    # Read image
-        
-    # Classify image
-    
-    # Get top 5 predictions
-    
-    # print result
+    ie_classifier = InferenceEngineClassifier(
+        configPath=args.model,
+        weightsPath=args.weights,
+        device=args.device,
+        extension=args.cpu_extension,
+        classesPath=args.classes
+    )
 
+    # Read image
+    img = cv2.imread(args.input)
+
+    # Classify image
+    prob = ie_classifier.classify(img)
+
+    # Get top 5 predictions
+    predictions = ie_classifier.get_top(prob, 5)
+
+    # print result
+    log.info("Predictions: " + str(predictions))
+    
     return
 
 
