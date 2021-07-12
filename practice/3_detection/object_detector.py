@@ -65,20 +65,29 @@ def draw_detections(frame, detections, labels, threshold):
     for detection in detections:
 
         # If score more than threshold, draw rectangle on the frame
-        if detection.score > 0.5:
+        if detection.score > threshold:
+            xmin = int(detection.xmin)
+            xmax = int(detection.xmax)
+            ymin = int(detection.ymin)
+            ymax = int(detection.ymax)
             cv2.rectangle(
                 frame,
-                detection.bottom_left_point(),
-                detection.top_right_point(),
-                color=(255, 165, 0),
-                line_width=2,
+                (xmin, ymin),
+                (xmax, ymax),
+                color=(0, 165, 255),
+                thickness=2,
             )
+            try:
+                classname = labels[detection.id]
+            except (TypeError, IndexError):
+                classname = f'Class #{detection.id}'
             cv2.putText(
                 frame,
-                f'Id {detection.id}',
-                (detection.xmin, detection.ymax+1),
-                color=(255, 0, 0),
-                text_size=0.45,
+                classname,
+                (xmin, ymin-4),
+                fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+                fontScale=0.6,
+                color=(160, 100, 255),
             )
 
         pass
