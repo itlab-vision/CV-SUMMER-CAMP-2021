@@ -92,34 +92,57 @@ def main():
     log.info("Start OpenVINO object detection")
 
     # Initialize data input
+    cap = open_images_capture(args.input, True)
 
     # Initialize OpenVINO
+    ie = IECore()
 
     # Initialize Plugin configs
+    plugin_configs = get_plugin_configs(args.device, 0, 0)
 
     # Load YOLOv3 model
+    detector = models.YOLO(
+        ie,
+        pathlib.Path(args.model),
+        labels=args.classes,
+        threshold=args.prob_threshold,
+        keep_aspect_ratio=True,
+    )
 
     # Initialize async pipeline
+    detector_pipeline = AsyncPipeline(
+        ie,
+        detector,
+        plugin_configs,
+        device=args.device,
+        max_num_requests=1,
+    )
 
     while True:
 
         # Get one image
+        img = cap.read()
 
 
         # Start processing frame asynchronously
+        frame_id = 0
+        detector_pipeline.submit_data(img, frame_id, {'frame': img, 'start_time': 0})
 
         # Wait for processing finished
+        detector_pipeline.await_any()
 
         # Get detection result
+        results, meta = detector_pipeline.get_result(frame_id)
 
         # Draw detections in the image
+        draw_detections(img, results, None, args.prob_threshold)
 
         # Show image and wait for key press
+        cv2.imshow('Detections', img)
 
         # Wait 1 ms and check pressed button to break the loop
-
-
-        pass
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
     # Destroy all windows
     cv2.destroyAllWindows()
