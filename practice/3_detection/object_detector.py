@@ -58,15 +58,15 @@ def build_argparser():
     parser.add_argument('-t', '--prob_threshold', default=0.8, type=float,
         help='Optional. Probability threshold for detections filtering.')
     return parser
-  
-  
+
+
 def draw_detections(frame, detections, labels, threshold):
     size = frame.shape[:2]
     for detection in detections:
-    
+
         # If score more than threshold, draw rectangle on the frame
-        
-        
+
+
         pass
     return frame
 
@@ -78,35 +78,35 @@ def main():
     log.info("Start OpenVINO object detection")
 
     # Initialize data input
-    
+
     # Initialize OpenVINO
-    
+
     # Initialize Plugin configs
-    
+
     # Load YOLOv3 model
-    
+
     # Initialize async pipeline
 
     while True:
 
-        # Get one image 
-        
+        # Get one image
+
 
         # Start processing frame asynchronously
-        
+
         # Wait for processing finished
-        
+
         # Get detection result
-    
+
         # Draw detections in the image
-    
+
         # Show image and wait for key press
-        
+
         # Wait 1 ms and check pressed button to break the loop
 
-            
+
         pass
-        
+
     # Destroy all windows
     cv2.destroyAllWindows()
     return
