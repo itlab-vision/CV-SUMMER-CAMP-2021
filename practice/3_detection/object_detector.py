@@ -11,7 +11,7 @@ import argparse
 import pathlib
 from time import perf_counter
 
-sys.path.append('C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\open_model_zoo\\demos\\common\\python')
+sys.path.append('C:\\Program Files (x86)\\Intel\\openvino_2021.4.582\\deployment_tools\\open_model_zoo\\demos\\common\\python')
 import models
 from pipelines import AsyncPipeline
 from images_capture import open_images_capture
@@ -63,10 +63,18 @@ def build_argparser():
 def draw_detections(frame, detections, labels, threshold):
     size = frame.shape[:2]
     for detection in detections:
-    
+        left = int(detection.xmin) 
+        bottom = int(detection.ymin)
+        right = int(detection.xmax)
+        top = int(detection.ymax)
+        score = detection.score 
+        id = detection.id
+
         # If score more than threshold, draw rectangle on the frame
-        
-        
+        if score > threshold:
+            label = labels[id] if labels else str(id)
+            cv2.rectangle(frame, (left, bottom), (right, top), (0, 0, 0), 2)
+            cv2.putText(frame, label, (left, bottom - 10), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0), 1)
         pass
     return frame
 
@@ -76,37 +84,64 @@ def main():
                     level=log.INFO, stream=sys.stdout)
     args = build_argparser().parse_args()
     log.info("Start OpenVINO object detection")
-
+    labels = None
+    if args.classes:
+        with open(args.classes, 'r') as f:
+            labels = [line.split(',')[0].strip() for line in f]
+    
     # Initialize data input
-    
+    cap = open_images_capture(args.input, True)
+
     # Initialize OpenVINO
-    
+    ie = IECore()
+
     # Initialize Plugin configs
-    
+    plugin_configs = get_plugin_configs('CPU', 0, 0)
+
     # Load YOLOv3 model
-    
+    detector = models.YOLO(ie, pathlib.Path(args.model), labels=args.classes, 
+                            threshold=args.prob_threshold, keep_aspect_ratio=True)
+
     # Initialize async pipeline
+    detector_pipeline = AsyncPipeline(ie, detector, 
+                                        plugin_configs, device='CPU', max_num_requests=1)
+    img = cap.read()
+    
+    video_writer = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc(*'MP42'), cap.fps(),(img.shape[1], img.shape[0]))
 
     while True:
 
-        # Get one image 
-        
-
         # Start processing frame asynchronously
-        
+        frame_id = 0
+
+        infer_start_time = perf_counter()
+        detector_pipeline.submit_data(img,frame_id,{'frame':img,'start_time':0})
+
         # Wait for processing finished
-        
+        detector_pipeline.await_any()
+        infer_time = perf_counter() - infer_start_time
+        log.info("Inference time: " + str(infer_time))
+
         # Get detection result
-    
+        results, meta = detector_pipeline.get_result(frame_id)
+
         # Draw detections in the image
+        draw_detections(img, results, labels, args.prob_threshold) 
     
         # Show image and wait for key press
-        
-        # Wait 1 ms and check pressed button to break the loop
+        cv2.imshow('Image with detections', img)
+              
+        video_writer.write(img)            
 
-            
+        # Wait 1 ms and check pressed button to break the loop
+        if cv2.waitKey(1) & 0xFF == ord('q'): 
+            break
+
+        # Get one image 
+        img = cap.read()
         pass
-        
+    
+    video_writer.release()
     # Destroy all windows
     cv2.destroyAllWindows()
     return
