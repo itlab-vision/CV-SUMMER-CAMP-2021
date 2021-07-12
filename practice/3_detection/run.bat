@@ -1,0 +1,1 @@
+python object_detector.py -i camera.mp4 -m models\yolo-v3-tiny-tf.xml -c imagenet_yolov3_labels.txt
