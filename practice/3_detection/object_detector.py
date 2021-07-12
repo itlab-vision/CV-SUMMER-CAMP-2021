@@ -15,6 +15,7 @@ sys.path.append('C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment
 import models
 from pipelines import AsyncPipeline
 from images_capture import open_images_capture
+from performance_metrics import PerformanceMetrics
 
 
 def get_plugin_configs(device, num_streams, num_threads):
@@ -65,10 +66,18 @@ def draw_detections(frame, detections, labels, threshold):
     for detection in detections:
     
         # If score more than threshold, draw rectangle on the frame
-        
-        
-        pass
+        if detection.score > threshold:
+            xmin = max(int(detection.xmin), 0)
+            ymin = max(int(detection.ymin), 0)
+            xmax = min(int(detection.xmax), size[1])
+            ymax = min(int(detection.ymax), size[0])
+            class_id = int(detection.id)
+            det_label = labels[class_id] if labels and len(labels) >= class_id else '#{}'.format(class_id)
+            cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (255,0,0), 2)
+            cv2.putText(frame, '{} {:.1%}'.format(det_label, detection.score),
+                        (xmin, ymin - 7), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255,0,0), 1)
     return frame
+
 
 
 def main():
@@ -78,35 +87,60 @@ def main():
     log.info("Start OpenVINO object detection")
 
     # Initialize data input
-    
+    cap = open_images_capture(args.input, True)
+
     # Initialize OpenVINO
-    
+    ie = IECore()
+
     # Initialize Plugin configs
-    
+    plugin_configs = get_plugin_configs('CPU', 0, 0)
+
     # Load YOLOv3 model
-    
+    detector = models.YOLO(ie, pathlib.Path(args.model), labels=args.classes,
+                           threshold=args.prob_threshold, keep_aspect_ratio=True)
     # Initialize async pipeline
+    detector_pipeline = AsyncPipeline(ie, detector, plugin_configs,
+                                      device='CPU', max_num_requests=1)
+
+    metrics = PerformanceMetrics()
+
+    img = cap.read()
+
+    fourcc = cv2.VideoWriter_fourcc(*"H264")
+    h, w = img.shape[0:2]
+    writer = cv2.VideoWriter("result.mp4", fourcc, 30, (w, h))
 
     while True:
-
-        # Get one image 
-        
-
         # Start processing frame asynchronously
-        
+        frame_id = 0
+        detector_pipeline.submit_data(img, frame_id, {'frame': img, 'start_time': 0})
+
         # Wait for processing finished
+        detector_pipeline.await_any()
         
         # Get detection result
+        results, meta = detector_pipeline.get_result(frame_id)
+        frame_id += 1
+
+        start_time = meta['start_time']
     
         # Draw detections in the image
+        frame = draw_detections(img, results, detector.labels, args.prob_threshold)
+        metrics.update(start_time, frame)
+
     
         # Show image and wait for key press
+        cv2.imshow('Image with detections', frame)
+
+        writer.write(img)
+
+        img = cap.read()
         
         # Wait 1 ms and check pressed button to break the loop
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
-            
-        pass
-        
+    writer.release()
     # Destroy all windows
     cv2.destroyAllWindows()
     return
