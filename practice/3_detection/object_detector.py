@@ -9,6 +9,7 @@ import sys
 import logging as log
 import argparse
 import pathlib
+from time import time
 
 sys.path.append('C:\\Program Files (x86)\\Intel\\openvino_2021.4.582\\deployment_tools\\open_model_zoo\\demos\\common\\python')
 import models
@@ -59,12 +60,12 @@ def build_argparser():
     return parser
   
   
-def draw_detections(frame, detections, labels, threshold):
+def draw_detections(frame, detections, classes, threshold):
     for detection in detections:
         # If score more than threshold, draw rectangle on the frame
         if detection.score > threshold:
             cv2.rectangle(frame, (floor(detection.xmin), floor(detection.ymin)), (floor(detection.xmax), floor(detection.ymax)), (0, 0, 255), 1)
-            cv2.putText(frame, str(detection.id), (floor(detection.xmin), floor(detection.ymin - 10)), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 2)
+            cv2.putText(frame, str(detection.id) if classes is None else classes[detection.id], (floor(detection.xmin), floor(detection.ymin - 10)), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 2)
 
 
 def main():
@@ -75,6 +76,12 @@ def main():
 
     # Initialize data input
     cap = open_images_capture(args.input, True)
+    if args.classes:
+        with open(args.labels, 'r') as f:
+            classes = [line.split(',')[0].strip() for line in f]
+    else:
+        classes = None
+
     # Initialize OpenVINO
     ie = IECore()
     # Initialize Plugin configs
@@ -88,26 +95,42 @@ def main():
     # Initialize async pipeline
     detector_pipeline = AsyncPipeline(ie, detector, plugin_configs, device="CPU", max_num_requests=1)
 
-    while True:
+    process_time = set()
+    # to save video with detections
+    frame = cap.read()
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter('output.mp4', fourcc, 20.0, (frame.shape[1], frame.shape[0]))
 
+    while True:
+        # to calculate process time of 1 image
+        start_process_timestamp = time()
         # Get one image 
-        img = cap.read()
+        frame = cap.read()
 
         # Start processing frame asynchronously
-        detector_pipeline.submit_data(img, 0, {"frame": img, "start_time": 0})
+        detector_pipeline.submit_data(frame, 0, {"frame": frame, "start_time": 0})
         # Wait for processing finished
         detector_pipeline.await_any()
         # Get detection result
         results, meta = detector_pipeline.get_result(0)
         # Draw detections in the image
-        draw_detections(img, results, None, args.prob_threshold)
+        draw_detections(frame, results, classes, args.prob_threshold)
+
+        out.write(frame)
+
+        end_process_timestamp = time()
+        process_time.add(end_process_timestamp - start_process_timestamp)
+
         # Show image and wait for key press
-        cv2.imshow("Image with detections", img)
+        cv2.imshow("Image with detections", frame)
         
         # Wait 1 ms and check pressed button to break the loop
         if cv2.waitKey(1) == ord("q"):
             break
-        
+
+    print("Average processing of 1 image:", sum(process_time) / len(process_time), "seconds.")
+
+    out.release()
     # Destroy all windows
     cv2.destroyAllWindows()
     return
