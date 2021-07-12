@@ -144,7 +144,7 @@ def main():
         results, meta = detector_pipeline.get_result(frame_id)
 
         # Draw detections in the image
-        draw_detections(img, results, None, args.prob_threshold)
+        draw_detections(img, results, detector.labels, args.prob_threshold)
 
         # Show image and wait for key press
         cv2.imshow('Detections', img)
