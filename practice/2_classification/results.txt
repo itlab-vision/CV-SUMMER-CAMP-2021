@@ -1,0 +1,29 @@
+Using squeezenet1.1
+
+doge.jpg:
+chow, chow chow 0.6891488
+Pembroke, Pembroke Welsh corgi 0.1459617
+Pomeranian  0.0605884
+Samoyed, Samoyede 0.0166881
+dingo, warrigal, warragal, Canis dingo 0.0077305
+
+husky.jpg:
+Eskimo dog, husky 0.6564323
+Siberian husky 0.3085899
+malamute, malemute, Alaskan malamute 0.0315567
+timber wolf, grey wolf, gray wolf, Canis lupus 0.0015405
+Norwegian elkhound, elkhound 0.0005643
+
+germanshepherd.jpg:
+German shepherd, German shepherd dog, German police dog, alsatian 0.2894391
+coyote, prairie wolf, brush wolf, Canis latrans 0.1839991
+timber wolf, grey wolf, gray wolf, Canis lupus 0.1666884
+red wolf, maned wolf, Canis rufus, Canis niger 0.0944228
+dingo, warrigal, warragal, Canis dingo 0.0856797
+
+retriever.jpg:
+golden retriever 0.6351569
+Labrador retriever 0.2711479
+kuvasz    0.0610785
+Great Pyrenees 0.0186901
+tennis ball 0.0082187
