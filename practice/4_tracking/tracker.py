@@ -151,7 +151,7 @@ class Tracker:
         D = ((center_1[0] - center_2[0])**2 + (center_1[1] - center_2[1])**2)**(1/2)
         w_last = last_obj.bbox.br_x - last_obj.bbox.tl_x
         h_last = obj.bbox.br_y - obj.bbox.tl_y
-        C = 1/3
+        C = 2/3
 
         return math.exp(-C * ((D**2) / (w_last * h_last)))
 
