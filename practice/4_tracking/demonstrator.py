@@ -35,6 +35,10 @@ class Demonstrator:
         last_frame_index = max(annotation_storage.get_list_of_frame_indexes())
 
         frame_range = range(first_frame_index, last_frame_index+1)
+
+        fourcc = cv2.VideoWriter_fourcc(*"H264")
+        writer = cv2.VideoWriter("result.mp4", fourcc, 30, (1280, 720))
+
         for frame_index in tqdm(frame_range, desc="Writing images"):
             cur_img_name = "{:06}.jpg".format(frame_index)
 
@@ -85,6 +89,7 @@ class Demonstrator:
                 cv2.waitKey(25)
 
             cv2.imwrite(dst_img_path.as_posix(), img)
+            writer.write(cv2.resize(img, (1280, 720)))
 
     @staticmethod
     def _draw_track_centers(img, track_centers, color):
