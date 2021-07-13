@@ -112,3 +112,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Models
+public/ssd300/*
+!public/ssd300/FP16
+public/ssd300/FP16/*
+!public/ssd300/FP16/*.xml
+
+public/yolo-v3-tiny-tf/*
+!public/yolo-v3-tiny-tf/FP16
+public/yolo-v3-tiny-tf/FP16/*
+!public/yolo-v3-tiny-tf/FP16/*.xml
