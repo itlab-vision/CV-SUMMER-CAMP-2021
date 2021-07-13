@@ -1,7 +1,9 @@
+import sys
+sys.path.append("E:\Downloads\intel\CV-SUMMER-CAMP-2021\practice\4_tracking\common")
+
 import argparse
 import logging as log
 from pathlib import Path
-import sys
 from tqdm import tqdm
 
 from common.annotation import AnnotationStorage, emulate_reallife_detector
@@ -88,6 +90,7 @@ def main():
     log.info("End evaluation, the result is written to the file {}".format(res_eval_path))
 
     log.info("Begin writing demo to images in the folder {}".format(dst_folder))
+    # result_annotation_storage = AnnotationStorage("E:\\Downloads\\intel\\CV-SUMMER-CAMP-2021\\practice\\4_tracking\\DST1\\result.txt")
     demonstrator.make_demonstration(result_annotation_storage)
     log.info("End writing demo to images in the folder {}".format(dst_folder))
     log.info("Done")
