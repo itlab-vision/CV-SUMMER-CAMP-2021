@@ -133,13 +133,39 @@ class Tracker:
         return affinity_appearance * affinity_position * affinity_shape
 
     def _calc_affinity_appearance(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_appearance  is not implemented -- implement it by yourself")
+        last_obj = track.last()
+        scalar_multiplication = sum([last_obj.appearance_feature[i] *
+                                    obj.appearance_feature[i]
+                                    for i in range(len(obj.appearance_feature))])
+
+        len_1 = (sum([el**2 for el in last_obj.appearance_feature]))**(1/2)
+        len_2 = (sum([el ** 2 for el in obj.appearance_feature]))**(1/2)
+
+        return scalar_multiplication / (len_1 * len_2)
 
     def _calc_affinity_position(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_position is not implemented -- implement it by yourself")
+        last_obj = track.last()
+        center_1 = ((last_obj.bbox.br_x + last_obj.bbox.tl_x) / 2, (last_obj.bbox.br_y + last_obj.bbox.tl_y) / 2)
+        center_2 = ((obj.bbox.br_x + obj.bbox.tl_x) / 2, (obj.bbox.br_y + obj.bbox.tl_y) / 2)
+
+        D = (abs(center_1[0] - center_2[0])**2 + abs(center_1[1] - center_2[1])**2)**(1/2)
+        w_last = last_obj.bbox.br_x - last_obj.bbox.tl_x
+        h_last = obj.bbox.br_y - obj.bbox.tl_y
+        C = 1/3
+
+        return math.exp(-C * ((D**2) / (w_last * h_last)))
+
 
     def _calc_affinity_shape(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_shape is not implemented -- implement it by yourself")
+        last_obj = track.last()
+        w_last = last_obj.bbox.br_x - last_obj.bbox.tl_x
+        h_last = obj.bbox.br_y - obj.bbox.tl_y
+        w_obj = obj.bbox.br_x - obj.bbox.tl_x
+        h_obj = obj.bbox.br_y - obj.bbox.tl_y
+        C = 1/3
+
+        return math.exp(-C * (((w_last - w_obj) / w_last) + ((h_last - h_obj) / h_last)))
+
 
     @staticmethod
     def _log_affinity_matrix(affinity_matrix):
