@@ -5,7 +5,7 @@ import sys
 from tqdm import tqdm
 from common.feature_distance import calc_features_similarity
 from common.common_objects import DetectedObject, validate_detected_object, Bbox
-from common.common_objects import get_bbox_center, get_dist, calc_bbox_area
+from common.common_objects import get_bbox_center, get_dist, calc_bbox_area, get_bbox_size, calc_IoU
 from common.find_best_assignment import solve_assignment_problem
 from common.annotation import AnnotationObject, AnnotationStorage
 
@@ -133,13 +133,50 @@ class Tracker:
         return affinity_appearance * affinity_position * affinity_shape
 
     def _calc_affinity_appearance(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_appearance  is not implemented -- implement it by yourself")
+        result = calc_features_similarity(track.objects[len(track.objects) - 1].appearance_feature, obj.appearance_feature)
+        # right!!!
+        # numerator = sum(track.objects[len(track.objects) - 1].appearance_feature[i] * obj.appearance_feature[i] for i in range(len(obj.appearance_feature)))
+        # den_1 = math.sqrt(sum(pow(track.objects[len(track.objects) - 1].appearance_feature[i], 2) for i in range(len(obj.appearance_feature))))
+        # den_2 = math.sqrt(sum(pow(obj.appearance_feature[i], 2) for i in range(len(obj.appearance_feature))))
+        # denominator = den_1 * den_2
+        # res = numerator / denominator
+        return result
+        #raise NotImplementedError("The function _calc_affinity_appearance  is not implemented -- implement it by yourself")
 
     def _calc_affinity_position(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_position is not implemented -- implement it by yourself")
+        c1 = 1
+        track_center = get_bbox_center(track.objects[len(track.objects) - 1].bbox)
+        obj_center = get_bbox_center(obj.bbox)
+        dist = get_dist(track_center, obj_center)
+        track_area = calc_bbox_area(track.objects[len(track.objects) - 1].bbox)
+        # track_width, track_height = get_bbox_size(track.objects[len(track.objects) - 1].bbox)
+        # track_center_x = (track.objects[len(track.objects) - 1].bbox.br_x + track.objects[len(track.objects) - 1].bbox.tl_x) / 2
+        # track_center_y = (track.objects[len(track.objects) - 1].bbox.br_y + track.objects[len(track.objects) - 1].bbox.tl_y) / 2
+        # obj_center_x = (obj.bbox.br_x + obj.bbox.tl_x) / 2
+        # obj_center_y = (obj.bbox.br_y + obj.bbox.tl_y) / 2
+        # centers = [track_center_x, obj_center_x, track_center_y, obj_center_y]
+        #D = math.sqrt(sum(pow(centers[i] - centers[i+1], 2) for i in range(0, len(centers), 2)))
+        #return pow(math.e, -c1 * (pow(dist, 2) / ((track.objects[len(track.objects) - 1].bbox.br_x - track.objects[len(track.objects) - 1].bbox.tl_x) * (track.objects[len(track.objects) - 1].bbox.br_y - track.objects[len(track.objects) - 1].bbox.tl_y))))
+        result_1 = math.exp(-c1 * (pow(dist, 2) / track_area))
+        result_2 = math.exp(-c1 * (dist / math.sqrt(track_area)))
+        result_3 = calc_IoU(track.objects[len(track.objects) - 1].bbox, obj.bbox)
+        return (result_1 + result_2 + result_3) / 3
+        #raise NotImplementedError("The function _calc_affinity_position is not implemented -- implement it by yourself")
 
     def _calc_affinity_shape(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_shape is not implemented -- implement it by yourself")
+        c2 = 1
+        w1, h1 = get_bbox_size(track.objects[len(track.objects) - 1].bbox)
+        w2, h2 = get_bbox_size(obj.bbox)
+        track_area = calc_bbox_area(track.objects[len(track.objects) - 1].bbox)
+        obj_area = calc_bbox_area(obj.bbox)
+        # w1 = track.objects[len(track.objects) - 1].bbox.br_x - track.objects[len(track.objects) - 1].bbox.tl_x
+        # w2 = obj.bbox.br_x - obj.bbox.tl_x
+        # h1 = track.objects[len(track.objects) - 1].bbox.br_y - track.objects[len(track.objects) - 1].bbox.tl_y
+        # h2 = obj.bbox.br_y - obj.bbox.tl_y
+        result_1 = math.exp(-c2 * (((w1 - w2) / w1) + ((h1 - h2) / h1)))
+        result_2 = math.exp(-c2 * abs(track_area - obj_area) / track_area)
+        return (result_1 + result_2) / 2
+        # raise NotImplementedError("The function _calc_affinity_shape is not implemented -- implement it by yourself")
 
     @staticmethod
     def _log_affinity_matrix(affinity_matrix):
