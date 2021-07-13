@@ -11,7 +11,7 @@ import argparse
 import pathlib
 from time import perf_counter
 
-sys.path.append('C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\open_model_zoo\\demos\\common\\python')
+sys.path.append('C:\\Program Files (x86)\\IntelSWTools\\openvino_2021.3.394\\deployment_tools\\open_model_zoo\\demos\\common\\python')
 import models
 from pipelines import AsyncPipeline
 from images_capture import open_images_capture
@@ -63,9 +63,18 @@ def build_argparser():
 def draw_detections(frame, detections, labels, threshold):
     size = frame.shape[:2]
     for detection in detections:
-    
-        # If score more than threshold, draw rectangle on the frame
-        
+        if detection.score > threshold:
+            color = (0,255,0)
+            xmin = max(int(detection.xmin), 0)
+            ymin = max(int(detection.ymin), 0)
+            xmax = min(int(detection.xmax), size[1])
+            ymax = min(int(detection.ymax), size[0])
+            class_id = int(detection.id)
+            det_label = labels[class_id] if labels and len(labels) >= class_id else '#{}'.format(class_id)
+            cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), color, 2)
+            cv2.putText(frame, '{} {:.1%}'.format(det_label, detection.score),
+                        (xmin, ymin - 7), cv2.FONT_HERSHEY_COMPLEX, 0.6, color, 1)
+
         
         pass
     return frame
@@ -78,32 +87,44 @@ def main():
     log.info("Start OpenVINO object detection")
 
     # Initialize data input
+    cap = open_images_capture(args.input, True)
     
     # Initialize OpenVINO
+    ie = IECore()
     
     # Initialize Plugin configs
+    plugin_configs = get_plugin_configs('CPU', 0, 0)
     
     # Load YOLOv3 model
+    detector = models.YOLO(ie, pathlib.Path(args.model), labels=args.classes, threshold=args.prob_threshold, keep_aspect_ratio=True)
     
     # Initialize async pipeline
+    detector_pipeline = AsyncPipeline(ie, detector, plugin_configs, device='CPU', max_num_requests=1)
 
     while True:
 
         # Get one image 
-        
+        img = cap.read()
 
         # Start processing frame asynchronously
+        frame_id = 0
+        detector_pipeline.submit_data(img,frame_id,{'frame':img,'start_time':0})
         
         # Wait for processing finished
+        detector_pipeline.await_any()
         
         # Get detection result
+        results, meta = detector_pipeline.get_result(frame_id)
     
         # Draw detections in the image
+        draw_detections(img, results, None, args.prob_threshold)
     
         # Show image and wait for key press
+        cv2.imshow('Image with detections', img)
         
         # Wait 1 ms and check pressed button to break the loop
-
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
             
         pass
         
