@@ -171,11 +171,12 @@ def main():
     # Classify image
     prob = ie_classifier.classify(args.input)
 
-    log.info(prob.shape)
     # Get top 5 predictions
     topN = 5
     
     for i, path in enumerate(args.input):
+        print()
+
         log.warning(f"Image path: {path}")
         log.info(f"Top {topN}:")
 
