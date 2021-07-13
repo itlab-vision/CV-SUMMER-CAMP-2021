@@ -1,0 +1,64 @@
+ Get paragraphs from https://en.wikipedia.org/wiki/OpenCV
+ Question: What programming language is it written in?
+ ---answer: 0.98 JavaScript
+    4, JavaScript bindings for a selected subset of OpenCV functions was released as OpenCV
+ ---answer: 0.89 C++
+    OpenCV is written in C++ and its primary interface is in C++, but it still retains a less comprehensive though extensive older C interface
+ ---answer: 0.15 Apache
+     The library is cross-platform and free for use under the open-source Apache 2 License
+ Question: When was it released?
+ ---answer: 0.87 2000
+    The first alpha version of OpenCV was released to the public at the IEEE Conference on Computer Vision and Pattern Recognition in 2000, and five betas were released between 2001 and 2005
+ ---answer: 0.29 October 2009
+    The second major release of the OpenCV was in October 2009
+ ---answer: 0.04 version 3.4
+     In version 3.4, JavaScript bindings for a selected subset of OpenCV functions was released as OpenCV
+ Question: What operating system is required?
+ ---answer: 0.06 Windows, Linux
+    OpenCV runs on the following desktop operating systems: Windows, Linux, macOS, FreeBSD, NetBSD, OpenBSD
+ ---answer: 0.05 Apache 2
+     The library is cross-platform and free for use under the open-source Apache 2 License
+ ---answer: 0.00 OpenCV
+    The first alpha version of OpenCV was released to the public at the IEEE Conference on Computer Vision and Pattern Recognition in 2000, and five betas were released between 2001 and 2005
+ Question: How many versions toolkit has?
+ ---answer: 0.04 3.4
+     In version 3.4, JavaScript bindings for a selected subset of OpenCV functions was released as OpenCV
+ ---answer: 0.03 five
+    The first alpha version of OpenCV was released to the public at the IEEE Conference on Computer Vision and Pattern Recognition in 2000, and five betas were released between 2001 and 2005
+ ---answer: 0.00 10
+    [10]
+
+
+
+ Get paragraphs from https://en.wikipedia.org/wiki/OpenVINO
+ Question: What programming language is it written in?
+ ---answer: 0.68 C++ and Python
+    OpenVINO is written in C++ and Python
+ ---answer: 0.44 Apache
+     The toolkit is cross-platform and free for use under Apache License version 2
+ ---answer: 0.00 xml
+    xml, which contain weights and model structures respectively
+ Question: When was it released?
+ ---answer: 0.00 2.0
+     The toolkit is cross-platform and free for use under Apache License version 2.0
+ ---answer: 0.00 version 2.0
+     Open Model Zoo is licensed under Apache License version 2.0
+ ---answer: 0.00 2.0
+     Open Model Zoo is licensed under Apache License version 2.0
+ Question: What operating system is required?
+ ---answer: 0.47 Windows, Linux and MacOS
+    OpenVINO runs on the following desktop operation systems: Windows, Linux and MacOS
+ ---answer: 0.01 Apache
+     The toolkit is cross-platform and free for use under Apache License version 2
+ ---answer: 0.00 Apache
+     Open Model Zoo is licensed under Apache License version 2
+ Question: How many versions toolkit has?
+ ---answer: 0.48 two
+    [2] The toolkit has two versions: OpenVINO toolkit, which is supported by open source community and Intel Distribution of OpenVINO toolkit, which is supported by Intel
+ ---answer: 0.28 2.0
+     Open Model Zoo is licensed under Apache License version 2.0
+ ---answer: 0.07 4
+    mizer using your trained model or public one and execute inference on Inference Engine on specified plugins (CPU, Intel Processor Graphics, VPU, FPGA, GNA, Multi-Device plugin, Heterogeneous plugin)[4]
+
+
+
