@@ -148,7 +148,7 @@ class Tracker:
         center_1 = ((last_obj.bbox.br_x + last_obj.bbox.tl_x) / 2, (last_obj.bbox.br_y + last_obj.bbox.tl_y) / 2)
         center_2 = ((obj.bbox.br_x + obj.bbox.tl_x) / 2, (obj.bbox.br_y + obj.bbox.tl_y) / 2)
 
-        D = (abs(center_1[0] - center_2[0])**2 + abs(center_1[1] - center_2[1])**2)**(1/2)
+        D = ((center_1[0] - center_2[0])**2 + (center_1[1] - center_2[1])**2)**(1/2)
         w_last = last_obj.bbox.br_x - last_obj.bbox.tl_x
         h_last = obj.bbox.br_y - obj.bbox.tl_y
         C = 1/3
