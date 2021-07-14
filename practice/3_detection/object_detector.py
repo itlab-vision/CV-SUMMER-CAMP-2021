@@ -16,7 +16,6 @@ import models
 from pipelines import AsyncPipeline
 from images_capture import open_images_capture
 
-
 def get_plugin_configs(device, num_streams, num_threads):
     config_user_specified = {}
 
