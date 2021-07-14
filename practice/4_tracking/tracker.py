@@ -133,13 +133,29 @@ class Tracker:
         return affinity_appearance * affinity_position * affinity_shape
 
     def _calc_affinity_appearance(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_appearance  is not implemented -- implement it by yourself")
+        affinity_appearance = calc_features_similarity(obj[2], track.objects[0][2])
+        return affinity_appearance
 
     def _calc_affinity_position(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_position is not implemented -- implement it by yourself")
+        xc1 = (obj[1][0]+obj[1][2])/2
+        yc1 = (obj[1][1]+obj[1][3])/2
+        xc2 = (track.objects[0][1][0]+track.objects[0][1][2])/2
+        yc2 = (track.objects[0][1][1]+track.objects[0][1][3])/2
+        w1 = track.objects[0][1][2] - track.objects[0][1][0]
+        h1 = track.objects[0][1][3] - track.objects[0][1][1]
+        C1 = 0.33
+        D = math.sqrt(((xc2-xc1)**2)+((yc2-yc1)**2))
+        affinity_position = math.exp(-C1*((D**2)/(h1*w1)))
+        return affinity_position
 
     def _calc_affinity_shape(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_shape is not implemented -- implement it by yourself")
+        w1 = track.objects[0][1][2] - track.objects[0][1][0]
+        h1 = track.objects[0][1][3] - track.objects[0][1][1]
+        w2 = obj[1][2] - obj[1][0]
+        h2 = obj[1][3] - obj[1][1]
+        C2 = 0.66
+        affinity_shape = math.exp(-C2*(((w1-w2)/w1)+((h1-h2)/h1)))
+        return affinity_shape
 
     @staticmethod
     def _log_affinity_matrix(affinity_matrix):

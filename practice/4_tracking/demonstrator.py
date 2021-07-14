@@ -40,7 +40,7 @@ class Demonstrator:
 
             src_img_path = self.images_folder_path / cur_img_name
             dst_img_path = self.dst_folder / cur_img_name
-
+            print(src_img_path.as_posix)
             img = cv2.imread(src_img_path.as_posix())
 
             ann_objects = annotation_storage.objects_by_frame.get(frame_index)
@@ -85,6 +85,8 @@ class Demonstrator:
                 cv2.waitKey(25)
 
             cv2.imwrite(dst_img_path.as_posix(), img)
+            fourcc = cv2.VideoWriter_fourcc(*'XVID')
+            out = cv2.VideoWriter('output_2.avi',fourcc, 20.0, (W1,H1))
 
     @staticmethod
     def _draw_track_centers(img, track_centers, color):
