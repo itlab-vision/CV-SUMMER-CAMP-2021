@@ -2,6 +2,13 @@
 Object detector based on Model API
 """
 
+import os 
+os.add_dll_directory("C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\ngraph\\lib")
+os.add_dll_directory("C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\inference_engine\\external\\tbb\\bin")
+os.add_dll_directory("C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\inference_engine\\bin\\intel64\\Release")
+os.add_dll_directory("C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\opencv\\bin")
+
+
 import cv2
 import numpy as np
 from openvino.inference_engine import IECore
@@ -9,6 +16,7 @@ import sys
 import logging as log
 import argparse
 import pathlib
+import time
 from time import perf_counter
 
 sys.path.append('C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\open_model_zoo\\demos\\common\\python')
@@ -63,9 +71,18 @@ def build_argparser():
 def draw_detections(frame, detections, labels, threshold):
     size = frame.shape[:2]
     for detection in detections:
-    
+
         # If score more than threshold, draw rectangle on the frame
-        
+        if detection.score > threshold:
+            point1 = (int(detection.xmin), int(detection.ymin))
+            point2 = (int(detection.xmax), int(detection.ymax))
+            color = (0, 255, 0)
+            line_width = 1
+            text = str(detection.id)
+            point = (int(detection.xmin - 1), int(detection.ymin - 1))
+            text_size = 0.5
+            cv2.rectangle(frame, point1, point2, color, line_width)
+            cv2.putText(frame, text, point, cv2.FONT_HERSHEY_COMPLEX, text_size, color, 1)
         
         pass
     return frame
@@ -78,34 +95,51 @@ def main():
     log.info("Start OpenVINO object detection")
 
     # Initialize data input
-    
-    # Initialize OpenVINO
-    
-    # Initialize Plugin configs
-    
-    # Load YOLOv3 model
-    
-    # Initialize async pipeline
+    cap = open_images_capture(args.input, True)
 
+    # Initialize OpenVINO
+    ie = IECore()
+
+    # Initialize Plugin configs
+    plugin_configs = get_plugin_configs('CPU', 0, 0)
+
+    # Load YOLOv3 model
+    detector = models.YOLO(ie, pathlib.Path(args.model), labels=args.classes, threshold=args.prob_threshold, keep_aspect_ratio=True)
+
+    # Initialize async pipeline
+    detector_pipeline = AsyncPipeline(ie, detector, plugin_configs, device='CPU', max_num_requests=1)
+
+    time_counter = 0.0
+    counter = 0.0
     while True:
 
+        start = time.time()
+
         # Get one image 
-        
+        img = cap.read()
 
         # Start processing frame asynchronously
-        
         # Wait for processing finished
-        
         # Get detection result
-    
-        # Draw detections in the image
-    
-        # Show image and wait for key press
-        
-        # Wait 1 ms and check pressed button to break the loop
+        frame_id = 0
+        detector_pipeline.submit_data(img,frame_id,{'frame':img,'start_time':0})
+        detector_pipeline.await_any()
+        results, meta = detector_pipeline.get_result(frame_id)
 
+        # Draw detections in the image
+        # Show image and wait for key press
+        draw_detections(img, results, None, args.prob_threshold)
+        cv2.imshow('Image with detections', img)
+
+        time_counter += time.time() - start
+        counter += 1.0
+        # Wait 1 ms and check pressed button to break the loop
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
             
         pass
+
+    print('Average time of image detection is', time_counter / counter)
         
     # Destroy all windows
     cv2.destroyAllWindows()
