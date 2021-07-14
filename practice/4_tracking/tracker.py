@@ -4,7 +4,7 @@ import logging as log
 import sys
 from tqdm import tqdm
 from common.feature_distance import calc_features_similarity
-from common.common_objects import DetectedObject, validate_detected_object, Bbox
+from common.common_objects import DetectedObject, validate_detected_object, Bbox, get_bbox_size
 from common.common_objects import get_bbox_center, get_dist, calc_bbox_area
 from common.find_best_assignment import solve_assignment_problem
 from common.annotation import AnnotationObject, AnnotationStorage
@@ -133,13 +133,25 @@ class Tracker:
         return affinity_appearance * affinity_position * affinity_shape
 
     def _calc_affinity_appearance(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_appearance  is not implemented -- implement it by yourself")
+        # raise NotImplementedError("The function _calc_affinity_appearance  is not implemented -- implement it by yourself")
+        feature1 = track.last().appearance_feature
+        feature2 = obj.appearance_feature
+        return calc_features_similarity(feature1, feature2)
 
     def _calc_affinity_position(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_position is not implemented -- implement it by yourself")
+        # raise NotImplementedError("The function _calc_affinity_position is not implemented -- implement it by yourself")
+        c1 = 1
+        pt1 = get_bbox_center(track.last().bbox)
+        pt2 = get_bbox_center(obj.bbox)
+        d = get_dist(pt1, pt2)
+        return math.exp(-c1 * (d * d / calc_bbox_area(track.last().bbox)))
 
     def _calc_affinity_shape(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_shape is not implemented -- implement it by yourself")
+        # raise NotImplementedError("The function _calc_affinity_shape is not implemented -- implement it by yourself")
+        c2 = 1
+        (w1, h1) = get_bbox_size(track.last().bbox)
+        (w2, h2) = get_bbox_size(obj.bbox)
+        return math.exp(-c2 * ((w1 - w2)/w1 + (h1 - h2)/h1))
 
     @staticmethod
     def _log_affinity_matrix(affinity_matrix):

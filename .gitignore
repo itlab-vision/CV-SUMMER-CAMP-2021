@@ -123,3 +123,9 @@ public/yolo-v3-tiny-tf/*
 !public/yolo-v3-tiny-tf/FP16
 public/yolo-v3-tiny-tf/FP16/*
 !public/yolo-v3-tiny-tf/FP16/*.xml
+
+# Settings
+.vscode/*
+
+# Data
+practice/4_tracking/MOT17-04-FRCNN/*

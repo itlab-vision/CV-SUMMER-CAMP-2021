@@ -1,7 +1,7 @@
 from copy import deepcopy
 from pathlib import Path
 import random
-from common.common_objects import DetectedObject, validate_detected_object, Bbox
+from .common_objects import DetectedObject, validate_detected_object, Bbox
 
 class AnnotationObject:
     def __init__(self, detect_obj, track_id):
