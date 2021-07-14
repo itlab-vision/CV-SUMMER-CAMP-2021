@@ -65,7 +65,14 @@ def draw_detections(frame, detections, labels, threshold):
     for detection in detections:
     
         # If score more than threshold, draw rectangle on the frame
-        
+        score = detection.score
+
+        if score> threshold:
+            cid = detection.id
+            cv2.rectangle(frame, (int(detection.xmin), int(detection.ymin)),
+                          (int(detection.xmax), int(detection.ymax)), (0, 200, 0), 1)
+            cv2.putText(frame, str(cid), (int(detection.xmin-1), int(detection.ymin-1)), cv2.FONT_HERSHEY_COMPLEX,
+                            0.45, (0, 200, 0), 1)  
         
         pass
     return frame
@@ -78,39 +85,56 @@ def main():
     log.info("Start OpenVINO object detection")
 
     # Initialize data input
-    
+    cap = open_images_capture(args.input, True)
+
     # Initialize OpenVINO
-    
+    ie = IECore()
+
     # Initialize Plugin configs
-    
+    plugin_configs = get_plugin_configs('CPU', 0, 0)
+
     # Load YOLOv3 model
-    
+    detector = models.YOLO(ie, pathlib.Path(args.model), labels=args.classes,
+                            threshold=args.prob_threshold, keep_aspect_ratio=True)
+
     # Initialize async pipeline
+    detector_pipeline = AsyncPipeline(ie, detector, plugin_configs,
+        device='CPU', max_num_requests=1)
 
     while True:
 
         # Get one image 
-        
+        img = cap.read()
 
         # Start processing frame asynchronously
-        
-        # Wait for processing finished
-        
-        # Get detection result
-    
-        # Draw detections in the image
-    
-        # Show image and wait for key press
-        
-        # Wait 1 ms and check pressed button to break the loop
+        frame_id = 0
+        start = perf_counter()
+        detector_pipeline.submit_data(img,frame_id,{'frame':img,'start_time':0})       
 
-            
+        # Wait for processing finished
+        detector_pipeline.await_any()
+
+        # Get detection result
+        results, meta = detector_pipeline.get_result(frame_id)
+
+        # Draw detections in the image
+        img = draw_detections(img, results, None, args.prob_threshold)
+
+        # Show image and wait for key press
+        end = perf_counter()
+        cv2.putText(img, str(end-start)[:4] + ' sec per frame', (10, 70), cv2.FONT_HERSHEY_PLAIN, 3,
+                    (0, 255, 255), 3)
+        cv2.imshow('Image with detections', img)        
+
+        # Wait 1 ms and check pressed button to break the loop
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
         pass
-        
+
     # Destroy all windows
     cv2.destroyAllWindows()
     return
-
 
 if __name__ == '__main__':
     sys.exit(main())
