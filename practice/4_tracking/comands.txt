@@ -1,0 +1,5 @@
+C:\Users\User\repos\CV-SUMMER-CAMP-2021\practice\openvino-virtual-environments\openvinoenv\Scripts\activate.bat
+
+python main.py --annotation annotation\annotation.txt --dst_folder .\DST1\
+
+python main.py --annotation annotation\annotation.txt --dst_folder .\DST1\ --images_folder MOT17-04-FRCNN\img1\ --show

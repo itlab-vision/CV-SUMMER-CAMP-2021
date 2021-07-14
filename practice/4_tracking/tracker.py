@@ -5,7 +5,7 @@ import sys
 from tqdm import tqdm
 from common.feature_distance import calc_features_similarity
 from common.common_objects import DetectedObject, validate_detected_object, Bbox
-from common.common_objects import get_bbox_center, get_dist, calc_bbox_area
+from common.common_objects import get_bbox_center, get_dist, calc_bbox_area, get_bbox_size, calc_IoU
 from common.find_best_assignment import solve_assignment_problem
 from common.annotation import AnnotationObject, AnnotationStorage
 
@@ -133,13 +133,33 @@ class Tracker:
         return affinity_appearance * affinity_position * affinity_shape
 
     def _calc_affinity_appearance(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_appearance  is not implemented -- implement it by yourself")
+        return calc_features_similarity(track.last().appearance_feature, obj.appearance_feature)
 
     def _calc_affinity_position(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_position is not implemented -- implement it by yourself")
+        c1 = 1
+        dist = get_dist(get_bbox_center(track.last().bbox), get_bbox_center(obj.bbox))
+        w1, h1 = get_bbox_size(track.last().bbox)
+        track_area = calc_bbox_area(track.last().bbox)
+        result1 = math.exp(-c1 * (pow(dist, 2) / (track_area)))
+        result2 = math.exp(-c1 * (dist / math.sqrt(track_area)))
+        result3 = calc_IoU(track.last().bbox, obj.bbox)
+        # return avg
+        return (result1 + result2 + result3) / 3
+
 
     def _calc_affinity_shape(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_shape is not implemented -- implement it by yourself")
+        c2 = 1
+        w1, h1 = get_bbox_size(track.last().bbox)
+        w2, h2 = get_bbox_size(obj.bbox)
+        track_area = calc_bbox_area(track.last().bbox)
+        obj_area = calc_bbox_area(obj.bbox)
+        result1 = math.exp(-c2 * (((w1 - w2) / w1) + ((h1 - h2) / h1)))
+        result2 = math.exp(-c2 * abs(track_area - obj_area) / track_area)
+        # return avg
+        return (result1 + result2) / 2
+
+
+
 
     @staticmethod
     def _log_affinity_matrix(affinity_matrix):
