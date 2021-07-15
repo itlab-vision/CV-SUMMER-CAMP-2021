@@ -1,0 +1,419 @@
+<?xml version="1.0"?>
+<mapping>
+	<map>
+		<framework name="image_input/scale_copy" output_port_id="conv2d/Conv2D/ReadVariableOp:0" />
+		<IR name="image_input/scale_copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d/Conv2D/ReadVariableOp" output_port_id="conv2d/Conv2D/ReadVariableOp:0" />
+		<IR name="image_input/scale_copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization/FusedBatchNorm:0" />
+		<IR name="batch_normalization/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization/FusedBatchNorm" output_port_id="batch_normalization/FusedBatchNorm:0" />
+		<IR name="batch_normalization/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu/LeakyRelu" output_port_id="leaky_re_lu/LeakyRelu:0" />
+		<IR name="leaky_re_lu/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu/LeakyRelu" output_port_id="leaky_re_lu/LeakyRelu:0" />
+		<IR name="leaky_re_lu/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="max_pooling2d/MaxPool" output_port_id="max_pooling2d/MaxPool:0" />
+		<IR name="max_pooling2d/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="max_pooling2d/MaxPool" output_port_id="max_pooling2d/MaxPool:0" />
+		<IR name="max_pooling2d/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="batch_normalization_1/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="conv2d_1/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_1/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_1/Conv2D/ReadVariableOp" output_port_id="conv2d_1/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_1/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization_1/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization_1/FusedBatchNorm:0" />
+		<IR name="batch_normalization_1/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_1/FusedBatchNorm" output_port_id="batch_normalization_1/FusedBatchNorm:0" />
+		<IR name="batch_normalization_1/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_1/LeakyRelu" output_port_id="leaky_re_lu_1/LeakyRelu:0" />
+		<IR name="leaky_re_lu_1/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_1/LeakyRelu" output_port_id="leaky_re_lu_1/LeakyRelu:0" />
+		<IR name="leaky_re_lu_1/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="max_pooling2d_1/MaxPool" output_port_id="max_pooling2d_1/MaxPool:0" />
+		<IR name="max_pooling2d_1/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="max_pooling2d_1/MaxPool" output_port_id="max_pooling2d_1/MaxPool:0" />
+		<IR name="max_pooling2d_1/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="batch_normalization_2/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="conv2d_2/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_2/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_2/Conv2D/ReadVariableOp" output_port_id="conv2d_2/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_2/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization_2/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization_2/FusedBatchNorm:0" />
+		<IR name="batch_normalization_2/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_2/FusedBatchNorm" output_port_id="batch_normalization_2/FusedBatchNorm:0" />
+		<IR name="batch_normalization_2/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_2/LeakyRelu" output_port_id="leaky_re_lu_2/LeakyRelu:0" />
+		<IR name="leaky_re_lu_2/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_2/LeakyRelu" output_port_id="leaky_re_lu_2/LeakyRelu:0" />
+		<IR name="leaky_re_lu_2/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="max_pooling2d_2/MaxPool" output_port_id="max_pooling2d_2/MaxPool:0" />
+		<IR name="max_pooling2d_2/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="max_pooling2d_2/MaxPool" output_port_id="max_pooling2d_2/MaxPool:0" />
+		<IR name="max_pooling2d_2/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="batch_normalization_3/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="conv2d_3/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_3/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_3/Conv2D/ReadVariableOp" output_port_id="conv2d_3/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_3/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization_3/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization_3/FusedBatchNorm:0" />
+		<IR name="batch_normalization_3/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_3/FusedBatchNorm" output_port_id="batch_normalization_3/FusedBatchNorm:0" />
+		<IR name="batch_normalization_3/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_3/LeakyRelu" output_port_id="leaky_re_lu_3/LeakyRelu:0" />
+		<IR name="leaky_re_lu_3/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_3/LeakyRelu" output_port_id="leaky_re_lu_3/LeakyRelu:0" />
+		<IR name="leaky_re_lu_3/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="max_pooling2d_3/MaxPool" output_port_id="max_pooling2d_3/MaxPool:0" />
+		<IR name="max_pooling2d_3/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="max_pooling2d_3/MaxPool" output_port_id="max_pooling2d_3/MaxPool:0" />
+		<IR name="max_pooling2d_3/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="batch_normalization_4/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="conv2d_4/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_4/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_4/Conv2D/ReadVariableOp" output_port_id="conv2d_4/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_4/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization_4/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization_4/FusedBatchNorm:0" />
+		<IR name="batch_normalization_4/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_4/FusedBatchNorm" output_port_id="batch_normalization_4/FusedBatchNorm:0" />
+		<IR name="batch_normalization_4/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_4/LeakyRelu" output_port_id="leaky_re_lu_4/LeakyRelu:0" />
+		<IR name="leaky_re_lu_4/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_4/LeakyRelu" output_port_id="leaky_re_lu_4/LeakyRelu:0" />
+		<IR name="leaky_re_lu_4/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="max_pooling2d_4/MaxPool" output_port_id="max_pooling2d_4/MaxPool:0" />
+		<IR name="max_pooling2d_4/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="max_pooling2d_4/MaxPool" output_port_id="max_pooling2d_4/MaxPool:0" />
+		<IR name="max_pooling2d_4/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="batch_normalization_5/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="conv2d_5/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_5/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_5/Conv2D/ReadVariableOp" output_port_id="conv2d_5/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_5/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization_5/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization_5/FusedBatchNorm:0" />
+		<IR name="batch_normalization_5/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_5/FusedBatchNorm" output_port_id="batch_normalization_5/FusedBatchNorm:0" />
+		<IR name="batch_normalization_5/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_5/LeakyRelu" output_port_id="leaky_re_lu_5/LeakyRelu:0" />
+		<IR name="leaky_re_lu_5/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_5/LeakyRelu" output_port_id="leaky_re_lu_5/LeakyRelu:0" />
+		<IR name="leaky_re_lu_5/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="max_pooling2d_5/MaxPool" output_port_id="max_pooling2d_5/MaxPool:0" />
+		<IR name="max_pooling2d_5/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="max_pooling2d_5/MaxPool" output_port_id="max_pooling2d_5/MaxPool:0" />
+		<IR name="max_pooling2d_5/MaxPool" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="batch_normalization_6/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="conv2d_6/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_6/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_6/Conv2D/ReadVariableOp" output_port_id="conv2d_6/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_6/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization_6/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization_6/FusedBatchNorm:0" />
+		<IR name="batch_normalization_6/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_6/FusedBatchNorm" output_port_id="batch_normalization_6/FusedBatchNorm:0" />
+		<IR name="batch_normalization_6/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_6/LeakyRelu" output_port_id="leaky_re_lu_6/LeakyRelu:0" />
+		<IR name="leaky_re_lu_6/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_6/LeakyRelu" output_port_id="leaky_re_lu_6/LeakyRelu:0" />
+		<IR name="leaky_re_lu_6/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_7/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="conv2d_7/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_7/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_7/Conv2D/ReadVariableOp" output_port_id="conv2d_7/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_7/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization_7/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization_7/FusedBatchNorm:0" />
+		<IR name="batch_normalization_7/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_7/FusedBatchNorm" output_port_id="batch_normalization_7/FusedBatchNorm:0" />
+		<IR name="batch_normalization_7/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_7/LeakyRelu" output_port_id="leaky_re_lu_7/LeakyRelu:0" />
+		<IR name="leaky_re_lu_7/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_7/LeakyRelu" output_port_id="leaky_re_lu_7/LeakyRelu:0" />
+		<IR name="leaky_re_lu_7/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_8/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="conv2d_8/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_8/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_8/Conv2D/ReadVariableOp" output_port_id="conv2d_8/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_8/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization_8/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization_8/FusedBatchNorm:0" />
+		<IR name="batch_normalization_8/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_8/FusedBatchNorm" output_port_id="batch_normalization_8/FusedBatchNorm:0" />
+		<IR name="batch_normalization_8/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_8/LeakyRelu" output_port_id="leaky_re_lu_8/LeakyRelu:0" />
+		<IR name="leaky_re_lu_8/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_8/LeakyRelu" output_port_id="leaky_re_lu_8/LeakyRelu:0" />
+		<IR name="leaky_re_lu_8/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="conv2d_9/Conv2D/ReadVariableOp" output_port_id="conv2d_9/Conv2D/ReadVariableOp:0" />
+		<IR name="conv2d_9/Conv2D/ReadVariableOp" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_9/Conv2D/ReadVariableOp" output_port_id="conv2d_9/Conv2D/ReadVariableOp:0" />
+		<IR name="conv2d_9/Conv2D/ReadVariableOp" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_9/Conv2D" output_port_id="conv2d_9/Conv2D:0" />
+		<IR name="conv2d_9/Conv2D" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="conv2d_9/Conv2D" output_port_id="conv2d_9/Conv2D:0" />
+		<IR name="conv2d_9/Conv2D" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_9/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="conv2d_10/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_9/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_10/Conv2D/ReadVariableOp" output_port_id="conv2d_10/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_9/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization_9/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization_9/FusedBatchNorm:0" />
+		<IR name="batch_normalization_9/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_9/FusedBatchNorm" output_port_id="batch_normalization_9/FusedBatchNorm:0" />
+		<IR name="batch_normalization_9/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_9/LeakyRelu" output_port_id="leaky_re_lu_9/LeakyRelu:0" />
+		<IR name="leaky_re_lu_9/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_9/LeakyRelu" output_port_id="leaky_re_lu_9/LeakyRelu:0" />
+		<IR name="leaky_re_lu_9/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/Shape/GatherNCHWtoNHWC" output_port_id="up_sampling2d/Shape:0" />
+		<IR name="up_sampling2d/Shape/GatherNCHWtoNHWC" output_port_id="3" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/Shape" output_port_id="up_sampling2d/Shape:0" />
+		<IR name="up_sampling2d/Shape/GatherNCHWtoNHWC" output_port_id="3" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/strided_slice/stack" output_port_id="up_sampling2d/strided_slice/stack:0" />
+		<IR name="up_sampling2d/strided_slice/stack" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/strided_slice/stack" output_port_id="up_sampling2d/strided_slice/stack:0" />
+		<IR name="up_sampling2d/strided_slice/stack" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/strided_slice/stack_1" output_port_id="up_sampling2d/strided_slice/stack_1:0" />
+		<IR name="up_sampling2d/strided_slice/stack_1" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/strided_slice/stack_1" output_port_id="up_sampling2d/strided_slice/stack_1:0" />
+		<IR name="up_sampling2d/strided_slice/stack_1" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/strided_slice/stack_2" output_port_id="up_sampling2d/strided_slice/stack_2:0" />
+		<IR name="up_sampling2d/strided_slice/stack_2" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/strided_slice/stack_2" output_port_id="up_sampling2d/strided_slice/stack_2:0" />
+		<IR name="up_sampling2d/strided_slice/stack_2" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/strided_slice" output_port_id="up_sampling2d/strided_slice:0" />
+		<IR name="up_sampling2d/strided_slice" output_port_id="4" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/strided_slice" output_port_id="up_sampling2d/strided_slice:0" />
+		<IR name="up_sampling2d/strided_slice" output_port_id="4" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/Const" output_port_id="up_sampling2d/Const:0" />
+		<IR name="up_sampling2d/Const" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/Const" output_port_id="up_sampling2d/Const:0" />
+		<IR name="up_sampling2d/Const" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/ResizeNearestNeighbor/Cast_1" output_port_id="up_sampling2d/mul:0" />
+		<IR name="up_sampling2d/ResizeNearestNeighbor/Cast_1" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/mul" output_port_id="up_sampling2d/mul:0" />
+		<IR name="up_sampling2d/ResizeNearestNeighbor/Cast_1" output_port_id="1" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/ResizeNearestNeighbor" output_port_id="up_sampling2d/ResizeNearestNeighbor:0" />
+		<IR name="up_sampling2d/ResizeNearestNeighbor" output_port_id="4" />
+	</map>
+	<map>
+		<framework name="up_sampling2d/ResizeNearestNeighbor" output_port_id="up_sampling2d/ResizeNearestNeighbor:0" />
+		<IR name="up_sampling2d/ResizeNearestNeighbor" output_port_id="4" />
+	</map>
+	<map>
+		<framework name="concatenate/concat" output_port_id="concatenate/concat:0" />
+		<IR name="concatenate/concat" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="concatenate/concat" output_port_id="concatenate/concat:0" />
+		<IR name="concatenate/concat" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_10/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="conv2d_11/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_10/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_11/Conv2D/ReadVariableOp" output_port_id="conv2d_11/Conv2D/ReadVariableOp:0" />
+		<IR name="batch_normalization_10/FusedBatchNorm/mean/Fused_Mul__copy" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="batch_normalization_10/FusedBatchNorm/variance/Fused_Add_" output_port_id="batch_normalization_10/FusedBatchNorm:0" />
+		<IR name="batch_normalization_10/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="batch_normalization_10/FusedBatchNorm" output_port_id="batch_normalization_10/FusedBatchNorm:0" />
+		<IR name="batch_normalization_10/FusedBatchNorm/variance/Fused_Add_" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_10/LeakyRelu" output_port_id="leaky_re_lu_10/LeakyRelu:0" />
+		<IR name="leaky_re_lu_10/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="leaky_re_lu_10/LeakyRelu" output_port_id="leaky_re_lu_10/LeakyRelu:0" />
+		<IR name="leaky_re_lu_10/LeakyRelu" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="conv2d_12/Conv2D/ReadVariableOp" output_port_id="conv2d_12/Conv2D/ReadVariableOp:0" />
+		<IR name="conv2d_12/Conv2D/ReadVariableOp" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_12/Conv2D/ReadVariableOp" output_port_id="conv2d_12/Conv2D/ReadVariableOp:0" />
+		<IR name="conv2d_12/Conv2D/ReadVariableOp" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="conv2d_12/Conv2D" output_port_id="conv2d_12/Conv2D:0" />
+		<IR name="conv2d_12/Conv2D" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="conv2d_12/Conv2D" output_port_id="conv2d_12/Conv2D:0" />
+		<IR name="conv2d_12/Conv2D" output_port_id="2" />
+	</map>
+</mapping>
