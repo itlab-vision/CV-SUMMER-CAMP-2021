@@ -12,6 +12,7 @@ import pathlib
 import random
 import colorsys
 from time import perf_counter
+from performance_metrics import PerformanceMetrics
 
 sys.path.append('C:\\Program Files (x86)\\Intel\\openvino_2021\\deployment_tools\\open_model_zoo\\demos\\common\\python')
 import models
@@ -96,6 +97,11 @@ def build_argparser():
         (CPU by default)', default='CPU', type=str)
     parser.add_argument('-c', '--classes', help='File containing classes \
         names', type=str, default="./yolov3_imageNet_labels.txt")
+    parser.add_argument('-o', '--output', required=False, default="./saved/",
+                        help='Optional. Name of the output file(s) to save.')    
+    parser.add_argument('-limit', '--output_limit', required=False, default=1000,
+                        type=int, help='Optional. Number of frames to store in output.\
+                        If 0 is set, all frames are stored.')
     parser.add_argument('-t', '--prob_threshold', default=0.75, type=float,
         help='Optional. Probability threshold for detections filtering.')
     return parser
@@ -141,7 +147,10 @@ def main():
         classes = [cname.strip() for cname in f.readlines()]
     # Initialize classes colors
     palette = ColorPalette(len(classes) if classes else 100)
+    # Initialize video writer
+    video_writer = cv2.VideoWriter()
     # Initialize async pipeline
+    metrics = PerformanceMetrics()
     detector_pipeline = AsyncPipeline(ie, detector, plugin_configs, device='CPU', 
                                         max_num_requests=1)
     while True:
@@ -154,12 +163,19 @@ def main():
         # Get detection result
         results, meta = detector_pipeline.get_result(frame_id)
         # Draw detections in the image
-        draw_detections(img, results, palette, classes, args.prob_threshold)
+        if results:
+            img = meta['frame']
+            start_time = meta['start_time']
+            draw_detections(img, results, palette, classes, args.prob_threshold)
+            metrics.update(start_time, img)
         # Show image and wait for key press
-        cv2.imshow('Output', img)
+            cv2.imshow('Output', img)
+            if video_writer.isOpened() and (args.output_limit <= 0 or frame_id <= args.output_limit-1):
+               video_writer.write(img)
+            frame_id += 1
         # Wait 1 ms and check pressed button to break the loop
-        if cv2.waitKey(1) & 0xFF == ord('q'): 
-            break
+            if cv2.waitKey(1) & 0xFF == ord('q'): 
+                break
             
     # Destroy all windows
     cv2.destroyAllWindows()
