@@ -133,14 +133,45 @@ class Tracker:
         return affinity_appearance * affinity_position * affinity_shape
 
     def _calc_affinity_appearance(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_appearance  is not implemented -- implement it by yourself")
+       
+       C = 0.5
+       mod_difference = sum([ (track.last().appearance_feature[i] - obj.appearance_feature[i])**2 for i in range(len(obj.appearance_feature))])
+       mod_difference = math.sqrt(mod_difference)
+       
+       return math.exp(-C * mod_difference)
 
     def _calc_affinity_position(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_position is not implemented -- implement it by yourself")
+    
+       C1 = 0.5
+       last_tl_x, last_tl_y, last_br_x, last_br_y = track.last().bbox
+       w1 = last_br_x - last_tl_x
+       h1 = last_br_y - last_tl_y
+        
+       obj_tl_x, obj_tl_y, obj_br_x, obj_br_y = obj.bbox
+       w2 = obj_br_x - obj_tl_x
+       h2 = obj_br_y - obj_tl_y
+        
+       center_last_x = last_tl_x+w1/2.0
+       center_last_y = last_tl_y+h1/2.0
+       center_obj_x = obj_tl_x+w2/2.0
+       center_obj_y = obj_tl_y+h2/2.0
+       D = (center_obj_x-center_last_x)**2+(center_obj_y-center_last_y)**2 
+        
+       return math.exp(-C1*(D/(w1*h1)))
 
     def _calc_affinity_shape(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_shape is not implemented -- implement it by yourself")
-
+    
+        C2 = 0.4
+        last_tl_x, last_tl_y, last_br_x, last_br_y = track.last().bbox
+        w1 = last_br_x - last_tl_x
+        h1 = last_br_y - last_tl_y
+        
+        obj_tl_x, obj_tl_y, obj_br_x, obj_br_y = obj.bbox
+        w2 = obj_br_x - obj_tl_x
+        h2 = obj_br_y - obj_tl_y
+        
+        return math.exp(-C2 * ((w1-w2)/w1+(h1-h2)/h1) )
+        
     @staticmethod
     def _log_affinity_matrix(affinity_matrix):
         with np.printoptions(precision=2, suppress=True, threshold=sys.maxsize, linewidth=sys.maxsize):

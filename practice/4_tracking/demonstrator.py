@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from common.colors import get_random_colors
 from common.common_objects import get_bbox_center
@@ -35,10 +36,15 @@ class Demonstrator:
         last_frame_index = max(annotation_storage.get_list_of_frame_indexes())
 
         frame_range = range(first_frame_index, last_frame_index+1)
+        
+        fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        writer = cv2.VideoWriter('output.mp4', fourcc, 30.0, (1080, 720))
+
         for frame_index in tqdm(frame_range, desc="Writing images"):
             cur_img_name = "{:06}.jpg".format(frame_index)
-
+            
             src_img_path = self.images_folder_path / cur_img_name
+            
             dst_img_path = self.dst_folder / cur_img_name
 
             img = cv2.imread(src_img_path.as_posix())
@@ -85,6 +91,7 @@ class Demonstrator:
                 cv2.waitKey(25)
 
             cv2.imwrite(dst_img_path.as_posix(), img)
+            writer.write(cv2.resize(img, (1280, 720)))
 
     @staticmethod
     def _draw_track_centers(img, track_centers, color):
