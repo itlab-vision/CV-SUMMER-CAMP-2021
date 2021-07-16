@@ -89,7 +89,7 @@ def main():
 
     log.info("Begin writing demo to images in the folder {}".format(dst_folder))
     demonstrator.make_demonstration(result_annotation_storage)
-    log.info("End writing demo to images in the folder {}".format(dst_folder))
+    log.info("End writing demo to video in the folder {}".format(dst_folder))
     log.info("Done")
 
 if __name__ == "__main__":

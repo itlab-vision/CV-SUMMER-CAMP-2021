@@ -34,12 +34,16 @@ class Demonstrator:
         first_frame_index = min(annotation_storage.get_list_of_frame_indexes())
         last_frame_index = max(annotation_storage.get_list_of_frame_indexes())
 
+        dst_vid_path = self.dst_folder / "video.mp4"
+        codec = cv2.VideoWriter_fourcc(*'mp4v')
+        # Video writer, initialized on the 1st frame
+        out = None
+
         frame_range = range(first_frame_index, last_frame_index+1)
-        for frame_index in tqdm(frame_range, desc="Writing images"):
+        for frame_index in tqdm(frame_range, desc="Writing video"):
             cur_img_name = "{:06}.jpg".format(frame_index)
 
             src_img_path = self.images_folder_path / cur_img_name
-            dst_img_path = self.dst_folder / cur_img_name
 
             img = cv2.imread(src_img_path.as_posix())
 
@@ -77,6 +81,8 @@ class Demonstrator:
             scale = self.max_output_image_width / W
             if scale < 1:
                 H1 = math.floor(H * scale)
+                # MP4 video codecs don't support odd height
+                H1 += H1 % 2
                 W1 = self.max_output_image_width
                 img = cv2.resize(img, (W1, H1))
 
@@ -84,7 +90,15 @@ class Demonstrator:
                 cv2.imshow("tracking", img)
                 cv2.waitKey(25)
 
-            cv2.imwrite(dst_img_path.as_posix(), img)
+            # Initialize video writer
+            if out is None:
+                out = cv2.VideoWriter(dst_vid_path.as_posix(), codec, 20.0, (W1, H1))
+
+            # Write current frame
+            out.write(img)
+
+        # Close video writer
+        out.release()
 
     @staticmethod
     def _draw_track_centers(img, track_centers, color):
