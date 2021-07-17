@@ -1,11 +1,28 @@
 import argparse
 import subprocess
+import re
+
+
+ANS_PATTERN = re.compile(
+    r'---answer: (?P<score>\d.\d\d) (?P<answer>[\S ]+)\s*.*   (?P<context>[\S ]+)',
+    re.MULTILINE,
+)
 
 
 def parse_cmd_output(text):
-    # Cut technical information from cmd output
+    # Convert bytes to str
+    text: str = text.decode('cp437')
 
-    return text
+    # Search for all answers
+    answers = [match.groupdict() for match in ANS_PATTERN.finditer(text)]
+
+    # Select answer for output
+    if answers:
+        ret = answers[0]['answer']
+    else:
+        ret = ''
+
+    return ret
 
 
 def build_argparser():
