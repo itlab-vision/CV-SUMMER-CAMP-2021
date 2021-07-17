@@ -19,14 +19,14 @@ def build_argparser():
 def main():
     args = build_argparser().parse_args()
 
-    # Prepare input parameters for script 
-    path_to_demo = "C:/Program Files (x86)/Intel/openvino_2021.3.394/deployment_tools/open_model_zoo/demos/bert_question_answering_demo/python/bert_question_answering_demo.py"
-    path_to_model = args.m #"bert-small-uncased-whole-word-masking-squad-0001/FP32/bert-small-uncased-whole-word-masking-squad-0001.xml"
+    # Prepare input parameters for script
+    path_to_demo = "C:/Program Files (x86)/Intel/openvino_2021/deployment_tools/open_model_zoo/demos/bert_question_answering_demo/python/bert_question_answering_demo.py"
+    path_to_model = args.m
     question = "What operating system is required?"
     site = "https://en.wikipedia.org/wiki/OpenVINO"
 
-    # Prepare text command line 
-    cmd = f'python "{path_to_demo}" -v vocab.txt -m {path_to_model} --input="{site}" --questions "{question}"'
+    # Prepare text command line
+    cmd = f'./venv/Scripts/python "{path_to_demo}" -v vocab.txt -m {path_to_model} --input="{site}" --questions "{question}"'
 
     # Run subprocess using prepared command line
     returned_output = subprocess.check_output(cmd)
