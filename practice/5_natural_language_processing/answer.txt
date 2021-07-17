@@ -1,0 +1,9 @@
+[https://en.wikipedia.org/wiki/OpenCV]
+What programming language is it written in? --- JavaScript / C++ / Apache
+When was it released? --- 2000 / October 2009 / version 3.4
+What operating system is required? --- Windows, Linux / Apache 2 / OpenCV
+
+[https://en.wikipedia.org/wiki/OpenVINO]
+What programming language is it written in? --- C++ and Python / Apache / xml
+When was it released? --- 2.0 / version 2.0 / 2.0
+What operating system is required? --- Windows, Linux and MacOS / Apache / Apache
