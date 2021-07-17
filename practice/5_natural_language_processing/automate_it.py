@@ -1,11 +1,17 @@
 import argparse
 import subprocess
+import re
 
 
 def parse_cmd_output(text):
     # Cut technical information from cmd output
+    text = str(text)
 
-    return text
+    pattern = r"---answer:[^\\]*"
+    info = re.findall(pattern, text)
+    formated_info = [answer[11:] for answer in info]
+
+    return formated_info
 
 
 def build_argparser():
@@ -20,23 +26,23 @@ def main():
     args = build_argparser().parse_args()
 
     # Prepare input parameters for script 
-    path_to_demo = "C:/Program Files (x86)/Intel/openvino_2021.3.394/deployment_tools/open_model_zoo/demos/bert_question_answering_demo/python/bert_question_answering_demo.py"
-    path_to_model = args.m #"bert-small-uncased-whole-word-masking-squad-0001/FP32/bert-small-uncased-whole-word-masking-squad-0001.xml"
-    question = "What operating system is required?"
-    site = "https://en.wikipedia.org/wiki/OpenVINO"
+    path_to_demo = "C:/Program Files (x86)/Intel/openvino_2021.4.582/deployment_tools/open_model_zoo/demos/bert_question_answering_demo/python/bert_question_answering_demo.py"
+    path_to_model = args.m
+    path_to_questions = args.q
+    path_to_sites = args.i
 
-    # Prepare text command line 
-    cmd = f'python "{path_to_demo}" -v vocab.txt -m {path_to_model} --input="{site}" --questions "{question}"'
+    with open(path_to_sites, "r") as fsites:
+        for index, site in enumerate(fsites):
+            with open(path_to_questions, "r") as fquestions, open(f"site_{index}.txt", "w") as fsite:
+                for question in fquestions:
+                    cmd = f'python "{path_to_demo}" -v vocab.txt -m {path_to_model} --input="{site}" --questions "{question}"'
+                    returned_output = subprocess.check_output(cmd)
+                    answer = parse_cmd_output(returned_output)
 
-    # Run subprocess using prepared command line
-    returned_output = subprocess.check_output(cmd)
-
-    # Process output
-    answer = parse_cmd_output(returned_output)
-
-    # Write output to file
-    with open('answer.txt', 'w') as the_file:
-        the_file.write(f'{answer}\n')
+                    fsite.write(f'{question}\n')
+                    for ans in answer:
+                        fsite.write(f'{ans}\n')
+                    fsite.write('\n')
 
 
 if __name__ == "__main__":

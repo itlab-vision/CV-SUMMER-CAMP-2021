@@ -1,0 +1,17 @@
+What programming language is it written in?
+
+0.98 JavaScript
+0.89 C++
+0.15 Apache
+
+When was it released?
+
+0.87 2000
+0.29 October 2009
+0.04 version 3.4
+
+What operating system is required? 
+0.06 Windows, Linux
+0.05 Apache 2
+0.00 OpenCV
+
