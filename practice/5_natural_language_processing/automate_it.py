@@ -14,13 +14,21 @@ def parse_cmd_output(text):
     text: str = text.decode('cp437')
 
     # Search for all answers
-    answers = [match.groupdict() for match in ANS_PATTERN.finditer(text)]
+    questions = []
+    for line in text.splitlines(keepends=False):
+        match = re.match(r'^\[ INFO \] Question: (.+)$', line)
+        if match:
+            questions.append((match.group(1), []))
+            continue
+        match = re.match(r'^\[ INFO \] ---answer: (\d\.\d\d) (.+)$', line)
+        if match:
+            questions[-1][1].append(match.group(2))
+            continue
 
-    # Select answer for output
-    if answers:
-        ret = answers[0]['answer']
-    else:
-        ret = ''
+    ret = []
+    for question, answers in questions:
+        ret.append(f'{question} --- {" / ".join(answers)}')
+    ret = '\n'.join(ret)
 
     return ret
 
@@ -56,12 +64,12 @@ def main():
         returned_output = subprocess.check_output(cmd)
 
         # Process output
-        answer.append(f'[{site}] {parse_cmd_output(returned_output)}')
+        answer.append(f'[{site}]\n{parse_cmd_output(returned_output)}\n')
 
     # Write output to file
     answer = '\n'.join(answer)
     with open('answer.txt', 'w') as the_file:
-        the_file.write(f'{answer}\n')
+        the_file.write(f'{answer}')
 
 
 if __name__ == "__main__":
