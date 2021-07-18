@@ -5,7 +5,7 @@ import sys
 from tqdm import tqdm
 from common.feature_distance import calc_features_similarity
 from common.common_objects import DetectedObject, validate_detected_object, Bbox
-from common.common_objects import get_bbox_center, get_dist, calc_bbox_area
+from common.common_objects import get_bbox_center, get_dist, calc_bbox_area, get_bbox_size
 from common.find_best_assignment import solve_assignment_problem
 from common.annotation import AnnotationObject, AnnotationStorage
 
@@ -133,13 +133,22 @@ class Tracker:
         return affinity_appearance * affinity_position * affinity_shape
 
     def _calc_affinity_appearance(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_appearance  is not implemented -- implement it by yourself")
+        last = track.last()
+        return calc_features_similarity(last.appearance_feature, obj.appearance_feature)
 
     def _calc_affinity_position(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_position is not implemented -- implement it by yourself")
+        c = 2.0 / 3.0
+        last = track.last()
+        dist = get_dist(get_bbox_center(last.bbox), get_bbox_center(obj.bbox))
+        return math.exp(-c * (dist**2) / calc_bbox_area(last.bbox))
 
     def _calc_affinity_shape(self, track, obj):
-        raise NotImplementedError("The function _calc_affinity_shape is not implemented -- implement it by yourself")
+        c = 1.0 / 3.0
+        last = track.last()
+        dist = get_dist(get_bbox_center(last.bbox), get_bbox_center(obj.bbox))
+        w1, h1 = get_bbox_size(last.bbox)
+        w2, h2 = get_bbox_size(obj.bbox)
+        return math.exp(-c * (w1 - w2) / w1 + (h1 - h2) / h1)
 
     @staticmethod
     def _log_affinity_matrix(affinity_matrix):
