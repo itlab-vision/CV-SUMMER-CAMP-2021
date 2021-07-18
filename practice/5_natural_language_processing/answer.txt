@@ -1,0 +1,32 @@
+[ SITE ]:  https://en.wikipedia.org/wiki/OpenVINO
+What programming language is it written in?
+ ---answer: 0.68 C++ and Python
+ ---answer: 0.44 Apache
+ ---answer: 0.00 xml
+
+When was it released?
+ ---answer: 0.00 2.0
+ ---answer: 0.00 version 2.0
+ ---answer: 0.00 2.0
+
+What operating system is required?
+ ---answer: 0.47 Windows, Linux and MacOS
+ ---answer: 0.01 Apache
+ ---answer: 0.00 Apache
+
+[ SITE ]:  https://en.wikipedia.org/wiki/Intel
+What programming language is it written in?
+ ---answer: 0.18 x86
+ ---answer: 0.07 ASICs
+ ---answer: 0.05 Linux
+
+When was it released?
+ ---answer: 0.94 1981
+ ---answer: 0.92 1970
+ ---answer: 0.89 October 2013
+
+What operating system is required?
+ ---answer: 0.51 Windows 8
+ ---answer: 0.10 Intel has a mandatory retirement policy for its CEOs when they reach age 65
+ ---answer: 0.04 Linux
+
