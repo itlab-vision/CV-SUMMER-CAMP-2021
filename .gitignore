@@ -124,6 +124,10 @@ public/yolo-v3-tiny-tf/*
 public/yolo-v3-tiny-tf/FP16/*
 !public/yolo-v3-tiny-tf/FP16/*.xml
 
+intel/bert-small-uncased-whole-word-masking-squad-0001/*
+!intel/bert-small-uncased-whole-word-masking-squad-0001/FP16/
+intel/bert-small-uncased-whole-word-masking-squad-0001/FP16/*
+!intel/bert-small-uncased-whole-word-masking-squad-0001/FP16/bert-small-uncased-whole-word-masking-squad-0001.xml
 # Settings
 .vscode/*
 
