@@ -6,7 +6,17 @@ python ie_classification_sample.py -i image.jpg \
     -m resnet-50.xml -w resnet-50.bin -c imagenet_synset_words.txt
 """
 
+
+#puts openvino to the PATH
 import os
+os.add_dll_directory("C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\ngraph\\lib")
+os.add_dll_directory("C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\inference_engine\\external\\tbb\\bin")
+os.add_dll_directory("C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\inference_engine\\bin\\intel64\\Release")
+#os.add_dll_directory("C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\inference_engine\\external\\hddl\\bin")
+os.add_dll_directory("C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\opencv\\bin")
+
+
+#import os 
 import cv2
 import sys
 import argparse
@@ -20,10 +30,15 @@ class InferenceEngineClassifier:
             device='CPU', extension=None, classesPath=None):
         
         # Add code for Inference Engine initialization
+        self.ie = IECore()
         
         # Add code for model loading
+        self.net = self.ie.read_network(model=configPath)
+        self.exec_net = self.ie.load_network(network=self.net, device_name=device)
 
         # Add code for classes names loading
+        with open(classesPath, 'r') as f:
+            self.labels_map = [x.split(sep=' ', maxsplit=1)[-1].strip() for x in f]
         
         return
 
@@ -31,12 +46,16 @@ class InferenceEngineClassifier:
         result = []
         
         # Add code for getting top predictions
+        result = np.squeeze(prob)
+        result = np.argsort(result)[-topN:][::-1]
         
         return result
 
     def _prepare_image(self, image, h, w):
     
         # Add code for image preprocessing
+        image = cv2.resize(image, (w, h))
+        image = image.transpose((2, 0, 1))
         
         return image
 
@@ -44,8 +63,18 @@ class InferenceEngineClassifier:
         probabilities = None
         
         # Add code for image classification using Inference Engine
+        input_blob = next(iter(self.net.inputs)) 
+        out_blob = next(iter(self.net.outputs))
         
-        return probabilities
+        n, c, h, w = self.net.inputs[input_blob].shape
+        
+        image = self._prepare_image(image, h, w)
+        
+        output = self.exec_net.infer(inputs = {input_blob: image})
+        
+        output = output[out_blob]
+        
+        return output
 
 
 def build_argparser():
@@ -76,14 +105,26 @@ def main():
     log.info("Start IE classification sample")
 
     # Create InferenceEngineClassifier object
+    ie_classifier = InferenceEngineClassifier(
+        configPath=args.model, 
+        weightsPath=args.weights, 
+        device=args.device, 
+        extension="CPU", 
+        classesPath=args.classes)
     
     # Read image
+    img = cv2.imread(args.input)
         
     # Classify image
+    prob = ie_classifier.classify(img)
     
     # Get top 5 predictions
+    predictions = ie_classifier.get_top(prob, 5)
+    
+    labels = [ie_classifier.labels_map[x] for x in predictions]
     
     # print result
+    log.info("Predictions: " + str(predictions) + str(labels))
 
     return
 
