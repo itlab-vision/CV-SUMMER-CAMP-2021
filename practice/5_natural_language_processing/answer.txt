@@ -1,5 +1,0 @@
-Question: What operating system is required?
----answer: 0.47 Windows, Linux and MacOS
----answer: 0.01 Apache
----answer: 0.00 Apache
-
