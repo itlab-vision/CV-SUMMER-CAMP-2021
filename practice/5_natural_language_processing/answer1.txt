@@ -1,0 +1,36 @@
+Site: https://en.wikipedia.org/wiki/OpenCV
+What programming language is it written in?
+---answer: 0.98 JavaScript 
+---answer: 0.89 C++ 
+---answer: 0.15 Apache 
+
+Site: https://en.wikipedia.org/wiki/OpenCV
+When was it released?
+---answer: 0.87 2000 
+---answer: 0.29 October 2009 
+---answer: 0.04 version 3.4 
+
+Site: https://en.wikipedia.org/wiki/OpenCV
+What operating system is required? 
+---answer: 0.06 Windows, Linux 
+---answer: 0.05 Apache 2 
+---answer: 0.00 OpenCV 
+
+Site: https://en.wikipedia.org/wiki/OpenVINO
+What programming language is it written in?
+---answer: 0.68 C++ and Python 
+---answer: 0.45 Apache 
+---answer: 0.00 xml 
+
+Site: https://en.wikipedia.org/wiki/OpenVINO
+When was it released?
+---answer: 0.00 2.0 
+---answer: 0.00 version 2.0 
+---answer: 0.00 2.0 
+
+Site: https://en.wikipedia.org/wiki/OpenVINO
+What operating system is required? 
+---answer: 0.47 Windows, Linux and MacOS 
+---answer: 0.01 Apache 
+---answer: 0.00 Apache 
+
