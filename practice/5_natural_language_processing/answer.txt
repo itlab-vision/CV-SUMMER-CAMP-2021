@@ -1,0 +1,18 @@
+What operating system is required?
+---answer: 0.47 Windows, Linux and MacOS 
+---answer: 0.01 Apache 
+---answer: 0.00 Apache 
+
+
+What programming languages are supported?
+---answer: 0.91 C++ and Python 
+---answer: 0.00 CPU, Intel Processor Graphics, VPU, FPGA, GNA 
+---answer: 0.00 open source community  
+
+
+How many versions of OpenVINO is there?
+---answer: 0.47 two 
+---answer: 0.21 2.0 
+---answer: 0.01 4 
+
+
