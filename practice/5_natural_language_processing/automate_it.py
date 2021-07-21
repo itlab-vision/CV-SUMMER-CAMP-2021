@@ -3,9 +3,12 @@ import subprocess
 
 
 def parse_cmd_output(text):
-    # Cut technical information from cmd output
-
-    return text
+    chunks = text.split(b'[ INFO ]')
+    ans = str()
+    for chunk in chunks:
+        if chunk.startswith((b' Question', b' ---answer', b' Get')):
+            ans += chunk.decode()
+    return ans
 
 
 def build_argparser():
