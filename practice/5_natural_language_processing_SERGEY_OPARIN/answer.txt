@@ -1,0 +1,48 @@
+What operating system is required? 
+---answer: 0.06 Windows, Linux 
+---answer: 0.05 Apache 2 
+---answer: 0.00 OpenCV 
+
+
+What operating system is required? 
+---answer: 0.47 Windows, Linux and MacOS 
+---answer: 0.01 Apache 
+---answer: 0.00 Apache 
+
+
+What programming language is it written in?
+---answer: 0.98 JavaScript 
+---answer: 0.89 C++ 
+---answer: 0.15 Apache 
+
+
+When was it released?
+---answer: 0.87 2000 
+---answer: 0.29 October 2009 
+---answer: 0.04 version 3.4 
+
+
+What operating system is required? 
+---answer: 0.06 Windows, Linux 
+---answer: 0.05 Apache 2 
+---answer: 0.00 OpenCV 
+
+
+What programming language is it written in?
+---answer: 0.68 C++ and Python 
+---answer: 0.45 Apache 
+---answer: 0.00 xml 
+
+
+When was it released?
+---answer: 0.00 2.0 
+---answer: 0.00 version 2.0 
+---answer: 0.00 2.0 
+
+
+What operating system is required? 
+---answer: 0.47 Windows, Linux and MacOS 
+---answer: 0.01 Apache 
+---answer: 0.00 Apache 
+
+
