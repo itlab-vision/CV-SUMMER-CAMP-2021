@@ -1,0 +1,14 @@
+ Get paragraphs from https://en.wikipedia.org/wiki/OpenVINO
+ Question: What programming language is it written in?
+ ---answer: 0.68 C++ and Python
+ ---answer: 0.45 Apache
+ ---answer: 0.00 xml
+ Question: When was it released?
+ ---answer: 0.00 2.0
+ ---answer: 0.00 version 2.0
+ ---answer: 0.00 2.0
+ Question: What operating system is required? 
+ ---answer: 0.47 Windows, Linux and MacOS
+ ---answer: 0.01 Apache
+ ---answer: 0.00 Apache
+

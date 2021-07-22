@@ -4,15 +4,19 @@ import subprocess
 
 def parse_cmd_output(text):
     # Cut technical information from cmd output
-
-    return text
+    text = text.split(b'[ INFO ]')
+    ans = str()
+    for line in text:
+        if line.startswith((b' Question', b' ---answer', b' Get')):
+            ans += line.decode()
+    return ans
 
 
 def build_argparser():
     parser = argparse.ArgumentParser(description="Simple object tracker demo")
-    parser.add_argument("-q", required=True, help="Path to the questions file")
-    parser.add_argument("-i", required=True, help="Path to the input sites file")
-    parser.add_argument("-m", required=True, help="Path to the model")
+    parser.add_argument("-q", required=False, help="Path to the questions file")
+    parser.add_argument("-i", required=False, help="Path to the input sites file")
+    parser.add_argument("-m", required=False, help="Path to the model")
     return parser
 
 
@@ -20,13 +24,19 @@ def main():
     args = build_argparser().parse_args()
 
     # Prepare input parameters for script 
-    path_to_demo = "C:/Program Files (x86)/Intel/openvino_2021.3.394/deployment_tools/open_model_zoo/demos/bert_question_answering_demo/python/bert_question_answering_demo.py"
-    path_to_model = args.m #"bert-small-uncased-whole-word-masking-squad-0001/FP32/bert-small-uncased-whole-word-masking-squad-0001.xml"
-    question = "What operating system is required?"
+    path_to_demo = "C:\\Program Files (x86)\\Intel\\openvino_2021.3.394\\deployment_tools\\open_model_zoo\\demos\\bert_question_answering_demo\\python\\bert_question_answering_demo.py"
+    path_to_model = "intel\\bert-small-uncased-whole-word-masking-squad-0001\\FP32\\bert-small-uncased-whole-word-masking-squad-0001.xml"
+    # question = ["What programming language is it written in?", "When was it released?"]
+    question = "questions.txt"
     site = "https://en.wikipedia.org/wiki/OpenVINO"
 
     # Prepare text command line 
-    cmd = f'python "{path_to_demo}" -v vocab.txt -m {path_to_model} --input="{site}" --questions "{question}"'
+    cmd = f'python \"{path_to_demo}\" -v vocab.txt -m {path_to_model} --input=\"{site}\" --questions '
+    question_list = ''
+    with open(question, 'r') as question_file:
+        question_list = question_file.read().split('\n')
+    for i in question_list:
+        cmd += f' "{i}"'
 
     # Run subprocess using prepared command line
     returned_output = subprocess.check_output(cmd)
