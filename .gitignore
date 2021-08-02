@@ -114,6 +114,6 @@ dmypy.json
 .pyre/
 
 # Python venv folder
-.practice/openvino-virtual-environments/
+practice/openvino-virtual-environments/
 
 .vscode/
